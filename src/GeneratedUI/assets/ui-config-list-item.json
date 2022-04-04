@@ -27,7 +27,7 @@
                         "component": "header",
                         "data": "title",
                         "props": {
-                            "as": "h2"
+                            "size": "medium"
                         }
                     },
                     {

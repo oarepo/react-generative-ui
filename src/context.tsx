@@ -5,15 +5,14 @@
 
 import React, { createContext } from 'react';
 
-import { Column, Columns, Header, Row, Fallback } from './components';
+import { Column, Columns, Row, SemanticFallback } from './components';
 import { ComponentMap, UIFragmentContext } from './types';
 
 export const defaultComponents = {
   columns: (context: UIFragmentContext) => (<Columns {...context} />),
   column: (context: UIFragmentContext) => (<Column {...context} />),
   row: (context: UIFragmentContext) => (<Row {...context} />),
-  header: (context: UIFragmentContext) => (<Header {...context} />),
-  _fallback: (context: UIFragmentContext) => (<Fallback {...context} />)
+  _fallback: (context: UIFragmentContext) => (<SemanticFallback {...context} />)
 } as ComponentMap;
 
 export const DataContext = createContext({});

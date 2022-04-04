@@ -7,6 +7,10 @@ import React, { FC } from "react";
 import { UIFragmentConfig, UIFragmentContext } from "../types";
 import { Grid, GridProps, SemanticWIDTHSNUMBER } from 'semantic-ui-react'
 
+/**
+ * Component putting its children items into separate columns.
+ * See https://react.semantic-ui.com/collections/grid/ for available props.
+ */
 export const Columns: FC<UIFragmentContext> = ({
     config,
     renderUIFragment

@@ -11,7 +11,12 @@ import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
 import { useDataProps } from "../hooks"
 
-export const Fallback: FC<UIFragmentContext> = ({
+
+/**
+ * A component that tries to use SemanticUI element or renders
+ * a Fallback component if requested component is unknown.
+ */
+export const SemanticFallback: FC<UIFragmentContext> = ({
     config,
 }) => {
     const { component, props, data } = config
@@ -29,7 +34,7 @@ export const Fallback: FC<UIFragmentContext> = ({
     return (
         <Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>
             <SemanticElementOrDefault {...props}>
-                {useDataProps(data)}
+                {data && useDataProps(data)}
             </SemanticElementOrDefault>
         </Suspense>
     )

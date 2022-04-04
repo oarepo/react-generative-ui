@@ -6,6 +6,4 @@
 export * from './Columns';
 export * from './Column';
 export * from './Row';
-export * from './Label';
-export * from './Header';
-export * from './Fallback';
+export * from './SemanticFallback';
