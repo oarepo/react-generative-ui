@@ -3,40 +3,51 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC } from 'react';
-import { UIFragmentConfig, UIGeneratorProps, ComponentMap } from './types';
-import { Columns, Column, Row, Label, Header } from '../components';
-import { useFragmentComponent } from '../hooks';
-
-
-const defaultComponents = {
-    // @ts-ignore 7031
-    columns: ({ components, config }) => <Columns config={config} components={components} />,
-    // @ts-ignore 7031
-    column: ({ components, config }) => <Column config={config} components={components} />,
-    // @ts-ignore 7031
-    row: ({ components, config }) => <Row config={config} components={components} />,
-    // @ts-ignore 7031
-    label: ({ components, config }) => <Label config={config} components={components} />,
-    // @ts-ignore 7031
-    header: ({ components, config }) => <Header config={config} components={components} />
-} as ComponentMap
+import React, { FC, Fragment, useContext } from 'react';
+import { ComponentMap, UIFragmentConfig, UIGeneratorProps } from './types';
+import { AvailableComponents, DataContext, defaultComponents } from '../context';
+import _mapKeys from 'lodash/mapKeys'
 
 
 /**
  * Generator of user-configured UI views 
  */
 // @ts-ignore 2322
-export const UIGenerator: FC<UIGeneratorProps> = ({ config, components }) => {
+export const UIGenerator: FC<UIGeneratorProps> = ({ config, data, components }) => {
     const availableComponents = {
-        ...defaultComponents,
         ...components,
+        ...defaultComponents
+    } as ComponentMap
+
+    const renderUIFragment = (config: UIFragmentConfig, index?: number) => {
+        const { props, component, items } = config
+        const components = useContext(AvailableComponents)
+
+        const mappedProps = _mapKeys(props, (_value: string, key: string) => {
+            if (key === 'class') {
+                return 'className'
+            }
+            return key
+        })
+
+        if (component in components) {
+            const resolvedConfig = { items, component, props: mappedProps }
+            const UIFragmentComponent = components[component]({ renderUIFragment, config: resolvedConfig })
+
+            return index !== undefined ? <Fragment key={index}>{UIFragmentComponent}</Fragment> : <>{UIFragmentComponent}</>
+        } else {
+            const FallbackComponent = components['_fallback']({ config: { component } })
+
+            return index !== undefined ? <Fragment key={index}>{FallbackComponent}</Fragment> : <>{FallbackComponent}</>
+        }
     }
 
-    return (<>
-        {config?.map((fragment: UIFragmentConfig, index: number) => {
-            return useFragmentComponent(availableComponents, fragment, index)
-        })}
-    </>)
-    // return <UIFragment key={index} availableComponents={availableComponents} {...fragment}></UIFragment>
+    return (
+        <AvailableComponents.Provider value={availableComponents}>
+            <DataContext.Provider value={data}>
+                {config?.map((fragment: UIFragmentConfig, index: number) => {
+                    return renderUIFragment(fragment, index)
+                })}
+            </DataContext.Provider>
+        </AvailableComponents.Provider>)
 }

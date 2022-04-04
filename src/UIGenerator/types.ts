@@ -33,8 +33,10 @@ export interface UIFragmentConfig {
 }
 
 export type UIFragmentContext = {
+  /** Function to render children UI fragments */
+  renderUIFragment: Function;
+  /** UI fragment config */
   config: UIFragmentConfig;
-  components: ComponentMap;
 };
 
 export interface UIGeneratorProps extends HTMLAttributes<HTMLDivElement> {
