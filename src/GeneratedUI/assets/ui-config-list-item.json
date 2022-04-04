@@ -12,15 +12,11 @@
                 "items": [
                     {
                         "component": "icon",
-                        "props": {
-                            "data": "access_status"
-                        }
+                        "data": "access_status"
                     },
                     {
                         "component": "icon",
-                        "props": {
-                            "data": "rights"
-                        }
+                        "data": "rights"
                     }
                 ]
             },
@@ -29,9 +25,9 @@
                 "items": [
                     {
                         "component": "header",
+                        "data": "title",
                         "props": {
-                            "as": "h2",
-                            "data": "title"
+                            "as": "h2"
                         }
                     },
                     {
@@ -42,9 +38,9 @@
                         "items": [
                             {
                                 "component": "inline",
+                                "data": "creators",
                                 "props": {
                                     "separator": "|",
-                                    "data": "creators",
                                     "item": {
                                         "component": "authority"
                                     }
@@ -52,9 +48,9 @@
                             },
                             {
                                 "component": "inline",
+                                "data": "contributors",
                                 "props": {
                                     "separator": "|",
-                                    "data": "contributors",
                                     "item": {
                                         "component": "authority",
                                         "props": {
@@ -73,16 +69,16 @@
                         "items": [
                             {
                                 "component": "label",
+                                "data": "publication_year",
                                 "props": {
-                                    "basic": true,
-                                    "data": "publication_year"
+                                    "basic": true
                                 }
                             },
                             {
                                 "component": "label",
+                                "data": "language",
                                 "props": {
-                                    "basic": true,
-                                    "data": "language"
+                                    "basic": true
                                 }
                             }
                         ]
@@ -92,15 +88,11 @@
                         "items": [
                             {
                                 "component": "label",
-                                "props": {
-                                    "data": "resource_type"
-                                }
+                                "data": "resource_type"
                             },
                             {
                                 "component": "label",
-                                "props": {
-                                    "data": "defended"
-                                }
+                                "data": "defended"
                             }
                         ]
                     },
