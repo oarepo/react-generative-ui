@@ -5,7 +5,7 @@
 
 import React, { FC } from "react"
 import { Label as SemanticLabel, LabelProps } from "semantic-ui-react"
-import { UIFragmentContext, UIFragmentProps } from "../UIGenerator/types"
+import { UIFragmentContext, UIFragmentProps } from "../types"
 
 export const Label: FC<UIFragmentContext> = ({
     config,

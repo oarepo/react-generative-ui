@@ -5,7 +5,7 @@
 
 import React, { FC } from "react"
 import { Grid, GridColumnProps } from "semantic-ui-react"
-import { UIFragmentConfig, UIFragmentContext } from "../UIGenerator/types"
+import { UIFragmentConfig, UIFragmentContext } from "../types"
 
 export const Column: FC<UIFragmentContext> = ({
     config,

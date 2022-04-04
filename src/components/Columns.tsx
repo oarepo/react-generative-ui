@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react";
-import { UIFragmentConfig, UIFragmentContext } from "../UIGenerator/types";
+import { UIFragmentConfig, UIFragmentContext } from "../types";
 import { Grid, GridProps, SemanticWIDTHSNUMBER } from 'semantic-ui-react'
 
 export const Columns: FC<UIFragmentContext> = ({
@@ -12,7 +12,6 @@ export const Columns: FC<UIFragmentContext> = ({
     renderUIFragment
 }) => {
     const { props, items } = config
-    console.log(config, renderUIFragment)
 
     return items?.length && (
         <Grid {...props as GridProps} columns={items.length! as SemanticWIDTHSNUMBER}>

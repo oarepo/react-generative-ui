@@ -5,7 +5,7 @@
 
 import React, { FC, Fragment } from "react"
 import { Grid, GridRowProps } from "semantic-ui-react"
-import { UIFragmentConfig, UIFragmentContext, UIListFragmentProps } from "../UIGenerator/types"
+import { UIFragmentConfig, UIFragmentContext, UIListFragmentProps } from "../types"
 
 export const Row: FC<UIFragmentContext> = ({
     config,
