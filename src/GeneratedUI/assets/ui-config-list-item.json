@@ -5,18 +5,33 @@
             {
                 "component": "column",
                 "props": {
+                    "textAlign": "center",
                     "stretched": true,
-                    "width": "3",
+                    "width": "1",
                     "class": "result-item-aside"
                 },
                 "items": [
                     {
                         "component": "icon",
-                        "data": "access_status"
+                        "props": {
+                            "size": "large"
+                        },
+                        "data": {
+                            "props": {
+                                "name": "access_status"
+                            }
+                        }
                     },
                     {
                         "component": "icon",
-                        "data": "rights"
+                        "props": {
+                            "size": "huge"
+                        },
+                        "data": {
+                            "props": {
+                                "name": "rights"
+                            }
+                        }
                     }
                 ]
             },

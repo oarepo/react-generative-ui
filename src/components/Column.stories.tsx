@@ -25,7 +25,6 @@ const config = {
   component: 'column',
   props: {
     stretched: true,
-    relaxed: true,
   },
   items: [
     { component: 'card', props: { centered: true, content: 'this is item #1' } },

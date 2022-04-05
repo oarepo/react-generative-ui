@@ -18,13 +18,12 @@ export const GeneratedUI: FC<UIGeneratorProps> = ({ config, data, components }) 
         ...components,
         ...defaultComponents
     } as ComponentMap
-
     return (
         <AvailableComponents.Provider value={availableComponents}>
             <DataContext.Provider value={data}>
-                {config?.map((fragment: UIFragmentConfig, index: number) => {
-                    return useUIFragment(fragment, index)
-                })}
+                {config?.map((fragment: UIFragmentConfig, index: number) =>
+                    useUIFragment(fragment, index)
+                )}
             </DataContext.Provider>
         </AvailableComponents.Provider>)
 }

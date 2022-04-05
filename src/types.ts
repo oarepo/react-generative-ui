@@ -9,12 +9,17 @@ export type ComponentMap = {
   [key: string]: Function;
 };
 
-export type DataProps = {
-  /** Dot-delimited path to a data field in a data context */
-  path: string;
-  /** Default value if path is non-existent in a data context */
-  default: any;
-};
+/** Field with its value fetched from DataContext */
+export type DataField =
+  | string
+  | {
+      /** Dot-delimited path to a data field in a data context */
+      path?: string;
+      /** Default value if path is non-existent in a data context */
+      default?: any;
+      /** Component props with values to be resolved from data context */
+      props?: { [key: string]: DataField };
+    };
 
 export interface UIFragmentProps extends AllHTMLAttributes<HTMLDivElement> {}
 
@@ -34,8 +39,12 @@ export interface UIFragmentConfig {
   items?: UIFragmentConfig[] | undefined;
   /** Props to be passed to the component rendering the UI fragment */
   props?: AllUIFragmentProps;
-  /** Data object holding field values to be rendered */
-  data?: string | DataProps;
+  /**
+   * Holds configuration of how the values should be
+   * fetched from DataContext and where should be used
+   * (either as Fragment children or in Fragment props)
+   */
+  data?: DataField;
 }
 
 export type UIFragmentContext = {
