@@ -52,7 +52,7 @@
                         },
                         "items": [
                             {
-                                "component": "inline",
+                                "component": "horizontal-list",
                                 "data": "creators",
                                 "props": {
                                     "separator": "|",
@@ -62,7 +62,7 @@
                                 }
                             },
                             {
-                                "component": "inline",
+                                "component": "horizontal-list",
                                 "data": "contributors",
                                 "props": {
                                     "separator": "|",

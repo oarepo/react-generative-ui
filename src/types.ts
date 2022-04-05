@@ -25,7 +25,7 @@ export interface UIFragmentProps extends AllHTMLAttributes<HTMLDivElement> {}
 
 export interface UIListFragmentProps extends UIFragmentProps {
   /** List item separator - either a registered component or a string */
-  separator?: string | undefined;
+  separator?: string | boolean | undefined;
   /** UI fragment config used to render list items */
   item?: UIFragmentConfig;
 }

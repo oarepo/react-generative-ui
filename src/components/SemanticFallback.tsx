@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, lazy, Suspense, useContext } from "react"
+import React, { FC, lazy, Suspense } from "react"
 import { Icon, Label, Placeholder } from "semantic-ui-react"
 import { UIFragmentContext } from "../types"
 import _get from 'lodash/get'
