@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { Columns } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
-import { useUIFragment } from '../hooks';
+import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
   title: 'Layout/Columns',
@@ -31,4 +31,4 @@ const config = {
 }
 
 // @ts-ignore 2322
-Default.args = { config, renderUIFragment: useUIFragment };
+Default.args = { config, renderUIFragment: UIFragment };

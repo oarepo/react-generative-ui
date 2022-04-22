@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { Row } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
-import { useUIFragment } from '../hooks';
+import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
   title: 'Layout/Row',
@@ -31,7 +31,7 @@ const config = {
 }
 
 // @ts-ignore 2322
-Default.args = { config, renderUIFragment: useUIFragment };
+Default.args = { config, renderUIFragment: UIFragment };
 
 
 export const CustomSeparator = Template.bind({});

@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { SemanticFallback } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
-import { useUIFragment } from '../hooks';
+import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
   title: 'Elements/SemanticFallback',
@@ -27,7 +27,7 @@ Icon.args = {
     props: {
       name: 'hand victory'
     }
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 
 export const List = Template.bind({});
@@ -42,7 +42,7 @@ List.args = {
       // @ts-ignore
       items: ['item #1', 'item #2', 'item #3']
     }
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 
 /** Unknown fallback */
