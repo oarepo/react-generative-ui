@@ -8,7 +8,7 @@ import { ComponentMap, UIFragmentConfig, UIGeneratorProps } from '../types';
 import { AvailableComponents, DataContext, defaultComponents } from '../context';
 import _mapKeys from 'lodash/mapKeys'
 import _get from 'lodash/get'
-import { useUIFragment } from '../hooks';
+import { UIFragment } from './UIFragment';
 
 /**
  * Generated user-configured UI view
@@ -22,7 +22,7 @@ export const GeneratedUI: FC<UIGeneratorProps> = ({ config, data, components }) 
         <AvailableComponents.Provider value={availableComponents}>
             <DataContext.Provider value={data}>
                 {config?.map((fragment: UIFragmentConfig, index: number) =>
-                    useUIFragment(fragment, index)
+                    UIFragment(fragment, index)
                 )}
             </DataContext.Provider>
         </AvailableComponents.Provider>)

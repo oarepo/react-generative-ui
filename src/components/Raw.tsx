@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, Fragment, Key } from "react"
+import React, { FC, Fragment } from "react"
 import { useResolvedDataProps } from "../hooks"
 import { UIFragmentContext } from "../types"
 

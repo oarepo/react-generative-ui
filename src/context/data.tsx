@@ -3,5 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from './GeneratedUI';
-export * from './UIFragment';
+import * as React from 'react';
+
+export const DataContext = React.createContext({});
+

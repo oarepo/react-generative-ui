@@ -3,11 +3,11 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { createContext } from 'react';
+import * as React from 'react';
 import { List } from 'semantic-ui-react';
 
-import { Column, Columns, Raw, Row, SemanticFallback } from './components';
-import { ComponentMap, UIFragmentContext } from './types';
+import { Column, Columns, Raw, Row, SemanticFallback } from '../components';
+import { ComponentMap, UIFragmentContext } from '../types';
 
 export const defaultComponents = {
   columns: (context: UIFragmentContext) => (<Columns {...context} />),
@@ -19,6 +19,4 @@ export const defaultComponents = {
   _fallback: (context: UIFragmentContext) => (<SemanticFallback {...context} />)
 } as ComponentMap;
 
-export const DataContext = createContext({});
-
-export const AvailableComponents = createContext(defaultComponents);
+export const AvailableComponents = React.createContext(defaultComponents);

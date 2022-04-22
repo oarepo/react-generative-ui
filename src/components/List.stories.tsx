@@ -3,9 +3,9 @@ import { Meta, Story, StoryFn } from '@storybook/react';
 import { List } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
-import { useUIFragment } from '../hooks';
 import { useParameter, useState } from '@storybook/addons';
-import { DataContext } from '../context';
+import { DataContext } from '../context/data';
+import { UIFragment } from '../GeneratedUI/UIFragment';
 
 
 const DataContextDecorator = (Story: StoryFn) => {
@@ -42,7 +42,7 @@ HorizontalItemsArray.args = {
       { component: 'card', props: { content: 'this is item #2' } },
       { component: 'card', props: { content: 'this is item #3' } }
     ]
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 
 export const HorizontalDataArray = Template.bind({});
@@ -57,7 +57,7 @@ HorizontalDataArray.args = {
         props: { "color": "blue" }
       }
     }
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 HorizontalDataArray.parameters = {
   data: {
@@ -80,7 +80,7 @@ SeparatedDataArray.args = {
         props: { "color": "blue" }
       }
     }
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 SeparatedDataArray.parameters = {
   data: {
@@ -100,7 +100,7 @@ VerticalDataArray.args = {
         props: { "color": "blue" }
       }
     }
-  }, renderUIFragment: useUIFragment
+  }, renderUIFragment: UIFragment
 };
 VerticalDataArray.parameters = {
   data: {

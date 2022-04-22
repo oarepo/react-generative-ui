@@ -3,14 +3,13 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { Fragment, useContext } from 'react';
+import * as React from 'react';
 
-import { AvailableComponents, DataContext } from './context';
-import { AllUIFragmentProps, DataField, UIFragmentConfig } from './types';
+import { DataContext } from './context/data';
+import { AllUIFragmentProps, DataField } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
-import _mapKeys from 'lodash/mapKeys'
 import _mapValues from 'lodash/mapValues'
 
 
@@ -23,7 +22,7 @@ import _mapValues from 'lodash/mapValues'
  */
 export const useData = (data: DataField) => {
   const _getData = (field: DataField) => {
-    const dataContext = useContext(DataContext);
+    const dataContext = React.useContext(DataContext);
     if (_isString(field)) {
       return _get(dataContext, field, '');
     } else if (field.path || field.default) {
@@ -69,32 +68,3 @@ export const useResolvedDataProps = (
   return props;
 };
 
-
-/**
- * Returns an UI fragment corresponding to the given configuration
- * 
- * @param config rendering configuration of a fragment
- * @param index optional position of a fragment as a list element, used for key attribute
- * @returns UI fragment component
- */
-export const useUIFragment = (config: UIFragmentConfig, index?: number) => {
-  const { props, component } = config
-  const components = useContext(AvailableComponents)
-
-  const resolvedProps = _mapKeys(props, (_value: string, key: string) => {
-    return key === 'class' ? 'className' : key
-  })
-
-  const renderContext = {
-    renderUIFragment: useUIFragment,
-    config: { ...config, props: resolvedProps }
-  }
-
-  const UIFragmentComponent = _get(components, component, components['_fallback'])
-
-  if (index !== undefined) {
-    return <Fragment key={index}>{UIFragmentComponent(renderContext)}</Fragment>
-  } else {
-    return <>{UIFragmentComponent(renderContext)}</>
-  }
-}
