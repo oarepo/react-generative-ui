@@ -11,7 +11,7 @@ on: push
 
 # List of jobs
 jobs:
-  test:
+  publish:
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
