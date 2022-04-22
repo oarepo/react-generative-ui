@@ -20,7 +20,13 @@
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic",
+    "edit-linked-package": "json -I -f ./dist/package.json -e 'this.module=\"react-generative-ui.esm.js\", this.main=\"react-generative-ui.cjs.development.js\"' ",
+    "prelink-dist": "cp package.json ./dist && yarn run edit-linked-package",
+    "link-dist": "cd dist && npm link",
+    "postlink-dist": "cd dist && rm -rf node_modules",
+    "unlink-dist": "cd dist && npm unlink && rm package*",
+    "watch": "NODE_ENV=development tsdx watch"
   },
   "peerDependencies": {
     "react": ">=16",
@@ -40,6 +46,7 @@
   },
   "name": "react-generative-ui",
   "author": "Miroslav Bauer @ CESNET",
+  "browser": "dist/react-generative-ui.cjs.production.min.js",
   "module": "dist/react-generative-ui.esm.js",
   "size-limit": [
     {
@@ -67,6 +74,7 @@
     "chromatic": "^6.5.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
+    "json": "^10.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-is": "^18.0.0",
