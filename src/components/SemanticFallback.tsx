@@ -3,39 +3,36 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, lazy, Suspense } from "react"
-import { Icon, Label, Placeholder } from "semantic-ui-react"
+import * as React from "react"
+import { Placeholder } from "semantic-ui-react"
 import { UIFragmentContext } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
 import { useResolvedDataProps } from "../hooks"
+import { Fallback, FallbackComponentProps } from "./Fallback"
 
 
 /**
  * A component that tries to use SemanticUI element or renders
  * a Fallback component if requested component is unknown.
  */
-export const SemanticFallback: FC<UIFragmentContext> = ({
+export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
 }) => {
     const { component, props, data } = config
-    const resolvedProps = useResolvedDataProps(data, props)
+    const resolvedProps = useResolvedDataProps(data, props) as FallbackComponentProps
 
-    const FallbackComponent: FC = () => <Label basic color="red" >
-        <Icon name="warning sign" />
-        Component '{component}' not found
-    </Label>
-
-    const SemanticElementOrDefault = lazy(() => import('semantic-ui-react')
+    const SemanticElementOrFallback = React.lazy(() => import('semantic-ui-react')
         .then(module => {
-            return { default: _get(module, _capitalize(_camelCase(component)), FallbackComponent) }
+            const semanticComp = _get(module, _capitalize(_camelCase(component)))
+            return { default: semanticComp || Fallback }
         }));
 
     return (
-        <Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>
-            <SemanticElementOrDefault {...resolvedProps}>
-            </SemanticElementOrDefault>
-        </Suspense>
+        <React.Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>
+            <SemanticElementOrFallback {...resolvedProps} component={component}>
+            </SemanticElementOrFallback>
+        </React.Suspense>
     )
 }

@@ -9,6 +9,7 @@ import { UIFragmentConfig } from "../types"
 import _mapKeys from 'lodash/mapKeys'
 import _get from 'lodash/get';
 
+
 /**
  * UI fragment component redered from the given configuration
  * 
@@ -30,6 +31,8 @@ export const UIFragment = (config: UIFragmentConfig, index?: number) => {
     }
 
     const UIFragmentComponent = _get(components, component, components['_fallback'])
+
+    // TODO: cache using React memo
 
     if (index !== undefined) {
         return <React.Fragment key={index}>{UIFragmentComponent(renderContext)}</React.Fragment>
