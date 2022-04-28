@@ -9,7 +9,7 @@ import { UIFragmentContext, UIFragmentProps } from "../types"
 import TextTruncate from 'react-text-truncate'
 import { Button } from "semantic-ui-react"
 
-interface TruncatedTextProps extends UIFragmentProps {
+export interface TruncatedTextProps extends UIFragmentProps {
     lines: number,
     element: string,
     ellipsis: string,
