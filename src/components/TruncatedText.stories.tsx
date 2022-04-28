@@ -1,13 +1,13 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Text } from '.';
+import { TruncatedText } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
   title: 'Layout/Row',
-  component: Row,
+  component: TruncatedText,
   parameters: {
     controls: { expanded: true },
   },
@@ -16,7 +16,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => <Row  {...args} />;
+const Template: Story<UIFragmentContext> = (args) => <TruncatedText  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -30,22 +30,4 @@ const config = {
   ]
 }
 
-// @ts-ignore 2322
-Default.args = { config, renderUIFragment: UIFragment };
-
-
-export const CustomSeparator = Template.bind({});
-// @ts-ignore 2322
-CustomSeparator.args = {
-  ...Default.args,
-  ...{
-    config: {
-      ...Default.args.config,
-      ...{
-        props: {
-          separator: ' || '
-        }
-      }
-    }
-  }
-}
+Default.args = { config };

@@ -122,10 +122,10 @@
                         }
                     },
                     {
-                        "component": "shortened-text",
+                        "component": "truncated-text",
+                        "data": "abstract",
                         "props": {
-                            "data": "abstract",
-                            "length": 350
+                            "lines": 3
                         }
                     }
                 ]

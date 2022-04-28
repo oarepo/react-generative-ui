@@ -42,16 +42,16 @@ export const useData = (data: DataField) => {
  * If any of `props.children` or `props.content` was specified,
  * it will be replaced by resolved children data value.
  * 
- * @param data Data fields configuration
+ * @param field Data fields configuration
  * @param props Current component props
  * @returns `props` with values resolved from DataContext
  */
 export const useResolvedDataProps = (
-  data?: DataField,
+  field?: DataField,
   props?: AllUIFragmentProps
 ) => {
-  if (data) {
-    const { childrenData, propsData } = useData(data);
+  if (field) {
+    const { childrenData, propsData } = useData(field);
     const resolvedProps = {
       ...props,
       ...propsData,
