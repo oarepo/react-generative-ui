@@ -35,6 +35,6 @@ export const AuthorityIdentifier: React.FC<UIFragmentContext> = ({
     return (
         <a href={`${scheme}:${identifier}`} target="_blank" {...rest}>
             <Icon link name='id card' {...rest} />
-        </a >
+        </a>
     )
 }

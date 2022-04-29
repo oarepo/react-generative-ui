@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { AvailableComponents } from "../context/components"
-import { UIFragmentConfig } from "../types"
+import { ComponentMap, UIFragmentConfig } from "../types"
 import _mapKeys from 'lodash/mapKeys'
 import _get from 'lodash/get';
 
@@ -30,17 +30,16 @@ export const UIFragment = (config: UIFragmentConfig, index?: number) => {
     }
     // TODO: cache using React memo
 
-    if (index !== undefined) {
-        return (
-            <AvailableComponents.Consumer key={index}>
-                {value => _get(value, component, value['_fallback'])(renderContext)}
-            </AvailableComponents.Consumer>
-        )
-    } else {
-        return (
-            <AvailableComponents.Consumer>
-                {value => _get(value, component, value['_fallback'])(renderContext)}
-            </AvailableComponents.Consumer>
-        )
+    const fragmentComponent = (components: ComponentMap, component: string, context: any) => {
+        const comp = _get(components, component, components['_fallback'])
+
+        const CachedFragment = React.memo(comp)
+        return <CachedFragment {...context} />
     }
+
+    return (
+        <AvailableComponents.Consumer {...(index != null && { key: index })} >
+            {value => fragmentComponent(value, component, renderContext)}
+        </AvailableComponents.Consumer >
+    )
 }

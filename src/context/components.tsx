@@ -16,19 +16,33 @@ import {
   TruncatedText,
   List,
 } from '../components';
-import { ComponentMap, UIFragmentContext } from '../types';
+import { ComponentMap } from '../types';
+
+// export const defaultComponents = {
+//   authority: (context: UIFragmentContext) => (<Authority {...context} />),
+//   'authority-identifier': (context: UIFragmentContext) => (<AuthorityIdentifier {...context} />),
+//   columns: (context: UIFragmentContext) => (<Columns {...context} />),
+//   column: (context: UIFragmentContext) => (<Column {...context} />),
+//   row: (context: UIFragmentContext) => (<Row {...context} />),
+//   list: (context: UIFragmentContext) => (<List {...context} />),
+//   raw: (context: UIFragmentContext) => (<Raw {...context} />),
+//   'horizontal-list': (context: UIFragmentContext) => (<List {...context} />),
+//   'truncated-text': (context: UIFragmentContext) => (<TruncatedText {...context} />),
+//   _fallback: (context: UIFragmentContext) => (<SemanticFallback {...context} />)
+// } as ComponentMap;
+
 
 export const defaultComponents = {
-  authority: (context: UIFragmentContext) => (<Authority {...context} />),
-  'authority-identifier': (context: UIFragmentContext) => (<AuthorityIdentifier {...context} />),
-  columns: (context: UIFragmentContext) => (<Columns {...context} />),
-  column: (context: UIFragmentContext) => (<Column {...context} />),
-  row: (context: UIFragmentContext) => (<Row {...context} />),
-  list: (context: UIFragmentContext) => (<List {...context} />),
-  raw: (context: UIFragmentContext) => (<Raw {...context} />),
-  'horizontal-list': (context: UIFragmentContext) => (<List {...context} />),
-  'truncated-text': (context: UIFragmentContext) => (<TruncatedText {...context} />),
-  _fallback: (context: UIFragmentContext) => (<SemanticFallback {...context} />)
+  authority: Authority,
+  'authority-identifier': AuthorityIdentifier,
+  columns: Columns,
+  column: Column,
+  row: Row,
+  list: List,
+  raw: Raw,
+  'horizontal-list': List,
+  'truncated-text': TruncatedText,
+  _fallback: SemanticFallback
 } as ComponentMap;
 
 export const AvailableComponents = React.createContext(defaultComponents);

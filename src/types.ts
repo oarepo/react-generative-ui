@@ -3,10 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { AllHTMLAttributes, HTMLAttributes } from 'react';
+import { AllHTMLAttributes, FC, HTMLAttributes } from 'react';
 
 export type ComponentMap = {
-  [key: string]: Function;
+  [key: string]: FC<UIFragmentContext>;
 };
 
 /** Field with its value fetched from DataContext */

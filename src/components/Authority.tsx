@@ -61,11 +61,11 @@ export const Authority: React.FC<UIFragmentContext> = ({
 
     return (
         <>
-            {renderUIFragment(fullNameComponentItem)}
+            {renderUIFragment(fullNameComponentItem, 'name')}
             {authorityIdentifiers.map((ai: any, index: number) => {
-                return renderUIFragment(identifierComponentItem(ai), index)
+                return renderUIFragment(identifierComponentItem(ai), `identifier-${index}`)
             })}
-            {role && renderUIFragment(roleComponentItem)}
+            {role && renderUIFragment(roleComponentItem, 'role')}
         </>
     )
 }

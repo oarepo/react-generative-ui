@@ -84,7 +84,7 @@ const MyCoolComponent: React.FC<UIFragmentContext> = ({ config }) => {
 
 UserProvidedComponent.args = {
   components: {
-    cool: (context: UIFragmentContext) => (<MyCoolComponent {...context} />)
+    cool: MyCoolComponent
   },
   config: [{
     component: 'cool',

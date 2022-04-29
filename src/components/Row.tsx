@@ -23,7 +23,7 @@ export const Row: FC<UIFragmentContext> = ({
         <Grid.Row {...rest as GridRowProps}>
             {items?.map((item: UIFragmentConfig, index) =>
                 <Fragment key={index}>
-                    {renderUIFragment(item)}
+                    {renderUIFragment(item, index)}
                     {index < items.length - 1 && (separator || ' ')}
                 </Fragment>
             )}
