@@ -14,8 +14,10 @@ import { Fallback, FallbackComponentProps } from "./Fallback"
 
 
 /**
- * A component that tries to use SemanticUI element or renders
- * a Fallback component if requested component is unknown.
+ * A component that tries to use SemanticUI element.
+ *
+ * If any usable element could not be found for a component,
+ * it renders a Fallback component.
  */
 export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
@@ -28,7 +30,6 @@ export const SemanticFallback: React.FC<UIFragmentContext> = ({
             const semanticComp = _get(module, _capitalize(_camelCase(component)))
             return { default: semanticComp || Fallback }
         }));
-
     return (
         <React.Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>
             <SemanticElementOrFallback {...resolvedProps} component={component}>

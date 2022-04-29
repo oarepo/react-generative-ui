@@ -4,7 +4,6 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { Icon, Label } from "semantic-ui-react"
 import { AllUIFragmentProps } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
@@ -16,15 +15,12 @@ export interface FallbackComponentProps extends AllUIFragmentProps {
 }
 
 /**
- * A fallback component to be displayed if no suitable component is found.
+ * A Fallback is trying to render a HTML element from component string.
+ * 
+ * A warning is logged to browser console, if component string is an
+ * unknown HTML element and component props is rendered as default span.
  */
-export const Fallback: React.FC<FallbackComponentProps> = ({
-    component,
-}) => {
-    return (
-        <Label basic color="red" >
-            <Icon name="warning sign" />
-            Component '{component}' not found
-        </Label>
-    )
+export const Fallback: React.FC<FallbackComponentProps> = (props) => {
+    const { component, ...attrs } = props
+    return <>{React.createElement(component, attrs)}</>
 }

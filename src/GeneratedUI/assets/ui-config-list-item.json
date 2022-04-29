@@ -55,7 +55,7 @@
                                 "component": "horizontal-list",
                                 "data": "creators",
                                 "props": {
-                                    "separator": "|",
+                                    "separator": true,
                                     "item": {
                                         "component": "authority"
                                     }
@@ -65,7 +65,7 @@
                                 "component": "horizontal-list",
                                 "data": "contributors",
                                 "props": {
-                                    "separator": "|",
+                                    "separator": true,
                                     "item": {
                                         "component": "authority",
                                         "props": {

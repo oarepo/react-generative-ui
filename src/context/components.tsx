@@ -4,12 +4,23 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from 'react';
-import { List } from 'semantic-ui-react';
 
-import { Column, Columns, Raw, Row, SemanticFallback, TruncatedText } from '../components';
+import {
+  Authority,
+  AuthorityIdentifier,
+  Column,
+  Columns,
+  Raw,
+  Row,
+  SemanticFallback,
+  TruncatedText,
+  List,
+} from '../components';
 import { ComponentMap, UIFragmentContext } from '../types';
 
 export const defaultComponents = {
+  authority: (context: UIFragmentContext) => (<Authority {...context} />),
+  'authority-identifier': (context: UIFragmentContext) => (<AuthorityIdentifier {...context} />),
   columns: (context: UIFragmentContext) => (<Columns {...context} />),
   column: (context: UIFragmentContext) => (<Column {...context} />),
   row: (context: UIFragmentContext) => (<Row {...context} />),

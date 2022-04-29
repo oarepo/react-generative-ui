@@ -10,13 +10,9 @@ import { UIFragmentContext } from "../types"
 /**
  * A Fragment component outputing raw data as its children.
  */
-export const Raw: FC<UIFragmentContext> = ({
-    config,
-}) => {
-    const { data } = config
-
-    const resolvedProps = useResolvedDataProps(data)
-    console.log(resolvedProps, data)
+export const Raw: FC<UIFragmentContext> = ({ config }) => {
+    const { data, props } = config
+    const resolvedProps = useResolvedDataProps(data, props)
     return (
         <Fragment {...resolvedProps}>
             {resolvedProps?.children}

@@ -49,6 +49,11 @@ List.args = {
 export const Unknown = Template.bind({});
 Unknown.args = {
   config: {
-    component: 'deathstar'
+    component: 'h1',
+    props: {
+      children: [
+        'Fallback using HTML fallback'
+      ]
+    }
   }
 }

@@ -31,7 +31,6 @@ export const UIFragment = (config: UIFragmentConfig, index?: number) => {
     }
 
     const UIFragmentComponent = _get(components, component, components['_fallback'])
-
     // TODO: cache using React memo
 
     if (index !== undefined) {

@@ -20,4 +20,13 @@ const Template: Story<UIFragmentContext & { component: string }> = (args) => <Fa
 export const Default = Template.bind({});
 Default.args = {
   component: 'unknown',
+  // @ts-ignore
+  children: ['check the browser console log by pressing F12']
+}
+
+export const Strong = Template.bind({});
+Strong.args = {
+  component: 'strong',
+  // @ts-ignore
+  children: ['this is so strong']
 }
