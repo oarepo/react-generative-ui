@@ -11,7 +11,6 @@ module.exports = {
       images({ include: ['**/*.png', '**/*.jpg', '**/*.svg'] }),
       ...config.plugins,
     ];
-
     return config;
   },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { GeneratedUI } from '.';
-import { UIGeneratorProps } from '../types';
+import { UIFragmentContext, UIGeneratorProps } from '../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {
@@ -66,3 +66,28 @@ const data = require('./assets/ui-data-list-item.json')
 const config = require('./assets/ui-config-list-item.json')
 
 ResultListItem.args = { data, config };
+
+
+export const UserProvidedComponent = Template.bind({});
+
+const MyCoolComponent: React.FC<UIFragmentContext> = ({ config }) => {
+  const { props } = config
+  return (
+    <>
+      <h1>
+        {props?.children}
+      </h1>
+      <p>This component was provided externally</p>
+    </>
+  )
+}
+
+UserProvidedComponent.args = {
+  components: {
+    cool: (context: UIFragmentContext) => (<MyCoolComponent {...context} />)
+  },
+  config: [{
+    component: 'cool',
+    props: { children: 'My cool component' }
+  }]
+}

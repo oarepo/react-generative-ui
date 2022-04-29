@@ -18,6 +18,7 @@ export const GeneratedUI: FC<UIGeneratorProps> = ({ config, data, components }) 
         ...components,
         ...defaultComponents
     } as ComponentMap
+
     return (
         <AvailableComponents.Provider value={availableComponents}>
             <DataContext.Provider value={data}>

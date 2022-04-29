@@ -19,7 +19,6 @@ import _get from 'lodash/get';
  */
 export const UIFragment = (config: UIFragmentConfig, index?: number) => {
     const { props, component } = config
-    const components = React.useContext(AvailableComponents)
 
     const resolvedProps = _mapKeys(props, (_value: string, key: string) => {
         return key === 'class' ? 'className' : key
@@ -29,13 +28,19 @@ export const UIFragment = (config: UIFragmentConfig, index?: number) => {
         renderUIFragment: UIFragment,
         config: { ...config, props: resolvedProps }
     }
-
-    const UIFragmentComponent = _get(components, component, components['_fallback'])
     // TODO: cache using React memo
 
     if (index !== undefined) {
-        return <React.Fragment key={index}>{UIFragmentComponent(renderContext)}</React.Fragment>
+        return (
+            <AvailableComponents.Consumer key={index}>
+                {value => _get(value, component, value['_fallback'])(renderContext)}
+            </AvailableComponents.Consumer>
+        )
     } else {
-        return <>{UIFragmentComponent(renderContext)}</>
+        return (
+            <AvailableComponents.Consumer>
+                {value => _get(value, component, value['_fallback'])(renderContext)}
+            </AvailableComponents.Consumer>
+        )
     }
 }
