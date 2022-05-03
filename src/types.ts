@@ -45,6 +45,8 @@ export interface UIFragmentConfig {
    * (either as Fragment children or in Fragment props)
    */
   data?: DataField;
+  /** Any component-specific properties */
+  [key: string]: any;
 }
 
 export type UIFragmentContext = {

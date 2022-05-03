@@ -12,3 +12,4 @@ export * from './SemanticFallback';
 export * from './List';
 export * from './TruncatedText';
 export * from './Raw';
+export * from './Placeholder';

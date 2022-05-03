@@ -15,6 +15,7 @@ import {
   SemanticFallback,
   TruncatedText,
   List,
+  Placeholder,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -26,6 +27,7 @@ export const defaultComponents = {
   row: Row,
   list: List,
   raw: Raw,
+  placeholder: Placeholder,
   'horizontal-list': List,
   'truncated-text': TruncatedText,
   _fallback: SemanticFallback
