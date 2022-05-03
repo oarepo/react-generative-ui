@@ -71,6 +71,7 @@
     "@types/lodash": "^4.14.181",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "@types/react-text-truncate": "^0.14.1",
     "babel-loader": "^8.2.4",
     "chromatic": "^6.5.3",
     "eslint-plugin-prettier": "^4.0.0",
@@ -87,7 +88,6 @@
     "typescript": "^4.6.3"
   },
   "dependencies": {
-    "@types/react-text-truncate": "^0.14.1",
     "lodash": "^4.17.21",
     "react-text-truncate": "^0.18.0"
   }
