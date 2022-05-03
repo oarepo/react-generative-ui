@@ -48,6 +48,12 @@ const config = {
             label: 'Docs',
           },
           {
+            href:
+              'https://www.chromatic.com/library?appId=624b0fa6357335003a8e1ddf',
+            label: 'Components Library',
+            position: 'right',
+          },
+          {
             href: 'https://github.com/oarepo/react-generative-ui',
             label: 'GitHub',
             position: 'right',
