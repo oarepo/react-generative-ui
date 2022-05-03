@@ -1,0 +1,21 @@
+---
+sidebar_position: 3
+---
+
+import 'semantic-ui-css/semantic.min.css';
+
+# Usage
+
+To render a React UI from a layout definition, you need to provide
+the definition and (optional) data context to provided `GeneratedUI` React component:
+
+```jsx live
+<GeneratedUI
+  config={[
+    {
+      component: 'label',
+      props: { color: 'red', content: 'This label was generated from config!' },
+    },
+  ]}
+></GeneratedUI>
+```

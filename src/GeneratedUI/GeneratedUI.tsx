@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC } from 'react';
+import * as React from 'react';
 import { ComponentMap, UIFragmentConfig, UIGeneratorProps } from '../types';
 import { AvailableComponents, DataContext, defaultComponents } from '../context';
 import _mapKeys from 'lodash/mapKeys'
@@ -13,7 +13,7 @@ import { UIFragment } from './UIFragment';
 /**
  * Generated user-configured UI view
  */
-export const GeneratedUI: FC<UIGeneratorProps> = ({ config, data, components }) => {
+export const GeneratedUI: React.FC<UIGeneratorProps> = ({ config, data, components }) => {
     const availableComponents = {
         ...components,
         ...defaultComponents
