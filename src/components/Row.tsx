@@ -5,7 +5,7 @@
 
 import React, { FC, Fragment } from "react"
 import { Grid, GridRowProps } from "semantic-ui-react"
-import { UIFragmentConfig, UIFragmentContext, UIListFragmentProps } from "../types"
+import { UILayoutConfig, UIFragmentContext, UIListFragmentProps } from "../types"
 
 /**
  * Component rendering its children items in a single row separated by a given separator.
@@ -21,7 +21,7 @@ export const Row: FC<UIFragmentContext> = ({
 
     return (
         <Grid.Row {...rest as GridRowProps}>
-            {items?.map((item: UIFragmentConfig, index) =>
+            {items?.map((item: UILayoutConfig, index) =>
                 <Fragment key={index}>
                     {renderUIFragment(item, index)}
                     {index < items.length - 1 && (separator || ' ')}

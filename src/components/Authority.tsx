@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { useResolvedDataProps } from "../hooks"
-import { UIFragmentConfig, UIFragmentContext, UIFragmentProps } from "../types"
+import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
 
 export interface AuthorityProps extends UIFragmentProps {
     authorityContainer: string
@@ -46,7 +46,7 @@ export const Authority: React.FC<UIFragmentContext> = ({
         props: { ...resolvedProps, children: [fullName] }
     }
 
-    const identifierComponentItem = (identifier: any): UIFragmentConfig => {
+    const identifierComponentItem = (identifier: any): UILayoutConfig => {
         return {
             component: identifierComponent,
             // @ts-ignore 2332

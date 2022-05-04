@@ -27,16 +27,16 @@ export interface UIListFragmentProps extends UIFragmentProps {
   /** List item separator - either a registered component or a string */
   separator?: string | boolean | undefined;
   /** UI fragment config used to render list items */
-  item?: UIFragmentConfig;
+  item?: UILayoutConfig;
 }
 
 export type AllUIFragmentProps = UIFragmentProps & UIListFragmentProps;
 
-export interface UIFragmentConfig {
+export interface UILayoutConfig {
   /** Name of UI component that should render the UI fragment */
   component: string;
   /** UI configs of items (children) contained in the UI fragment */
-  items?: UIFragmentConfig[] | undefined;
+  items?: UILayoutConfig[] | undefined;
   /** Props to be passed to the component rendering the UI fragment */
   props?: AllUIFragmentProps;
   /**
@@ -53,12 +53,12 @@ export type UIFragmentContext = {
   /** Function to render children UI fragments */
   renderUIFragment: Function;
   /** UI fragment config */
-  config: UIFragmentConfig;
+  config: UILayoutConfig;
 };
 
 export interface UIGeneratorProps extends HTMLAttributes<HTMLDivElement> {
   /** UI view configuration */
-  config: UIFragmentConfig[];
+  layout: UILayoutConfig[];
   /** Data object holding field values to be rendered */
   data: { [key: string]: any };
   /** Components available to the generator */

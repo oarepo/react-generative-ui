@@ -18,7 +18,7 @@ const Template: Story<UIGeneratorProps> = (args) => <GeneratedUI {...args} />;
 
 export const Simple = Template.bind({});
 Simple.args = {
-  config: [
+  layout: [
     { component: 'label', props: { content: 'This label was generated from config!' } }
   ]
 }
@@ -29,7 +29,7 @@ SimpleDataContent.args = {
     labelValue: 'This value was fetched from data object!',
     nested: { labelValue: 'And this value was fetched from nested data path!' }
   },
-  config: [
+  layout: [
     { component: 'label', data: 'labelValue' },
     { component: 'label', data: 'nested.labelValue' }
   ]
@@ -43,7 +43,7 @@ ComplexDataContent.args = {
       coolColor: 'blue'
     }
   },
-  config: [
+  layout: [
     { component: 'label', data: { path: 'labels.labelValue1' } },
     {
       component: 'label', data: {
@@ -63,9 +63,9 @@ ComplexDataContent.args = {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const ResultListItem = Template.bind({});
 const data = require('./assets/ui-data-list-item.json')
-const config = require('./assets/ui-config-list-item.json')
+const layout = require('./assets/ui-config-list-item.json')
 
-ResultListItem.args = { data, config };
+ResultListItem.args = { data, layout };
 
 
 export const UserProvidedComponent = Template.bind({});
@@ -86,7 +86,7 @@ UserProvidedComponent.args = {
   components: {
     cool: MyCoolComponent
   },
-  config: [{
+  layout: [{
     component: 'cool',
     props: { children: 'My cool component' }
   }]

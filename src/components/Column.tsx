@@ -5,7 +5,7 @@
 
 import React, { FC } from "react"
 import { Grid, GridColumnProps } from "semantic-ui-react"
-import { UIFragmentConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../types"
 
 /**
  * Component putting its children items into a single column.
@@ -19,7 +19,7 @@ export const Column: FC<UIFragmentContext> = ({
 
     return (
         <Grid.Column {...props as GridColumnProps}>
-            {items?.map((item: UIFragmentConfig, index) => (
+            {items?.map((item: UILayoutConfig, index) => (
                 <Grid.Row key={index}>
                     {renderUIFragment(item)}
                 </Grid.Row>

@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UIFragmentConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../types"
 import { Placeholder as SemanticPlaceholder } from "semantic-ui-react"
 import _times from 'lodash/times'
 
@@ -15,7 +15,7 @@ export enum PlaceholderType {
 }
 
 
-export interface PlaceholderProps extends UIFragmentConfig {
+export interface PlaceholderProps extends UILayoutConfig {
     /** Placeholder representation type */
     type?: PlaceholderType
     /** Number of placeholder content lines */
