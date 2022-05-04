@@ -24,7 +24,7 @@ export const Columns = Template.bind({});
 
 Columns.args = {
   config: {
-    "component": 'grid',
+    'component': 'grid',
     'columnsPerRow': 2,
     'className': 'demo',
     'columns': [
