@@ -3,26 +3,31 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC } from "react"
-import { Grid, GridColumnProps } from "semantic-ui-react"
+import * as React from "react"
+import { Grid } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../types"
 
+export interface ColumnLayoutConfig {
+    items: UILayoutConfig[]
+}
+
 /**
- * Component putting its children items into a single column.
+ * Component putting its children items into a single responsive column.
  * See https://react.semantic-ui.com/collections/grid/#Grid.Column for available props.
  */
-export const Column: FC<UIFragmentContext> = ({
+export const Column: React.FC<UIFragmentContext> = ({
     config,
     renderUIFragment
 }) => {
-    const { items, props } = config
+    const { component, ...props } = config
+    const { items, ...rest } = props as ColumnLayoutConfig
+
+    console.log('column', rest, props)
 
     return (
-        <Grid.Column {...props as GridColumnProps}>
+        <Grid.Column {...rest}>
             {items?.map((item: UILayoutConfig, index) => (
-                <Grid.Row key={index}>
-                    {renderUIFragment(item)}
-                </Grid.Row>
+                renderUIFragment(item, index)
             ))}
         </Grid.Column>
     )

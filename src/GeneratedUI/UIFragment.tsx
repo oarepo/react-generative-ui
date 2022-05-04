@@ -26,8 +26,10 @@ export const UIFragment = (config: UILayoutConfig, index?: number) => {
 
     const renderContext = {
         renderUIFragment: UIFragment,
-        config: { ...config, ...(!_isEmpty(resolvedProps) && { props: resolvedProps }) }
+        config: { ...config, ...resolvedProps }
     }
+
+    console.log('ctx', renderContext, resolvedProps)
 
     const fragmentComponent = (components: ComponentMap, component: string, context: any) => {
         const comp = _get(components, component, components['_fallback'])

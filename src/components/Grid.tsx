@@ -43,6 +43,15 @@ export const Grid: FC<UIFragmentContext> = ({
     const { columnsPerRow = 1, columns, rows, ...restInnerProps } = props as GridLayoutConfig
     const { stretched = true, ...rest } = restInnerProps as GridProps
 
+    const ColumnWrapper = ({ ...props }) => {
+        const { component, key } = props
+        if (!component) {
+            // Render fragment inside column
+        }
+        console.log('wrap', props)
+        return renderUIFragment(props, key)
+    }
+
     if (columns?.length) {
         return <SemanticGrid container columns={columnsPerRow} {...rest}>
             {columns?.map((column: UILayoutConfig, index) => (
@@ -56,13 +65,8 @@ export const Grid: FC<UIFragmentContext> = ({
             {rows?.map(({ columns }, index) => (
                 <SemanticGrid.Row key={index} stretched={stretched} {...restInnerProps}>
                     {columns.map(
-                        ({ stretched = true, columnClassName, ...columnProps }: UILayoutConfig, columnIndex) => (
-                            <SemanticGrid.Column
-                                stretched={stretched}
-                                key={columnIndex}
-                                className={columnClassName}>
-                                {renderUIFragment(columnProps, columnIndex)}
-                            </SemanticGrid.Column>
+                        (column: UILayoutConfig, columnIndex) => (
+                            <ColumnWrapper {...column} key={columnIndex} />
                         ))}
                 </SemanticGrid.Row>
             ))}
