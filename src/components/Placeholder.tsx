@@ -6,6 +6,7 @@
 import * as React from "react"
 import { UIFragmentConfig, UIFragmentContext } from "../types"
 import { Placeholder as SemanticPlaceholder } from "semantic-ui-react"
+import _times from 'lodash/times'
 
 export enum PlaceholderType {
     Paragraph = 'paragraph',
@@ -18,9 +19,13 @@ export interface PlaceholderProps extends UIFragmentConfig {
     /** Placeholder representation type */
     type?: PlaceholderType
     /** Number of placeholder content lines */
-    lines?: Number
+    lines?: number
     /** Any extra props passed down to Placeholder component */
     props?: { [key: string]: any }
+}
+
+export interface PlaceholderInnerProps {
+    square?: boolean
 }
 
 /**
@@ -30,10 +35,11 @@ export const Placeholder: React.FC<UIFragmentContext> = ({
     config,
 }) => {
     const { props, type = 'paragraph', lines = 1 } = config as PlaceholderProps
+    const { square, ...rest } = props as PlaceholderInnerProps
 
     const ParagraphPlaceholder = (
         <SemanticPlaceholder.Paragraph>
-            {[...Array(lines)].map(() => <SemanticPlaceholder.Line />)}
+            {_times(lines || 1, (num) => <SemanticPlaceholder.Line key={num.toString()} />)}
         </SemanticPlaceholder.Paragraph>
     )
 
@@ -44,12 +50,12 @@ export const Placeholder: React.FC<UIFragmentContext> = ({
             case PlaceholderType.ImageHeader:
                 return (
                     <SemanticPlaceholder.Header image>
-                        {[...Array(lines)].map(() => <SemanticPlaceholder.Line />)}
+                        {_times(lines || 1, (num) => <SemanticPlaceholder.Line key={num.toString()} />)}
                     </SemanticPlaceholder.Header>
                 )
             case PlaceholderType.Image:
                 return (
-                    <SemanticPlaceholder.Image {...(props?.square != null && { square: props.square! })} />
+                    <SemanticPlaceholder.Image {...(square != null && { square: square })} />
                 )
             default:
                 return ParagraphPlaceholder
@@ -57,7 +63,7 @@ export const Placeholder: React.FC<UIFragmentContext> = ({
     }
 
     return (
-        <SemanticPlaceholder fluid {...props}>
+        <SemanticPlaceholder fluid {...rest}>
             {placeholderRepresentation(type)}
         </SemanticPlaceholder>
     )
