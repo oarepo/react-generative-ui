@@ -10,7 +10,7 @@ import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
 import { useResolvedDataProps } from "../hooks"
-import { Fallback, FallbackComponentProps } from "./Fallback"
+import { Fallback } from "./Fallback"
 
 
 /**
@@ -23,7 +23,7 @@ export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
 }) => {
     const { component, props, data } = config
-    const resolvedProps = useResolvedDataProps(data, props) as FallbackComponentProps
+    const resolvedProps = useResolvedDataProps(data, props)
 
     const SemanticElementOrFallback = React.lazy(() => import('semantic-ui-react')
         .then(module => {

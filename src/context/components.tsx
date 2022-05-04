@@ -16,6 +16,7 @@ import {
   TruncatedText,
   List,
   Placeholder,
+  Grid,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -27,6 +28,7 @@ export const defaultComponents = {
   row: Row,
   list: List,
   raw: Raw,
+  grid: Grid,
   placeholder: Placeholder,
   'horizontal-list': List,
   'truncated-text': TruncatedText,

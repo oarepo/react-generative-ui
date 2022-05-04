@@ -6,7 +6,7 @@
 import * as React from 'react';
 
 import { DataContext } from './context/data';
-import { AllUIFragmentProps, DataField } from './types';
+import { DataField, UIFragmentProps } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
@@ -31,9 +31,8 @@ export const useData = (data: DataField) => {
   }
 
   const childrenData = _getData(data)
-  const propsData = !_isString(data) ? _mapValues(data.props, (o: DataField) => _getData(o)) : {}
 
-  return { childrenData, propsData }
+  return { childrenData }
 };
 
 /**
@@ -48,14 +47,13 @@ export const useData = (data: DataField) => {
  */
 export const useResolvedDataProps = (
   field?: DataField,
-  props?: AllUIFragmentProps
+  props?: UIFragmentProps
 ) => {
   if (field) {
-    const { childrenData, propsData } = useData(field);
+    const { childrenData } = useData(field);
     const resolvedProps = {
       ...props,
-      ...propsData,
-    };
+    } as UIFragmentProps;
     if (childrenData && (props && props.children)) {
       resolvedProps.children = childrenData;
     } else if (childrenData && (props && props.content)) {

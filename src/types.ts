@@ -17,34 +17,21 @@ export type DataField =
       path?: string;
       /** Default value if path is non-existent in a data context */
       default?: any;
-      /** Component props with values to be resolved from data context */
-      props?: { [key: string]: DataField };
     };
 
 export interface UIFragmentProps extends AllHTMLAttributes<HTMLDivElement> {}
-
-export interface UIListFragmentProps extends UIFragmentProps {
-  /** List item separator - either a registered component or a string */
-  separator?: string | boolean | undefined;
-  /** UI fragment config used to render list items */
-  item?: UILayoutConfig;
-}
-
-export type AllUIFragmentProps = UIFragmentProps & UIListFragmentProps;
 
 export interface UILayoutConfig {
   /** Name of UI component that should render the UI fragment */
   component: string;
   /** UI configs of items (children) contained in the UI fragment */
   items?: UILayoutConfig[] | undefined;
-  /** Props to be passed to the component rendering the UI fragment */
-  props?: AllUIFragmentProps;
   /**
    * Holds configuration of how the values should be
    * fetched from DataContext and where should be used
    * (either as Fragment children or in Fragment props)
    */
-  data?: DataField;
+  dataField?: DataField;
   /** Any component-specific properties */
   [key: string]: any;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Placeholder, PlaceholderProps } from '.';
+import { Placeholder, PlaceholderLayoutConfig } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
 
@@ -24,7 +24,7 @@ export const Paragraph = Template.bind({});
 Paragraph.args = {
   config: {
     component: 'placeholder',
-  } as PlaceholderProps
+  } as PlaceholderLayoutConfig
 };
 
 export const ImageHeader = Template.bind({});
@@ -33,7 +33,7 @@ ImageHeader.args = {
     component: 'placeholder',
     type: 'image-header',
     lines: 3
-  } as PlaceholderProps
+  } as PlaceholderLayoutConfig
 };
 
 export const Image = Template.bind({});
@@ -41,10 +41,8 @@ Image.args = {
   config: {
     component: 'placeholder',
     type: 'image',
-    props: {
-      square: true,
-      fluid: false
-    },
+    square: true,
+    fluid: false,
     lines: 3
-  } as PlaceholderProps
+  } as PlaceholderLayoutConfig
 }

@@ -15,17 +15,19 @@ export enum PlaceholderType {
 }
 
 
-export interface PlaceholderProps extends UILayoutConfig {
+export interface PlaceholderLayoutConfig extends UILayoutConfig {
     /** Placeholder representation type */
     type?: PlaceholderType
     /** Number of placeholder content lines */
     lines?: number
-    /** Any extra props passed down to Placeholder component */
-    props?: { [key: string]: any }
+    /** Any extra props passed down to Placeholder inner components */
+    [key: string]: any
 }
 
-export interface PlaceholderInnerProps {
-    square?: boolean
+export interface PlaceholderProps {
+    square?: boolean,
+    /** Any extra props passed directly to Placeholder component */
+    [key: string]: any
 }
 
 /**
@@ -34,13 +36,28 @@ export interface PlaceholderInnerProps {
 export const Placeholder: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { props, type = 'paragraph', lines = 1 } = config as PlaceholderProps
-    const { square, ...rest } = props as PlaceholderInnerProps
+    const { component, ...props } = config
+    const { type = 'paragraph', lines = 1, fluid = true, ...restInnerProps } = props as PlaceholderLayoutConfig
+    const { square, ...rest } = restInnerProps as PlaceholderProps
 
     const ParagraphPlaceholder = (
         <SemanticPlaceholder.Paragraph>
-            {_times(lines || 1, (num) => <SemanticPlaceholder.Line key={num.toString()} />)}
+            {_times(lines || 1, (num) => (
+                <SemanticPlaceholder.Line {...restInnerProps} key={num.toString()} />)
+            )}
         </SemanticPlaceholder.Paragraph>
+    )
+
+    const ImageHeaderPlaceholder = (
+        <SemanticPlaceholder.Header image>
+            {_times(lines || 1, (num) => (
+                <SemanticPlaceholder.Line {...restInnerProps} key={num.toString()} />
+            ))}
+        </SemanticPlaceholder.Header>
+    )
+
+    const ImagePlaceholder = (
+        <SemanticPlaceholder.Image {...restInnerProps} />
     )
 
     const placeholderRepresentation = (type: string) => {
@@ -48,22 +65,16 @@ export const Placeholder: React.FC<UIFragmentContext> = ({
             case PlaceholderType.Paragraph:
                 return ParagraphPlaceholder
             case PlaceholderType.ImageHeader:
-                return (
-                    <SemanticPlaceholder.Header image>
-                        {_times(lines || 1, (num) => <SemanticPlaceholder.Line key={num.toString()} />)}
-                    </SemanticPlaceholder.Header>
-                )
+                return ImageHeaderPlaceholder
             case PlaceholderType.Image:
-                return (
-                    <SemanticPlaceholder.Image {...(square != null && { square: square })} />
-                )
+                return ImagePlaceholder
             default:
                 return ParagraphPlaceholder
         }
     }
 
     return (
-        <SemanticPlaceholder fluid {...rest}>
+        <SemanticPlaceholder {...rest}>
             {placeholderRepresentation(type)}
         </SemanticPlaceholder>
     )

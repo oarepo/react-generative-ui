@@ -4,15 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { AllUIFragmentProps } from "../types"
+import { UILayoutConfig } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
 
-
-export interface FallbackComponentProps extends AllUIFragmentProps {
-    component: string
-}
 
 /**
  * A Fallback is trying to render a HTML element from component string.
@@ -20,7 +16,7 @@ export interface FallbackComponentProps extends AllUIFragmentProps {
  * A warning is logged to browser console, if component string is an
  * unknown HTML element and component props is rendered as default span.
  */
-export const Fallback: React.FC<FallbackComponentProps> = (props) => {
+export const Fallback: React.FC<UILayoutConfig> = (props) => {
     const { component, ...attrs } = props
     return <>{React.createElement(component, attrs)}</>
 }

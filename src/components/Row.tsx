@@ -5,7 +5,7 @@
 
 import React, { FC, Fragment } from "react"
 import { Grid, GridRowProps } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext, UIListFragmentProps } from "../types"
+import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
 
 /**
  * Component rendering its children items in a single row separated by a given separator.
@@ -17,7 +17,7 @@ export const Row: FC<UIFragmentContext> = ({
     renderUIFragment
 }) => {
     const { props, items } = config
-    const { separator, ...rest } = props || {} as UIListFragmentProps
+    const { separator, ...rest } = props || {} as UIFragmentProps
 
     return (
         <Grid.Row {...rest as GridRowProps}>

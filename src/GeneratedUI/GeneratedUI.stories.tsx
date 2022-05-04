@@ -44,17 +44,12 @@ ComplexDataContent.args = {
     }
   },
   layout: [
-    { component: 'label', data: { path: 'labels.labelValue1' } },
+    { component: 'label', dataField: { path: 'labels.labelValue1' } },
     {
-      component: 'label', data: {
+      component: 'label', dataField: {
         path: 'labels.labelValue2',
         default: 'This is a default value, because "labels.labelValue2" path is not found!'
       }
-    },
-    {
-      component: 'label',
-      props: { content: 'This one uses data to control the "color" property' },
-      data: { props: { color: 'labels.coolColor' } }
     }
   ]
 }

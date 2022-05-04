@@ -6,7 +6,7 @@
 import React, { FC, Key } from "react"
 import { List as SemanticList, ListListProps } from "semantic-ui-react"
 import { useResolvedDataProps } from "../hooks"
-import { UILayoutConfig, UIFragmentContext, UIListFragmentProps } from "../types"
+import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
 
 /**
  * Component putting its children items into a List.
@@ -16,8 +16,8 @@ export const List: FC<UIFragmentContext> = ({
     config,
     renderUIFragment
 }) => {
-    const { component, items, props, data } = config
-    const { item, separator } = props || {} as UIListFragmentProps
+    const { items, props, data } = config
+    const { item } = props || {} as UIFragmentProps
     const _childrenToFragment = (children: any) => {
         return {
             ...item,
@@ -34,12 +34,12 @@ export const List: FC<UIFragmentContext> = ({
     // @ts-ignore 2339
     const resolvedItems = items || (resolvedProps?.children?.map((c: any) => _childrenToFragment(c)) || []) as UILayoutConfig[]
     const semanticProps = resolvedProps || {} as ListListProps
-    if (component === 'horizontal-list') {
-        semanticProps.horizontal = true
-    }
-    if (separator) {
-        semanticProps.divided = true
-    }
+    // if (component === 'horizontal-list') {
+    //     semanticProps.horizontal = true
+    // }
+    // if (separator) {
+    //     semanticProps.divided = true
+    // }
 
     return (
         <SemanticList {...semanticProps as ListListProps}>
