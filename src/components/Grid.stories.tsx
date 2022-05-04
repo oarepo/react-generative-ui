@@ -58,7 +58,6 @@ Rows.args = {
       {
         "columns": [
           {
-            "component": "column",
             "className": "ten wide",
             "items": [
               {

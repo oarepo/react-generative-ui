@@ -46,9 +46,10 @@ export const Grid: FC<UIFragmentContext> = ({
     const ColumnWrapper = ({ ...props }) => {
         const { component, key } = props
         if (!component) {
-            // Render fragment inside column
+            props.component = 'column'
+        } else if (component !== 'column') {
+            return renderUIFragment({ component: 'column', items: [props] })
         }
-        console.log('wrap', props)
         return renderUIFragment(props, key)
     }
 

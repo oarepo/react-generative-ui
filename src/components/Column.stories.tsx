@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Layout/Column',
+  title: 'Structural/Column',
   component: Column,
   parameters: {
     controls: { expanded: true },
@@ -23,13 +23,11 @@ const Template: Story<UIFragmentContext> = (args) => <Column  {...args} />;
 export const Default = Template.bind({});
 const config = {
   component: 'column',
-  props: {
-    stretched: true,
-  },
+  stretched: true,
   items: [
-    { component: 'card', props: { centered: true, content: 'this is item #1' } },
-    { component: 'card', props: { centered: true, content: 'this is item #2' } },
-    { component: 'card', props: { centered: true, content: 'this is item #3' } }
+    { component: 'placeholder' },
+    { component: 'placeholder' },
+    { component: 'placeholder' },
   ]
 }
 

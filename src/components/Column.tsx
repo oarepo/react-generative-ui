@@ -21,9 +21,6 @@ export const Column: React.FC<UIFragmentContext> = ({
 }) => {
     const { component, ...props } = config
     const { items, ...rest } = props as ColumnLayoutConfig
-
-    console.log('column', rest, props)
-
     return (
         <Grid.Column {...rest}>
             {items?.map((item: UILayoutConfig, index) => (
