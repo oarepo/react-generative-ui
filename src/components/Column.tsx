@@ -8,6 +8,7 @@ import { Grid } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../types"
 
 export interface ColumnLayoutConfig {
+    stretched: boolean
     items: UILayoutConfig[]
 }
 
@@ -20,9 +21,9 @@ export const Column: React.FC<UIFragmentContext> = ({
     renderUIFragment
 }) => {
     const { component, ...props } = config
-    const { items, ...rest } = props as ColumnLayoutConfig
+    const { items, stretched = true, ...rest } = props as ColumnLayoutConfig
     return (
-        <Grid.Column {...rest}>
+        <Grid.Column stretched={stretched} {...rest}>
             {items?.map((item: UILayoutConfig, index) => (
                 renderUIFragment(item, index)
             ))}
