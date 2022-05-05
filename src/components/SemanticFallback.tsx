@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Placeholder } from "semantic-ui-react"
-import { UIFragmentContext } from "../types"
+import { UIFragmentContext, UIFragmentProps } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
@@ -22,8 +22,8 @@ import { Fallback } from "./Fallback"
 export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, props, data } = config
-    const resolvedProps = useResolvedDataProps(data, props)
+    const { component, data, ...rest } = config
+    const resolvedProps = useResolvedDataProps(data, { ...rest } as UIFragmentProps)
 
     const SemanticElementOrFallback = React.lazy(() => import('semantic-ui-react')
         .then(module => {

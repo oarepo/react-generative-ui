@@ -4,7 +4,6 @@
         "columnsPerRow": 2,
         "columns": [
             {
-                "component": "column",
                 "className": "result-item-aside",
                 "textAlign": "center",
                 "stretched": true,
@@ -35,14 +34,12 @@
                 ]
             },
             {
-                "component": "column",
                 "items": [
                     {
                         "component": "header",
                         "data": "title",
-                        "props": {
-                            "size": "medium"
-                        }
+                        "as": "a",
+                        "size": "medium"
                     },
                     {
                         "component": "row",
