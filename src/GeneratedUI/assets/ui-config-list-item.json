@@ -1,15 +1,14 @@
 [
     {
-        "component": "columns",
-        "items": [
+        "component": "grid",
+        "columnsPerRow": 2,
+        "columns": [
             {
                 "component": "column",
-                "props": {
-                    "textAlign": "center",
-                    "stretched": true,
-                    "width": "1",
-                    "class": "result-item-aside"
-                },
+                "className": "result-item-aside",
+                "textAlign": "center",
+                "stretched": true,
+                "width": "1",
                 "items": [
                     {
                         "component": "icon",

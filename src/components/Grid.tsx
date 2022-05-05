@@ -55,10 +55,8 @@ export const Grid: FC<UIFragmentContext> = ({
 
     if (columns?.length) {
         return <SemanticGrid container={container} columns={columnsPerRow} {...rest}>
-            {columns?.map((column: UILayoutConfig, index) => (
-                <SemanticGrid.Column key={index} stretched={stretched} {...restInnerProps}>
-                    {renderUIFragment(column, index)}
-                </SemanticGrid.Column>
+            {columns?.map((column: UILayoutConfig, columnIndex) => (
+                <ColumnWrapper stretched={stretched} key={columnIndex} {...column} {...restInnerProps} />
             ))}
         </SemanticGrid>
     } else if (rows?.length) {

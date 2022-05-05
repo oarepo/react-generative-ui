@@ -5,7 +5,7 @@ import { UIFragmentContext, UIGeneratorProps } from '../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {
-  title: 'Generated UI',
+  title: 'Views/Generated',
   component: GeneratedUI,
   parameters: {
     controls: { expanded: true },
