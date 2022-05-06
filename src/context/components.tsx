@@ -17,6 +17,7 @@ import {
   Placeholder,
   Grid,
   Item,
+  CustomIcon,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -28,6 +29,7 @@ export const defaultComponents = {
   list: List,
   raw: Raw,
   grid: Grid,
+  'custom-icon': CustomIcon,
   placeholder: Placeholder,
   'horizontal-list': List,
   item: Item,

@@ -23,6 +23,7 @@ import _mapValues from 'lodash/mapValues'
 export const useData = (data: DataField) => {
   const _getData = (field: DataField) => {
     const dataContext = React.useContext(DataContext);
+
     if (_isString(field)) {
       return _get(dataContext, field, '');
     } else if (field.path || field.default) {

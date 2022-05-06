@@ -14,3 +14,4 @@ export * from './Raw';
 export * from './Placeholder';
 export * from './Grid';
 export * from './Item';
+export * from './CustomIcon';
