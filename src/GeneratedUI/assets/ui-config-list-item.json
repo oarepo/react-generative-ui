@@ -1,35 +1,24 @@
 [
     {
         "component": "grid",
+        "container": false,
         "columnsPerRow": 2,
         "columns": [
             {
-                "className": "result-item-aside",
+                "className": "result-item-aside two wide",
                 "textAlign": "center",
                 "stretched": true,
                 "width": "1",
                 "items": [
                     {
-                        "component": "icon",
-                        "props": {
-                            "size": "large"
-                        },
-                        "data": {
-                            "props": {
-                                "name": "access_status"
-                            }
-                        }
+                        "component": "custom-icon",
+                        "size": "large",
+                        "dataField": "access_status"
                     },
                     {
-                        "component": "icon",
-                        "props": {
-                            "size": "huge"
-                        },
-                        "data": {
-                            "props": {
-                                "name": "rights"
-                            }
-                        }
+                        "component": "custom-icon",
+                        "size": "huge",
+                        "dataField": "rights"
                     }
                 ]
             },
@@ -49,7 +38,7 @@
                         "items": [
                             {
                                 "component": "horizontal-list",
-                                "data": "creators",
+                                "dataField": "creators",
                                 "props": {
                                     "separator": true,
                                     "item": {
@@ -59,7 +48,7 @@
                             },
                             {
                                 "component": "horizontal-list",
-                                "data": "contributors",
+                                "dataField": "contributors",
                                 "props": {
                                     "separator": true,
                                     "item": {

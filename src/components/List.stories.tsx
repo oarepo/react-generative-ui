@@ -50,7 +50,7 @@ export const HorizontalDataArray = Template.bind({});
 HorizontalDataArray.args = {
   config: {
     component: 'horizontal-list',
-    data: 'itemValues',
+    dataField: 'itemValues',
     props: {
       item: {
         component: "card",
@@ -70,7 +70,7 @@ export const SeparatedDataArray = Template.bind({});
 SeparatedDataArray.args = {
   config: {
     component: 'horizontal-list',
-    data: 'itemValues',
+    dataField: 'itemValues',
     props: {
       // @ts-ignore
       relaxed: 'very',
@@ -93,7 +93,7 @@ export const VerticalDataArray = Template.bind({});
 VerticalDataArray.args = {
   config: {
     component: 'list',
-    data: 'itemValues',
+    dataField: 'itemValues',
     props: {
       item: {
         component: "card",

@@ -1,9 +1,19 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { CustomIcon } from '.';
-import { UIFragmentContext } from '../types';
+import { Meta, Story, StoryFn } from '@storybook/react';
 import 'semantic-ui-css/semantic.min.css'
-import { CustomIconLayoutConfig } from './CustomIcon';
+import { useParameter, useState } from '@storybook/addons';
+import { DataContext } from '../context/data';
+import { CustomIcon, CustomIconLayoutConfig } from '.';
+import { UIFragmentContext } from '../types';
+
+
+const DataContextDecorator = (Story: StoryFn) => {
+  const initialState = useParameter('data', {})
+
+  const [data] = useState({ ...initialState })
+
+  return <><DataContext.Provider value={data}><Story /></DataContext.Provider></>
+}
 
 const meta: Meta = {
   title: 'Elements/Custom Icon',
@@ -11,6 +21,7 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
+  decorators: [DataContextDecorator]
 };
 
 export default meta;
@@ -41,5 +52,25 @@ ImageIcon.args = {
         src: 'https://semantic-ui.com//images/wireframe/image.png'
       }
     }
+  }
+}
+
+export const DataIcon = Template.bind({});
+
+DataIcon.args = {
+  config: {
+    component: 'custom-icon',
+    dataField: 'iconName',
+    iconSet: {
+      wireframe: {
+        src: 'https://semantic-ui.com//images/wireframe/image.png'
+      }
+    }
+  }
+}
+
+DataIcon.parameters = {
+  data: {
+    iconName: 'wireframe'
   }
 }

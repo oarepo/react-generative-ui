@@ -13,6 +13,8 @@ import {
     StrictImageProps
 } from "semantic-ui-react"
 import _times from 'lodash/times'
+import { useResolvedData } from "../hooks"
+import { DataContext } from "../context"
 
 
 export interface CustomIconLayoutConfig extends UILayoutConfig {
@@ -32,16 +34,26 @@ export interface CustomIconLayoutConfig extends UILayoutConfig {
 export const CustomIcon: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, ...props } = config
+    const { component, dataField, ...props } = config
     const { name, iconSet, ...rest } = props as CustomIconLayoutConfig
 
-    const resolvedName = iconSet ? iconSet[name] : name
+    const _getIcon = (name: string) => {
+        return iconSet ? iconSet[name] : name
+    }
 
-    if (resolvedName) {
-        if (typeof resolvedName === 'string') {
-            return <SemanticIcon name={resolvedName as SemanticICONS} {...rest} />
+    const resolvedName = dataField
+        ? useResolvedData(React.useContext(DataContext), dataField)
+        : name
+
+    const iconData = _getIcon(resolvedName)
+
+    console.log(iconData)
+
+    if (iconData) {
+        if (typeof iconData === 'string') {
+            return <SemanticIcon name={iconData as SemanticICONS} {...rest} />
         } else {
-            const { inline = true, size = 'tiny', ...imageProps } = resolvedName as ImageProps
+            const { inline = true, size = 'tiny', ...imageProps } = iconData as ImageProps
 
             return <SemanticImage inline={inline} size={size} {...imageProps} />
         }
@@ -51,5 +63,4 @@ export const CustomIcon: React.FC<UIFragmentContext> = ({
             Unknown icon: {name}.
         </div>
     )
-
 }

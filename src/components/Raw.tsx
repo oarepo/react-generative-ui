@@ -4,18 +4,24 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC, Fragment } from "react"
-import { useResolvedDataProps } from "../hooks"
+import { DataContext } from "../context"
+import { useResolvedData } from "../hooks"
 import { UIFragmentContext } from "../types"
 
 /**
  * A Fragment component outputing raw data as its children.
  */
 export const Raw: FC<UIFragmentContext> = ({ config }) => {
-    const { data, props } = config
-    const resolvedProps = useResolvedDataProps(data, props)
+    const { dataField, props } = config
+    const { children, ...rest } = props
+
+    const resolvedChildren = dataField
+        ? useResolvedData(React.useContext(DataContext), dataField)
+        : children
+
     return (
-        <Fragment {...resolvedProps}>
-            {resolvedProps?.children}
+        <Fragment {...rest}>
+            {resolvedChildren}
         </Fragment>
     )
 }

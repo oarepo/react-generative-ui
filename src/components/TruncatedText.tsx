@@ -4,10 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedDataProps } from "../hooks"
+import { useResolvedData } from "../hooks"
 import { UIFragmentContext, UIFragmentProps } from "../types"
 import TextTruncate from 'react-text-truncate'
 import { Button } from "semantic-ui-react"
+import { DataContext } from "../context"
 
 export interface TruncatedTextProps extends UIFragmentProps {
     lines: number,
@@ -23,17 +24,19 @@ export interface TruncatedTextProps extends UIFragmentProps {
 export const TruncatedText: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { data, props } = config
-    const resolvedProps = useResolvedDataProps(data, props)
-    const resolvedText = resolvedProps?.children?.toString()
-
-    const [expanded, setExpanded] = React.useState(false)
-
+    const { dataField, props } = config
     const {
+        children,
         lines = 1,
         ellipsis = "…",
-        expandToggle = { basic: true, size: 'mini' }
-    } = resolvedProps as TruncatedTextProps
+        expandToggle = { basic: true, size: 'mini' },
+        ...rest } = props
+
+    const resolvedText = dataField
+        ? useResolvedData(React.useContext(DataContext), dataField)
+        : children?.toString()
+
+    const [expanded, setExpanded] = React.useState(false)
 
     const toggleExpanded: React.MouseEventHandler<HTMLButtonElement> = () => {
         setExpanded(!expanded)
@@ -52,6 +55,7 @@ export const TruncatedText: React.FC<UIFragmentContext> = ({
             truncateText={ellipsis}
             text={resolvedText}
             textTruncateChild={ExpandToggle}
+            {...rest}
         />
     )
 }

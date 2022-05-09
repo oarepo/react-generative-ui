@@ -20,13 +20,12 @@ import _isEmpty from 'lodash/isEmpty'
 export const UIFragment = (config: UILayoutConfig, index?: number) => {
     const { component, ...props } = config
 
-    const resolvedProps = _mapKeys(props, (_value: string, key: string) => {
+    const translatedProps = _mapKeys(props, (_value: string, key: string) => {
         return key === 'class' ? 'className' : key
     })
-
     const renderContext = {
         renderUIFragment: UIFragment,
-        config: { ...config, ...resolvedProps }
+        config: { ...config, ...translatedProps }
     }
 
     const fragmentComponent = (components: ComponentMap, component: string, context: any) => {

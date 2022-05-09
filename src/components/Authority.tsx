@@ -4,7 +4,8 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedDataProps } from "../hooks"
+import { DataContext } from "../context"
+import { useResolvedData } from "../hooks"
 import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
 
 export interface AuthorityProps extends UIFragmentProps {
@@ -27,36 +28,38 @@ export const Authority: React.FC<UIFragmentContext> = ({
     config,
     renderUIFragment
 }) => {
-    const { data, props } = config
+    const { dataField, props } = config
     const {
         fullNameComponent = 'span',
         identifierComponent = 'authority-identifier',
         roleComponent = 'span'
     } = props as AuthorityProps
-    const resolvedProps = useResolvedDataProps(data, props)
 
     const {
         authorityIdentifiers = [],
         fullName,
-        role = undefined
-    } = resolvedProps?.children as AuthorityChildrenProps
+        role = undefined,
+        ...rest
+    } = dataField
+            ? useResolvedData(React.useContext(DataContext), dataField)
+            : props
 
     const fullNameComponentItem = {
         component: fullNameComponent,
-        props: { ...resolvedProps, children: [fullName] }
+        props: { ...rest, children: [fullName] }
     }
 
     const identifierComponentItem = (identifier: any): UILayoutConfig => {
         return {
             component: identifierComponent,
             // @ts-ignore 2332
-            props: { ...resolvedProps, ...identifier }
+            props: { ...rest, ...identifier }
         }
     }
 
     const roleComponentItem = {
         component: roleComponent,
-        props: { ...resolvedProps, children: [`(${role})`] }
+        props: { ...rest, children: [`(${role})`] }
     }
 
     return (
