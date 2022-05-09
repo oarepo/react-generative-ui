@@ -5,20 +5,29 @@
         "columnsPerRow": 2,
         "columns": [
             {
-                "className": "result-item-aside two wide",
+                "className": "result-item-aside one wide",
                 "textAlign": "center",
                 "stretched": true,
                 "width": "1",
                 "items": [
                     {
                         "component": "custom-icon",
-                        "size": "large",
-                        "dataField": "access_status"
+                        "dataField": "access_status",
+                        "iconSet": {
+                            "open": {
+                                "src": "https://github.com/Narodni-repozitar/nr-ui/raw/master/public/icons/locks/zamky_open_access.png"
+                            }
+                        }
                     },
                     {
                         "component": "custom-icon",
-                        "size": "huge",
-                        "dataField": "rights"
+                        "dataField": "rights",
+                        "fluid": true,
+                        "iconSet": {
+                            "CC BY-ND": {
+                                "src": "https://raw.githubusercontent.com/Narodni-repozitar/nr-ui/master/src/assets/licenses/by-nd.png"
+                            }
+                        }
                     }
                 ]
             },
@@ -26,7 +35,7 @@
                 "items": [
                     {
                         "component": "header",
-                        "data": "title",
+                        "dataField": "title",
                         "as": "a",
                         "size": "medium"
                     },

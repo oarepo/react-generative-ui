@@ -26,14 +26,14 @@ export interface AuthorityChildrenProps {
  */
 export const Authority: React.FC<UIFragmentContext> = ({
     config,
-    renderUIFragment
+    // renderUIFragment
 }) => {
-    const { dataField, props } = config
+    const { dataField, ...props } = config
     const {
-        fullNameComponent = 'span',
-        identifierComponent = 'authority-identifier',
-        roleComponent = 'span'
-    } = props as AuthorityProps
+        // fullNameComponent = 'span',
+        // identifierComponent = 'authority-identifier',
+        // roleComponent = 'span',
+    } = props
 
     const {
         authorityIdentifiers = [],
@@ -44,31 +44,33 @@ export const Authority: React.FC<UIFragmentContext> = ({
             ? useResolvedData(React.useContext(DataContext), dataField)
             : props
 
-    const fullNameComponentItem = {
-        component: fullNameComponent,
-        props: { ...rest, children: [fullName] }
-    }
+    // const fullNameComponentItem = {
+    //     component: fullNameComponent,
+    //     ...rest,
+    //     children: [fullName]
+    // }
 
-    const identifierComponentItem = (identifier: any): UILayoutConfig => {
-        return {
-            component: identifierComponent,
-            // @ts-ignore 2332
-            props: { ...rest, ...identifier }
-        }
-    }
+    // const identifierComponentItem = (identifier: any): UILayoutConfig => {
+    //     return {
+    //         component: identifierComponent,
+    //         ...rest,
+    //         ...identifier
+    //     }
+    // }
 
-    const roleComponentItem = {
-        component: roleComponent,
-        props: { ...rest, children: [`(${role})`] }
-    }
+    // const roleComponentItem = {
+    //     component: roleComponent,
+    //     ...rest,
+    //     children: [`(${role})`]
+    // }
 
     return (
         <>
-            {renderUIFragment(fullNameComponentItem, 'name')}
+            {/* {renderUIFragment(fullNameComponentItem, 'name')}
             {authorityIdentifiers.map((ai: any, index: number) => {
                 return renderUIFragment(identifierComponentItem(ai), `identifier-${index}`)
             })}
-            {role && renderUIFragment(roleComponentItem, 'role')}
+            {role && renderUIFragment(roleComponentItem, 'role')} */}
         </>
     )
 }

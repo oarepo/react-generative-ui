@@ -24,24 +24,18 @@ export const Icon = Template.bind({});
 Icon.args = {
   config: {
     component: 'icon',
-    props: {
-      name: 'hand victory'
-    }
+    name: 'hand victory'
   }, renderUIFragment: UIFragment
 };
 
 export const List = Template.bind({});
 
-// @ts-ignore 2322
 List.args = {
   config: {
     component: 'list',
-    props: {
-      // @ts-ignore
-      ordered: true,
-      // @ts-ignore
-      items: ['item #1', 'item #2', 'item #3']
-    }
+    ordered: true,
+    // @ts-ignore
+    items: ['item #1', 'item #2', 'item #3']
   }, renderUIFragment: UIFragment
 };
 
@@ -50,10 +44,8 @@ export const Unknown = Template.bind({});
 Unknown.args = {
   config: {
     component: 'h1',
-    props: {
-      children: [
-        'Fallback using HTML fallback'
-      ]
-    }
+    children: [
+      'Fallback using HTML fallback'
+    ]
   }
 }

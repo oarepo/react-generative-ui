@@ -19,7 +19,7 @@ const Template: Story<UIGeneratorProps> = (args) => <GeneratedUI {...args} />;
 export const Simple = Template.bind({});
 Simple.args = {
   layout: [
-    { component: 'label', props: { content: 'This label was generated from config!' } }
+    { component: 'label', content: 'This label was generated from config!' }
   ]
 }
 
@@ -30,8 +30,8 @@ SimpleDataContent.args = {
     nested: { labelValue: 'And this value was fetched from nested data path!' }
   },
   layout: [
-    { component: 'label', data: 'labelValue' },
-    { component: 'label', data: 'nested.labelValue' }
+    { component: 'label', dataField: 'labelValue' },
+    { component: 'label', dataField: 'nested.labelValue' }
   ]
 }
 
@@ -66,11 +66,11 @@ ResultListItem.args = { data, layout };
 export const UserProvidedComponent = Template.bind({});
 
 const MyCoolComponent: React.FC<UIFragmentContext> = ({ config }) => {
-  const { props } = config
+  const { children } = config
   return (
     <>
       <h1>
-        {props?.children}
+        {children}
       </h1>
       <p>This component was provided externally</p>
     </>
@@ -83,6 +83,6 @@ UserProvidedComponent.args = {
   },
   layout: [{
     component: 'cool',
-    props: { children: 'My cool component' }
+    children: 'My cool component'
   }]
 }

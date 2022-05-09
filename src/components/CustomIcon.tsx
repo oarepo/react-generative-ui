@@ -47,15 +47,18 @@ export const CustomIcon: React.FC<UIFragmentContext> = ({
 
     const iconData = _getIcon(resolvedName)
 
-    console.log(iconData)
-
     if (iconData) {
         if (typeof iconData === 'string') {
             return <SemanticIcon name={iconData as SemanticICONS} {...rest} />
         } else {
-            const { inline = true, size = 'tiny', ...imageProps } = iconData as ImageProps
+            const {
+                inline = true,
+                style = { objectFit: 'contain' },
+                size = 'tiny',
+                ...imageProps
+            } = iconData as ImageProps
 
-            return <SemanticImage inline={inline} size={size} {...imageProps} />
+            return <SemanticImage style={style} inline={inline} size={size} {...imageProps} />
         }
     }
     return (

@@ -17,6 +17,7 @@ import _capitalize from 'lodash/capitalize'
  * unknown HTML element and component props is rendered as default span.
  */
 export const Fallback: React.FC<UILayoutConfig> = (props) => {
-    const { component, ...attrs } = props
-    return <>{React.createElement(component, attrs)}</>
+    const { 'data-component': dataComponent, ...attrs } = props
+
+    return <>{React.createElement(dataComponent, attrs)}</>
 }

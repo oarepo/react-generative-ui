@@ -35,8 +35,6 @@ export const List: React.FC<UIFragmentContext> = ({
         ? useResolvedData(React.useContext(DataContext), dataField)
         : props.children
 
-    console.log(items, resolvedChildren, dataField, config)
-
     const resolvedItems = items || (resolvedChildren.map((c: any) => _childrenToFragment(c)) || []) as UILayoutConfig[]
     const semanticProps = rest || {} as ListListProps
 

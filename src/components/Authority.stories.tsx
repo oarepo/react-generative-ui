@@ -24,11 +24,7 @@ export const Person = Template.bind({});
 Person.args = {
   config: {
     component: 'authority',
-    props: {
-      children: {
-        fullName: 'John Doe'
-      }
-    }
+    fullName: 'John Doe'
   },
   renderUIFragment: UIFragment
 };

@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Placeholder } from "semantic-ui-react"
-import { UIFragmentContext, UIFragmentProps } from "../types"
+import { UIFragmentContext } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
@@ -23,11 +23,12 @@ import { DataContext } from "../context"
 export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, dataField, ...rest } = config
+    const { component, dataField, ...props } = config
+    const { children, ...rest } = props
 
-    const resolvedProps = dataField
+    const resolvedChildren = dataField
         ? useResolvedData(React.useContext(DataContext), dataField)
-        : rest
+        : children
 
     const SemanticElementOrFallback = React.lazy(() => import('semantic-ui-react')
         .then(module => {
@@ -35,9 +36,12 @@ export const SemanticFallback: React.FC<UIFragmentContext> = ({
             return { default: semanticComp || Fallback }
         }));
 
+    console.log(component, resolvedChildren, children)
+
     return (
         <React.Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>
-            <SemanticElementOrFallback {...resolvedProps} component={component}>
+            <SemanticElementOrFallback {...rest} data-component={component}>
+                {resolvedChildren}
             </SemanticElementOrFallback>
         </React.Suspense>
     )
