@@ -6,7 +6,7 @@
 import * as React from "react"
 import { DataContext } from "../context"
 import { useResolvedData } from "../hooks"
-import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
+import { UIFragmentContext, UIFragmentProps } from "../types"
 
 export interface AuthorityProps extends UIFragmentProps {
     authorityContainer: string
@@ -36,10 +36,10 @@ export const Authority: React.FC<UIFragmentContext> = ({
     } = props
 
     const {
-        authorityIdentifiers = [],
-        fullName,
-        role = undefined,
-        ...rest
+        // authorityIdentifiers = [],
+        // fullName,
+        // role = undefined,
+        // // ...rest
     } = dataField
             ? useResolvedData(React.useContext(DataContext), dataField)
             : props

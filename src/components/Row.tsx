@@ -12,6 +12,7 @@ import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
  * Separator prop could be either a string or a registered component key.
  * See https://react.semantic-ui.com/collections/grid/#Grid.Row for available props.
  */
+// TODO: this could be eliminated
 export const Row: FC<UIFragmentContext> = ({
     config,
     renderUIFragment

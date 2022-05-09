@@ -36,8 +36,13 @@ export interface PlaceholderProps {
 export const Placeholder: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, ...props } = config
-    const { type = 'paragraph', lines = 1, fluid = true, ...restInnerProps } = props as PlaceholderLayoutConfig
+    const {
+        component,
+        type = 'paragraph',
+        lines = 1,
+        fluid = true,
+        ...restInnerProps
+    } = config as PlaceholderLayoutConfig
     const { square, ...rest } = restInnerProps as PlaceholderProps
 
     const ParagraphPlaceholder = (

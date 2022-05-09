@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Placeholder } from "semantic-ui-react"
-import { UIFragmentContext } from "../types"
+import { UIFragmentContext, UILayoutConfig } from "../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
@@ -23,8 +23,7 @@ import { DataContext } from "../context"
 export const SemanticFallback: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, dataField, ...props } = config
-    const { children, ...rest } = props
+    const { component, dataField, children, ...rest } = config as UILayoutConfig
 
     const resolvedChildren = dataField
         ? useResolvedData(React.useContext(DataContext), dataField)
@@ -35,8 +34,6 @@ export const SemanticFallback: React.FC<UIFragmentContext> = ({
             const semanticComp = _get(module, _capitalize(_camelCase(component)))
             return { default: semanticComp || Fallback }
         }));
-
-    console.log(component, resolvedChildren, children)
 
     return (
         <React.Suspense fallback={<Placeholder><Placeholder.Line length="very short" /></Placeholder>}>

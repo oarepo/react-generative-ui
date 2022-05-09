@@ -34,8 +34,7 @@ export interface CustomIconLayoutConfig extends UILayoutConfig {
 export const CustomIcon: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { component, dataField, ...props } = config
-    const { name, iconSet, ...rest } = props as CustomIconLayoutConfig
+    const { component, dataField, name, iconSet, ...rest } = config as CustomIconLayoutConfig
 
     const _getIcon = (name: string) => {
         return iconSet ? iconSet[name] : name

@@ -9,6 +9,11 @@ import { DataContext } from "../context"
 import { useResolvedData } from "../hooks"
 import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
 
+
+export interface ListLayoutConfig extends UILayoutConfig {
+}
+
+
 /**
  * Component putting its children items into a List.
  * See https://react.semantic-ui.com/elements/list for available props.
@@ -17,7 +22,7 @@ export const List: React.FC<UIFragmentContext> = ({
     config,
     renderUIFragment
 }) => {
-    const { items, props, dataField } = config
+    const { items, dataField, ...props } = config
     const { item, ...rest } = props || {} as UIFragmentProps
     const _childrenToFragment = (children: any) => {
         return {

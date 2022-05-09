@@ -37,6 +37,7 @@ const ItemHeader: React.FC<ItemSectionProps> = (props) => {
 }
 
 /**
+ * TODO: WIP
  * An item view presents related collection of content for display.
  * See https://react.semantic-ui.com/views/item for available props.
  */

@@ -12,8 +12,7 @@ import { UIFragmentContext } from "../types"
  * A Fragment component outputing raw data as its children.
  */
 export const Raw: FC<UIFragmentContext> = ({ config }) => {
-    const { dataField, props } = config
-    const { children, ...rest } = props
+    const { dataField, children, ...rest } = config
 
     const resolvedChildren = dataField
         ? useResolvedData(React.useContext(DataContext), dataField)

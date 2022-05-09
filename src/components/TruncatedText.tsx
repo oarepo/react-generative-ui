@@ -5,16 +5,19 @@
 
 import * as React from "react"
 import { useResolvedData } from "../hooks"
-import { UIFragmentContext, UIFragmentProps } from "../types"
+import { UIFragmentContext, UIFragmentProps, UILayoutConfig } from "../types"
 import TextTruncate from 'react-text-truncate'
 import { Button } from "semantic-ui-react"
 import { DataContext } from "../context"
 
-export interface TruncatedTextProps extends UIFragmentProps {
+export interface TruncatedTextLayoutConfig extends UILayoutConfig {
+    /** Number of lines displayed in truncated state */
     lines: number,
-    element: string,
+    /** Ellipsis character (default: `…`) */
     ellipsis: string,
+    /** Text to be rendered truncated */
     text: string,
+    /** Props passed to 'Show more|less' toggle button */
     expandToggle: UIFragmentProps
 }
 
@@ -24,17 +27,19 @@ export interface TruncatedTextProps extends UIFragmentProps {
 export const TruncatedText: React.FC<UIFragmentContext> = ({
     config,
 }) => {
-    const { dataField, props } = config
     const {
-        children,
+        component,
+        dataField,
+        text,
         lines = 1,
         ellipsis = "…",
         expandToggle = { basic: true, size: 'mini' },
-        ...rest } = props
+        ...rest
+    } = config as TruncatedTextLayoutConfig
 
     const resolvedText = dataField
         ? useResolvedData(React.useContext(DataContext), dataField)
-        : children?.toString()
+        : text?.toString()
 
     const [expanded, setExpanded] = React.useState(false)
 

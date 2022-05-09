@@ -39,8 +39,15 @@ export const Grid: FC<UIFragmentContext> = ({
     config,
     renderUIFragment
 }) => {
-    const { component, ...props } = config
-    const { columnsPerRow = 1, className, container = true, columns, rows, ...restInnerProps } = props as GridLayoutConfig
+    const {
+        component,
+        columnsPerRow = 1,
+        className,
+        container = true,
+        columns,
+        rows,
+        ...restInnerProps
+    } = config as GridLayoutConfig
     const { stretched = true, ...rest } = restInnerProps as GridProps
 
     const ColumnWrapper = ({ ...props }) => {
