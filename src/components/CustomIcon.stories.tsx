@@ -36,7 +36,7 @@ ImageIcon.args = {
   config: {
     component: 'custom-icon',
     name: 'wireframe',
-    nameMap: {
+    iconSet: {
       wireframe: {
         src: 'https://semantic-ui.com//images/wireframe/image.png'
       }

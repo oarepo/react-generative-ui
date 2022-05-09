@@ -17,7 +17,7 @@ import _times from 'lodash/times'
 
 export interface CustomIconLayoutConfig extends UILayoutConfig {
     /** Mapping used to translate name prop to actual icon name/image source */
-    nameMap?: { [key: string]: SemanticICONS | StrictImageProps }
+    iconSet?: { [key: string]: SemanticICONS | StrictImageProps }
     /** Icon name */
     name: string
     /** Any extra props passed to Icon element */
@@ -33,9 +33,9 @@ export const CustomIcon: React.FC<UIFragmentContext> = ({
     config,
 }) => {
     const { component, ...props } = config
-    const { name, nameMap, ...rest } = props as CustomIconLayoutConfig
+    const { name, iconSet, ...rest } = props as CustomIconLayoutConfig
 
-    const resolvedName = nameMap ? nameMap[name] : name
+    const resolvedName = iconSet ? iconSet[name] : name
 
     if (resolvedName) {
         if (typeof resolvedName === 'string') {
