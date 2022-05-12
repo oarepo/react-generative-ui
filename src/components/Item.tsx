@@ -27,7 +27,7 @@ export interface ItemSectionProps extends UILayoutConfig {
 }
 
 const ItemHeader: React.FC<ItemSectionProps> = (props) => {
-    const { children, content, renderUIFragment, ...rest } = props
+    const { component, children, content, renderUIFragment, ...rest } = props
     return (
         <SemanticItem.Header
             {...rest}

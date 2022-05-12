@@ -46,7 +46,7 @@
                         },
                         "items": [
                             {
-                                "component": "horizontal-list",
+                                "component": "list",
                                 "dataField": "creators",
                                 "props": {
                                     "separator": true,
@@ -56,7 +56,7 @@
                                 }
                             },
                             {
-                                "component": "horizontal-list",
+                                "component": "list",
                                 "dataField": "contributors",
                                 "props": {
                                     "separator": true,
