@@ -13,10 +13,9 @@ export interface AuthorityLayoutConfig extends UILayoutConfig {
     fullName?: string,
     role?: string,
     authorityIdentifiers?: AuthorityIdentifierProps[],
-    authorityContainer?: string
-    fullNameComponent?: string
-    identifierComponent?: string
-    roleComponent?: string
+    fullNameComponent?: UILayoutConfig
+    identifierComponent?: UILayoutConfig
+    roleComponent?: UILayoutConfig
 }
 /**
  * Displays either a personal or an organizational authority tag.
@@ -31,10 +30,9 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
         fullName,
         role,
         authorityIdentifiers = [],
-        authorityContainer,
-        fullNameComponent = 'span',
-        identifierComponent = 'authority-identifier',
-        roleComponent = 'span',
+        fullNameComponent = { component: 'span' },
+        identifierComponent = { component: 'authority-identifier' },
+        roleComponent = { component: 'span' },
         ...rest
     } = config as AuthorityLayoutConfig
 
@@ -47,20 +45,20 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
             : { fullName, authorityIdentifiers, role, ...rest }
 
     const FullName = renderUIFragment({
-        component: fullNameComponent,
+        ...fullNameComponent,
         children: resolvedFullName,
     }, 'name')
 
     const Identifiers = resolvedIdentifiers.map(
         (identifier: AuthorityIdentifierProps, index: number) => (
             renderUIFragment(
-                { ...identifier, component: identifierComponent },
+                { ...identifierComponent, ...identifier },
                 `identifier-${index}`
             )
         ))
 
     const Role = renderUIFragment({
-        component: roleComponent,
+        ...roleComponent,
         children: `(${resolvedRole})`
     }, 'role')
 
