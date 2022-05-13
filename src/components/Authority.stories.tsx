@@ -33,17 +33,13 @@ export const PersonWithID = Template.bind({});
 PersonWithID.args = {
   config: {
     component: 'authority',
-    props: {
-      children: {
-        fullName: 'John Doe',
-        authorityIdentifiers: [
-          {
-            identifier: '1234',
-            scheme: 'orcid'
-          }
-        ]
+    fullName: 'John Doe',
+    authorityIdentifiers: [
+      {
+        identifier: '1234',
+        scheme: 'orcid'
       }
-    }
+    ]
   },
   renderUIFragment: UIFragment
 };
@@ -52,12 +48,8 @@ export const PersonWithRole = Template.bind({});
 PersonWithRole.args = {
   config: {
     component: 'authority',
-    props: {
-      children: {
-        fullName: 'John Doe',
-        role: 'developer'
-      }
-    }
+    fullName: 'John Doe',
+    role: 'developer'
   },
   renderUIFragment: UIFragment
 };

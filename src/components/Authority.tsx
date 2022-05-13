@@ -4,73 +4,73 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
+import { AuthorityIdentifierProps } from "."
 import { DataContext } from "../context"
 import { useResolvedData } from "../hooks"
-import { UIFragmentContext, UIFragmentProps } from "../types"
+import { UIFragmentContext, UILayoutConfig } from "../types"
 
-export interface AuthorityProps extends UIFragmentProps {
-    authorityContainer: string
-    fullNameComponent: string
-    identifierComponent: string
-    roleComponent: string
+export interface AuthorityLayoutConfig extends UILayoutConfig {
+    fullName?: string,
+    role?: string,
+    authorityIdentifiers?: AuthorityIdentifierProps[],
+    authorityContainer?: string
+    fullNameComponent?: string
+    identifierComponent?: string
+    roleComponent?: string
 }
-
-export interface AuthorityChildrenProps {
-    authorityIdentifiers: any[],
-    fullName: string,
-    role: any
-}
-
 /**
  * Displays either a personal or an organizational authority tag.
  */
 export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
-    // renderUIFragment
+    renderUIFragment
 }) => {
-    const { dataField, ...props } = config
     const {
-        // fullNameComponent = 'span',
-        // identifierComponent = 'authority-identifier',
-        // roleComponent = 'span',
-    } = props
+        component,
+        dataField,
+        fullName,
+        role,
+        authorityIdentifiers = [],
+        authorityContainer,
+        fullNameComponent = 'span',
+        identifierComponent = 'authority-identifier',
+        roleComponent = 'span',
+        ...rest
+    } = config as AuthorityLayoutConfig
 
     const {
-        // authorityIdentifiers = [],
-        // fullName,
-        // role = undefined,
-        // // ...rest
+        authorityIdentifiers: resolvedIdentifiers = [],
+        fullName: resolvedFullName,
+        role: resolvedRole,
     } = dataField
             ? useResolvedData(React.useContext(DataContext), dataField)
-            : props
+            : { fullName, authorityIdentifiers, role, ...rest }
 
-    // const fullNameComponentItem = {
-    //     component: fullNameComponent,
-    //     ...rest,
-    //     children: [fullName]
-    // }
+    const FullName = renderUIFragment({
+        component: fullNameComponent,
+        children: resolvedFullName,
+    }, 'name')
 
-    // const identifierComponentItem = (identifier: any): UILayoutConfig => {
-    //     return {
-    //         component: identifierComponent,
-    //         ...rest,
-    //         ...identifier
-    //     }
-    // }
+    const Identifiers = resolvedIdentifiers.map(
+        (identifier: AuthorityIdentifierProps, index: number) => (
+            renderUIFragment(
+                { ...identifier, component: identifierComponent },
+                `identifier-${index}`
+            )
+        ))
 
-    // const roleComponentItem = {
-    //     component: roleComponent,
-    //     ...rest,
-    //     children: [`(${role})`]
-    // }
+    const Role = renderUIFragment({
+        component: roleComponent,
+        children: `(${resolvedRole})`
+    }, 'role')
+
+    console.log(resolvedIdentifiers, Identifiers)
 
     return (
         <>
-            {/* {renderUIFragment(fullNameComponentItem, 'name')}
-            {authorityIdentifiers.map((ai: any, index: number) => {
-                return renderUIFragment(identifierComponentItem(ai), `identifier-${index}`)
-            })}
-            {role && renderUIFragment(roleComponentItem, 'role')} */}
+            {FullName}
+            {resolvedIdentifiers && Identifiers}
+            {resolvedRole && Role}
         </>
     )
 }

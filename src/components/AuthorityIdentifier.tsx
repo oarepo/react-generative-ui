@@ -4,15 +4,14 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UIFragmentContext } from "../types"
+import { UIFragmentContext, UILayoutConfig } from "../types"
 import orcid from '../assets/orcid-brands.svg'
 import { Icon } from "semantic-ui-react"
 
-export interface AuthorityIdentifierProps {
+export interface AuthorityIdentifierProps extends UILayoutConfig {
     identifier: string,
     scheme: string
 }
-
 
 /**
  * Renders a badge for a given authority identifier.
@@ -20,11 +19,15 @@ export interface AuthorityIdentifierProps {
 export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
-    const { props } = config
-    const { identifier, scheme, ...rest } = props as AuthorityIdentifierProps
+    const { identifier, scheme, ...rest } = config as AuthorityIdentifierProps
 
     if (scheme.toLowerCase() === 'orcid') {
-        const target = identifier.startsWith('https://orcid.org') ? identifier : `https://orcid.org/${identifier}`
+        let target = identifier
+        try {
+            new URL(identifier)
+        } catch (err) {
+            target = `https://orcid.org/${identifier}`
+        }
         return (
             <a href={target} target="_blank" {...rest}>
                 <img alt="ORCID iD" src={orcid} style={{ width: '16px', display: "inline-block" }} />

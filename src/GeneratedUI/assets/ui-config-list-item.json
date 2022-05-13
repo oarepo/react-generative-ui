@@ -46,7 +46,8 @@
                             {
                                 "component": "list",
                                 "dataField": "creators",
-                                "separator": true,
+                                "horizontal": true,
+                                "divided": true,
                                 "item": {
                                     "component": "authority"
                                 }
@@ -54,7 +55,8 @@
                             {
                                 "component": "list",
                                 "dataField": "contributors",
-                                "separator": true,
+                                "horizontal": true,
+                                "divided": true,
                                 "item": {
                                     "component": "authority",
                                     "class": "text-gray"

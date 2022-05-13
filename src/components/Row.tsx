@@ -22,7 +22,7 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {
-    const { items, separator = ' ', ...rest } = config as RowLayoutConfig
+    const { component, items, separator = ' ', ...rest } = config as RowLayoutConfig
 
     const Separator = _isString(separator) ? separator : renderUIFragment(separator)
 
