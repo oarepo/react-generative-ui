@@ -1,9 +1,20 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, Story, StoryFn } from '@storybook/react';
+import { Authority } from '.';
 import { UIFragmentContext } from '../types';
 import 'semantic-ui-css/semantic.min.css'
-import { Authority } from './Authority';
-import { UIFragment } from '../GeneratedUI';
+import { useParameter, useState } from '@storybook/addons';
+import { DataContext } from '../context/data';
+import { UIFragment } from '../GeneratedUI/UIFragment';
+
+const DataContextDecorator = (Story: StoryFn) => {
+  const initialState = useParameter('data', {})
+
+  const [data] = useState({ ...initialState })
+
+  return <><DataContext.Provider value={data}><Story /></DataContext.Provider></>
+}
+
 
 const meta: Meta = {
   title: 'Elements/Authority',
@@ -11,6 +22,7 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
+  decorators: [DataContextDecorator]
 };
 
 export default meta;
@@ -53,3 +65,28 @@ PersonWithRole.args = {
   },
   renderUIFragment: UIFragment
 };
+
+
+export const PersonFromData = Template.bind({});
+PersonFromData.args = {
+  config: {
+    component: 'authority',
+    dataField: 'personData'
+  },
+  renderUIFragment: UIFragment
+};
+
+PersonFromData.parameters = {
+  data: {
+    personData: {
+      fullName: 'Datavid Datovic',
+      role: 'data analyst',
+      authorityIdentifiers: [
+        {
+          identifier: '1234',
+          scheme: 'orcid'
+        }
+      ]
+    }
+  }
+}
