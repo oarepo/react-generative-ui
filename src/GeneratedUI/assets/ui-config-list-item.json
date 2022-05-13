@@ -41,31 +41,23 @@
                     },
                     {
                         "component": "row",
-                        "props": {
-                            "separator": "‖"
-                        },
+                        "separator": "‖",
                         "items": [
                             {
                                 "component": "list",
                                 "dataField": "creators",
-                                "props": {
-                                    "separator": true,
-                                    "item": {
-                                        "component": "authority"
-                                    }
+                                "separator": true,
+                                "item": {
+                                    "component": "authority"
                                 }
                             },
                             {
                                 "component": "list",
                                 "dataField": "contributors",
-                                "props": {
-                                    "separator": true,
-                                    "item": {
-                                        "component": "authority",
-                                        "props": {
-                                            "class": "text-gray"
-                                        }
-                                    }
+                                "separator": true,
+                                "item": {
+                                    "component": "authority",
+                                    "class": "text-gray"
                                 }
                             }
                         ]

@@ -31,7 +31,6 @@ export const defaultComponents = {
   grid: Grid,
   'custom-icon': CustomIcon,
   placeholder: Placeholder,
-  'horizontal-list': List,
   item: Item,
   'truncated-text': TruncatedText,
   _fallback: SemanticFallback

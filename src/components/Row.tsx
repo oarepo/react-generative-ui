@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, Fragment } from "react"
+import * as React from "react"
 import { Grid } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../types"
 import _isString from 'lodash/isString';
@@ -18,7 +18,7 @@ export interface RowLayoutConfig extends UILayoutConfig {
  * Component rendering its children items in a flexbox row.
  * Items can optionally be separated by a separator component.
  */
-export const Row: FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {
@@ -28,11 +28,12 @@ export const Row: FC<React.PropsWithChildren<UIFragmentContext>> = ({
 
     return (
         <Grid.Row {...rest}>
-            {items?.map((item: UILayoutConfig, index) =>
-                <Fragment key={index}>
-                    {renderUIFragment(item, index)}
-                    {index < items.length - 1 && Separator}
-                </Fragment>
+            {items?.map(
+                (item: UILayoutConfig, index) =>
+                    <React.Fragment key={index}>
+                        {renderUIFragment(item, index)}
+                        {index < items.length - 1 && Separator}
+                    </React.Fragment>
             )}
         </Grid.Row>
     )

@@ -4,14 +4,17 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { List as SemanticList, ListListProps } from "semantic-ui-react"
+import { List as SemanticList } from "semantic-ui-react"
 import { DataContext } from "../context"
 import { useResolvedData } from "../hooks"
 import { UILayoutConfig, UIFragmentContext } from "../types"
+import _isString from 'lodash/isString'
 
 
 export interface ListLayoutConfig extends UILayoutConfig {
-    items: []
+    item?: UILayoutConfig
+    items?: any[]
+    horizontal?: boolean
 }
 
 
@@ -25,39 +28,35 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
 }) => {
     const {
         component,
-        items,
         dataField,
-        children,
-        item,
+        items,
+        item = { component: 'raw' },
+        horizontal = false,
         ...rest
     } = config as ListLayoutConfig
 
-    const _childrenToFragment = (children: any) => {
-        return {
-            ...item,
-            ...{
-                props: {
-                    ...(item?.props || {}),
-                    children: children
-                }
-            }
-        };
+    const resolvedItems = dataField
+        ? useResolvedData(React.useContext(DataContext), dataField)
+        : items
+
+    if (!resolvedItems) {
+        return <div className="error">
+            Error rendering list: either items or dataField must be provided.
+        </div>
     }
 
-    const resolvedChildren = dataField
-        ? useResolvedData(React.useContext(DataContext), dataField)
-        : children
-
-    const resolvedItems = items || (resolvedChildren.map((c: any) => _childrenToFragment(c)) || []) as UILayoutConfig[]
-    const semanticProps = rest || {} as ListListProps
+    const renderItem = (itemData: any, index: React.Key) => {
+        const itemProps = _isString(itemData) ? { children: itemData } : itemData
+        return renderUIFragment({ ...item, ...itemProps }, index)
+    }
 
     return (
-        <SemanticList {...semanticProps as ListListProps}>
-            {resolvedItems?.map((item: UILayoutConfig, index: React.Key) => (
+        <SemanticList horizontal={horizontal} {...rest}>
+            {resolvedItems?.map((itemData: any, index: React.Key) => (
                 <SemanticList.Item key={index}>
-                    {renderUIFragment(item)}
+                    {renderItem(itemData, index)}
                 </SemanticList.Item>
             ))}
-        </SemanticList>
+        </SemanticList >
     )
 }

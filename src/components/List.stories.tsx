@@ -6,6 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { useParameter, useState } from '@storybook/addons';
 import { DataContext } from '../context/data';
 import { UIFragment } from '../GeneratedUI/UIFragment';
+import { ListLayoutConfig } from './List';
 
 
 const DataContextDecorator = (Story: StoryFn) => {
@@ -32,79 +33,54 @@ const Template: Story<UIFragmentContext> = (args) => <List  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const HorizontalItemsArray = Template.bind({});
-
-HorizontalItemsArray.args = {
-  config: {
-    component: 'horizontal-list',
-    items: [
-      { component: 'card', props: { content: 'this is item #1' } },
-      { component: 'card', props: { content: 'this is item #2' } },
-      { component: 'card', props: { content: 'this is item #3' } }
-    ]
-  }, renderUIFragment: UIFragment
-};
-
-export const HorizontalDataArray = Template.bind({});
-
-HorizontalDataArray.args = {
-  config: {
-    component: 'horizontal-list',
-    dataField: 'itemValues',
-    props: {
-      item: {
-        component: "card",
-        props: { "color": "blue" }
-      }
-    }
-  }, renderUIFragment: UIFragment
-};
-HorizontalDataArray.parameters = {
-  data: {
-    itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
-  }
-}
-
-export const SeparatedDataArray = Template.bind({});
-
-SeparatedDataArray.args = {
-  config: {
-    component: 'horizontal-list',
-    dataField: 'itemValues',
-    props: {
-      // @ts-ignore
-      relaxed: 'very',
-      separator: true,
-      item: {
-        component: "card",
-        props: { "color": "blue" }
-      }
-    }
-  }, renderUIFragment: UIFragment
-};
-SeparatedDataArray.parameters = {
-  data: {
-    itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
-  }
-}
-
-export const VerticalDataArray = Template.bind({});
-
-VerticalDataArray.args = {
+export const SimpleList = Template.bind({});
+SimpleList.args = {
   config: {
     component: 'list',
+    items: [
+      'this is item #1',
+      'this is item #2',
+      'this is item #3'
+    ]
+  } as ListLayoutConfig,
+  renderUIFragment: UIFragment
+};
+
+export const HorizontalListFromData = Template.bind({});
+HorizontalListFromData.args = {
+  config: {
+    component: 'list',
+    horizontal: true,
     dataField: 'itemValues',
-    props: {
-      item: {
-        component: "card",
-        props: { "color": "blue" }
-      }
-    }
   }, renderUIFragment: UIFragment
 };
-VerticalDataArray.parameters = {
+
+
+HorizontalListFromData.parameters = {
   data: {
     itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
   }
 }
 
+export const CustomItemComponent = Template.bind({});
+CustomItemComponent.args = {
+  config: {
+    component: 'list',
+    horizontal: true,
+    dataField: 'itemValues',
+    item: {
+      component: "card",
+      "color": "blue"
+    }
+  } as ListLayoutConfig,
+  renderUIFragment: UIFragment
+}
+CustomItemComponent.parameters = {
+  data: {
+    itemValues: [
+      { content: 'this is data item #1', color: 'red' },
+      { header: 'this is data item #2', color: 'green', size: 'large' },
+      { content: 'this is data item #3', color: 'blue' }
+    ]
+  }
+}
