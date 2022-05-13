@@ -34,6 +34,7 @@ export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentCon
 
     return (
         <a href={`${scheme}:${identifier}`} target="_blank" {...rest}>
+            {/* @ts-ignore until Semantic-UI supports React 18 */}
             <Icon link name='id card' {...rest} />
         </a>
     )

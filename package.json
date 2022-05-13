@@ -70,6 +70,7 @@
     "@types/lodash": "^4.14.181",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-text-truncate": "^0.14.1",
     "babel-loader": "^8.2.4",
     "chromatic": "^6.5.3",
     "eslint-plugin-prettier": "^4.0.0",

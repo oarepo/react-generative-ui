@@ -48,6 +48,7 @@ export const CustomIcon: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
 
     if (iconData) {
         if (typeof iconData === 'string') {
+            // @ts-ignore until Semantic-UI supports React 18
             return <SemanticIcon name={iconData as SemanticICONS} {...rest} />
         } else {
             const {
