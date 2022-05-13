@@ -35,7 +35,7 @@ export interface GridRowLayoutConfig {
  * Component putting its children items into separate columns.
  * See https://react.semantic-ui.com/collections/grid/ for available props.
  */
-export const Grid: FC<UIFragmentContext> = ({
+export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {

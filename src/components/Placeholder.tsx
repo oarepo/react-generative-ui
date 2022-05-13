@@ -33,7 +33,7 @@ export interface PlaceholderProps {
 /**
  * A placeholder used to reserve space for content that soon will appear in a layout.
  */
-export const Placeholder: React.FC<UIFragmentContext> = ({
+export const Placeholder: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
     const {

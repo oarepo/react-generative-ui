@@ -31,7 +31,7 @@ export interface CustomIconLayoutConfig extends UILayoutConfig {
  * An Icon, that renders either as a custom
  * SVG graphic or as a built-in Semantic-UI Icon.
  */
-export const CustomIcon: React.FC<UIFragmentContext> = ({
+export const CustomIcon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
     const { component, dataField, name, iconSet, ...rest } = config as CustomIconLayoutConfig

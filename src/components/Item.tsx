@@ -26,7 +26,7 @@ export interface ItemSectionProps extends UILayoutConfig {
     renderUIFragment: Function
 }
 
-const ItemHeader: React.FC<ItemSectionProps> = (props) => {
+const ItemHeader: React.FC<React.PropsWithChildren<ItemSectionProps>> = (props) => {
     const { component, children, content, renderUIFragment, ...rest } = props
     return (
         <SemanticItem.Header
@@ -41,7 +41,7 @@ const ItemHeader: React.FC<ItemSectionProps> = (props) => {
  * An item view presents related collection of content for display.
  * See https://react.semantic-ui.com/views/item for available props.
  */
-export const Item: React.FC<UIFragmentContext> = ({
+export const Item: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {

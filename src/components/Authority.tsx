@@ -24,7 +24,7 @@ export interface AuthorityChildrenProps {
 /**
  * Displays either a personal or an organizational authority tag.
  */
-export const Authority: React.FC<UIFragmentContext> = ({
+export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     // renderUIFragment
 }) => {

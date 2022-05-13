@@ -16,7 +16,7 @@ export interface ColumnLayoutConfig extends UILayoutConfig {
  * Component putting its children items into a single responsive column.
  * See https://react.semantic-ui.com/collections/grid/#Grid.Column for available props.
  */
-export const Column: React.FC<UIFragmentContext> = ({
+export const Column: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {

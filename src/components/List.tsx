@@ -19,7 +19,7 @@ export interface ListLayoutConfig extends UILayoutConfig {
  * Component putting its children items into a List.
  * See https://react.semantic-ui.com/elements/list for available props.
  */
-export const List: React.FC<UIFragmentContext> = ({
+export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {
@@ -37,11 +37,11 @@ export const List: React.FC<UIFragmentContext> = ({
             ...item,
             ...{
                 props: {
-                    ...item?.props || {},
+                    ...(item?.props || {}),
                     children: children
                 }
             }
-        }
+        };
     }
 
     const resolvedChildren = dataField

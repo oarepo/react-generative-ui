@@ -16,7 +16,7 @@ import _capitalize from 'lodash/capitalize'
  * A warning is logged to browser console, if component string is an
  * unknown HTML element and component props is rendered as default span.
  */
-export const Fallback: React.FC<UILayoutConfig> = (props) => {
+export const Fallback: React.FC<React.PropsWithChildren<UILayoutConfig>> = (props) => {
     const { 'data-component': dataComponent, ...attrs } = props
 
     return <>{React.createElement(dataComponent, attrs)}</>

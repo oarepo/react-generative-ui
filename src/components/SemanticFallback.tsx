@@ -20,7 +20,7 @@ import { DataContext } from "../context"
  * If any usable element could not be found for a component,
  * it renders a Fallback component.
  */
-export const SemanticFallback: React.FC<UIFragmentContext> = ({
+export const SemanticFallback: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
     const { component, dataField, children, ...rest } = config as UILayoutConfig

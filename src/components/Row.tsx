@@ -13,7 +13,7 @@ import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
  * See https://react.semantic-ui.com/collections/grid/#Grid.Row for available props.
  */
 // TODO: this could be eliminated
-export const Row: FC<UIFragmentContext> = ({
+export const Row: FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {

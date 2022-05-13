@@ -65,7 +65,7 @@ ResultListItem.args = { data, layout };
 
 export const UserProvidedComponent = Template.bind({});
 
-const MyCoolComponent: React.FC<UIFragmentContext> = ({ config }) => {
+const MyCoolComponent: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({ config }) => {
   const { children } = config
   return (
     <>

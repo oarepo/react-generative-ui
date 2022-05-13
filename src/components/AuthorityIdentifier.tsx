@@ -17,7 +17,7 @@ export interface AuthorityIdentifierProps {
 /**
  * Renders a badge for a given authority identifier.
  */
-export const AuthorityIdentifier: React.FC<UIFragmentContext> = ({
+export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
     const { props } = config

@@ -13,7 +13,7 @@ import { UIFragment } from './UIFragment';
 /**
  * Generated user-configured UI view
  */
-export const GeneratedUI: React.FC<UIGeneratorProps> = ({ layout, data, components }) => {
+export const GeneratedUI: React.FC<React.PropsWithChildren<UIGeneratorProps>> = ({ layout, data, components }) => {
     const availableComponents = {
         ...components,
         ...defaultComponents

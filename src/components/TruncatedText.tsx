@@ -24,7 +24,7 @@ export interface TruncatedTextLayoutConfig extends UILayoutConfig {
 /**
  * Longer text that will be displayed truncated, with an option to show more.
  */
-export const TruncatedText: React.FC<UIFragmentContext> = ({
+export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
     const {

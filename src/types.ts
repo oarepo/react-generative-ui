@@ -6,7 +6,7 @@
 import { AllHTMLAttributes, FC, HTMLAttributes } from 'react';
 
 export type ComponentMap = {
-  [key: string]: FC<UIFragmentContext>;
+  [key: string]: FC<React.PropsWithChildren<UIFragmentContext>>;
 };
 
 /** Field with its value fetched from DataContext */
