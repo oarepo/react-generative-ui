@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Layout/Row',
+  title: 'Structural/Row',
   component: Row,
   parameters: {
     controls: { expanded: true },
@@ -24,15 +24,26 @@ export const Default = Template.bind({});
 const config = {
   component: 'row',
   items: [
-    { component: 'label', props: { basic: true, content: 'this is item #1' } },
-    { component: 'label', 'props': { basic: true, content: 'this is item #2' } },
-    { component: 'label', 'props': { basic: true, content: 'this is item #3' } }
+    { component: 'label', basic: true, content: 'this is item #1' },
+    { component: 'label', basic: true, content: 'this is item #2' },
+    { component: 'label', basic: true, content: 'this is item #3' }
   ]
 }
 
-// @ts-ignore 2322
 Default.args = { config, renderUIFragment: UIFragment };
 
+
+export const StringSeparator = Template.bind({});
+// @ts-ignore 2322
+StringSeparator.args = {
+  ...Default.args,
+  ...{
+    config: {
+      ...Default.args.config,
+      ...{ separator: ' || ' }
+    }
+  }
+}
 
 export const CustomSeparator = Template.bind({});
 // @ts-ignore 2322
@@ -42,8 +53,9 @@ CustomSeparator.args = {
     config: {
       ...Default.args.config,
       ...{
-        props: {
-          separator: ' || '
+        separator: {
+          component: 'icon',
+          name: 'arrow right'
         }
       }
     }

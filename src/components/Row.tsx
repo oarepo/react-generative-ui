@@ -4,28 +4,34 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC, Fragment } from "react"
-import { Grid, GridRowProps } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext, UIFragmentProps } from "../types"
+import { Grid } from "semantic-ui-react"
+import { UILayoutConfig, UIFragmentContext } from "../types"
+import _isString from 'lodash/isString';
+
+
+export interface RowLayoutConfig extends UILayoutConfig {
+    items: [],
+    separator: string | UILayoutConfig
+}
 
 /**
- * Component rendering its children items in a single row separated by a given separator.
- * Separator prop could be either a string or a registered component key.
- * See https://react.semantic-ui.com/collections/grid/#Grid.Row for available props.
+ * Component rendering its children items in a flexbox row.
+ * Items can optionally be separated by a separator component.
  */
-// TODO: this could be eliminated
 export const Row: FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {
-    const { props, items } = config
-    const { separator, ...rest } = props || {} as UIFragmentProps
+    const { items, separator = ' ', ...rest } = config as RowLayoutConfig
+
+    const Separator = _isString(separator) ? separator : renderUIFragment(separator)
 
     return (
-        <Grid.Row {...rest as GridRowProps}>
+        <Grid.Row {...rest}>
             {items?.map((item: UILayoutConfig, index) =>
                 <Fragment key={index}>
                     {renderUIFragment(item, index)}
-                    {index < items.length - 1 && (separator || ' ')}
+                    {index < items.length - 1 && Separator}
                 </Fragment>
             )}
         </Grid.Row>
