@@ -46,8 +46,8 @@ SimpleList.args = {
   renderUIFragment: UIFragment
 };
 
-export const HorizontalListFromData = Template.bind({});
-HorizontalListFromData.args = {
+export const HorizontalDataList = Template.bind({});
+HorizontalDataList.args = {
   config: {
     component: 'list',
     horizontal: true,
@@ -56,7 +56,7 @@ HorizontalListFromData.args = {
 };
 
 
-HorizontalListFromData.parameters = {
+HorizontalDataList.parameters = {
   data: {
     itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
   }
@@ -80,7 +80,7 @@ CustomItemComponent.parameters = {
     itemValues: [
       { content: 'this is data item #1', color: 'red' },
       { header: 'this is data item #2', color: 'green', size: 'large' },
-      { content: 'this is data item #3', color: 'blue' }
+      { content: 'this is data item #3' }
     ]
   }
 }

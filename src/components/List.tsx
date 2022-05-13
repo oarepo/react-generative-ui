@@ -50,13 +50,10 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         return renderUIFragment({ ...item, ...itemProps }, index)
     }
 
-    return (
-        <SemanticList horizontal={horizontal} {...rest}>
-            {resolvedItems?.map((itemData: any, index: React.Key) => (
-                <SemanticList.Item key={index}>
-                    {renderItem(itemData, index)}
-                </SemanticList.Item>
-            ))}
-        </SemanticList >
-    )
+    const itemProps = resolvedItems?.map((itemData: any, index: React.Key) => ({
+        key: index,
+        content: renderItem(itemData, index)
+    }))
+
+    return <SemanticList horizontal={horizontal} items={itemProps} {...rest} />
 }
