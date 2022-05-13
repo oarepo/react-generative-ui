@@ -62,8 +62,6 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
         children: `(${resolvedRole})`
     }, 'role')
 
-    console.log(resolvedIdentifiers, Identifiers)
-
     return (
         <>
             {FullName}
