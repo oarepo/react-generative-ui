@@ -86,27 +86,32 @@
                                 "dataField": "resource_type"
                             },
                             {
-                                "component": "span",
+                                "component": "defense-status",
                                 "dataField": "defended"
                             }
                         ]
                     },
                     {
                         "component": "row",
-                        "props": {
-                            "separator": "|",
-                            "data": "keywords",
-                            "item": {
-                                "component": "label"
+                        "items": [
+                            {
+                                "component": "list",
+                                "horizontal": true,
+                                "divided": true,
+                                "dataField": "keywords",
+                                "item": {
+                                    "component": "span",
+                                    "style": {
+                                        "color": "blue"
+                                    }
+                                }
                             }
-                        }
+                        ]
                     },
                     {
                         "component": "truncated-text",
-                        "data": "abstract",
-                        "props": {
-                            "lines": 3
-                        }
+                        "dataField": "abstract",
+                        "lines": 3
                     }
                 ]
             }
