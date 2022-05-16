@@ -21,6 +21,12 @@ export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentCon
 }) => {
     const { identifier, scheme, ...rest } = config as AuthorityIdentifierProps
 
+    if (!scheme || !identifier) {
+        return (<div className="error">
+            Error rendering authority-identifier: missing value or scheme.
+        </div>)
+    }
+
     if (scheme.toLowerCase() === 'orcid') {
         let target = identifier
         try {
