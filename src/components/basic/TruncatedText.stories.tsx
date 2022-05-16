@@ -38,3 +38,16 @@ Shorter.args = {
     text: 'Tis textt is too short to be truncated'
   }, renderUIFragment: UIFragment
 }
+
+export const CustomExpand = Template.bind({});
+CustomExpand.args = {
+  config: {
+    component: 'truncated-text',
+    lines: 4,
+    text: 'I will not do this,'.repeat(100),
+    expandToggle: {
+      component: 'button',
+      children: 'Toggle'
+    }
+  }, renderUIFragment: UIFragment
+}
