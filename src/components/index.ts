@@ -18,3 +18,4 @@ export * from './basic/Raw';
 export * from './basic/Placeholder';
 export * from './basic/Item';
 export * from './basic/CustomIcon';
+export * from './basic/Separator';

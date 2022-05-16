@@ -38,8 +38,6 @@ export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>>
         expandToggle = {
             component: 'a',
             href: '#',
-            basic: true,
-            size: 'mini',
             children: `> Show ${!expanded ? 'more' : 'less'}`
         },
         ...rest

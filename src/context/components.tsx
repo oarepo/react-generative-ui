@@ -19,6 +19,7 @@ import {
   Item,
   CustomIcon,
   DefenseStatus,
+  Separator,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -31,6 +32,7 @@ export const defaultComponents = {
   list: List,
   raw: Raw,
   grid: Grid,
+  separator: Separator,
   'custom-icon': CustomIcon,
   placeholder: Placeholder,
   item: Item,

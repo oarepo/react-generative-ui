@@ -6,7 +6,9 @@
         "columns": [
             {
                 "className": "result-item-aside two wide",
-                "textAlign": "center",
+                "style": {
+                    "alignItems": "center"
+                },
                 "stretched": true,
                 "width": "1",
                 "items": [
@@ -41,7 +43,9 @@
                     },
                     {
                         "component": "row",
-                        "separator": " ‖ ",
+                        "separator": {
+                            "component": "separator"
+                        },
                         "items": [
                             {
                                 "component": "list",
@@ -66,7 +70,9 @@
                     },
                     {
                         "component": "row",
-                        "separator": " ‖ ",
+                        "separator": {
+                            "component": "separator"
+                        },
                         "items": [
                             {
                                 "component": "span",
@@ -100,10 +106,8 @@
                                 "divided": true,
                                 "dataField": "keywords",
                                 "item": {
-                                    "component": "span",
-                                    "style": {
-                                        "color": "blue"
-                                    }
+                                    "component": "a",
+                                    "href": "#"
                                 }
                             }
                         ]
