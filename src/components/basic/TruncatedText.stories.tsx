@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { TruncatedText } from '.';
-import { UIFragmentContext } from '../types';
+import { TruncatedText } from './TruncatedText';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {

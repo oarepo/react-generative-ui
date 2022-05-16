@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Placeholder, PlaceholderLayoutConfig } from '.';
-import { UIFragmentContext } from '../types';
+import { Placeholder, PlaceholderLayoutConfig } from './Placeholder';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {

@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../../types"
 import { Placeholder as SemanticPlaceholder } from "semantic-ui-react"
 import _times from 'lodash/times'
 

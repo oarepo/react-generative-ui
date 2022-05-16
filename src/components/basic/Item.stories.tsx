@@ -7,7 +7,7 @@ import { UIFragment } from '../../GeneratedUI';
 
 
 const meta: Meta = {
-  title: 'Views/Item',
+  title: 'Elements/Item',
   component: Item,
   parameters: {
     controls: { expanded: true },

@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { UIFragmentContext, UILayoutConfig } from "../../types"
-import orcid from '../assets/orcid-brands.svg'
+import orcid from '../../assets/orcid-brands.svg'
 import { Icon } from "semantic-ui-react"
 
 export interface AuthorityIdentifierProps extends UILayoutConfig {

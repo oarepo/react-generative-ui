@@ -18,12 +18,14 @@ import {
   Grid,
   Item,
   CustomIcon,
+  DefenseStatus,
 } from '../components';
 import { ComponentMap } from '../types';
 
 export const defaultComponents = {
   authority: Authority,
   'authority-identifier': AuthorityIdentifier,
+  'defense-status': DefenseStatus,
   column: Column,
   row: Row,
   list: List,

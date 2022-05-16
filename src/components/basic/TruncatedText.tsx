@@ -4,11 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedData } from "../hooks"
-import { UIFragmentContext, UIFragmentProps, UILayoutConfig } from "../types"
+import { useResolvedData } from "../../hooks"
+import { UIFragmentContext, UIFragmentProps, UILayoutConfig } from "../../types"
 import TextTruncate from 'react-text-truncate'
 import { Button } from "semantic-ui-react"
-import { DataContext } from "../context"
+import { DataContext } from "../../context"
 
 export interface TruncatedTextLayoutConfig extends UILayoutConfig {
     /** Number of lines displayed in truncated state */

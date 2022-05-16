@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story, StoryFn } from '@storybook/react';
-import { Authority } from '..';
+import { DefenseStatus } from './DefenseStatus';
 import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 import { useParameter, useState } from '@storybook/addons';
@@ -17,8 +17,8 @@ const DataContextDecorator = (Story: StoryFn) => {
 
 
 const meta: Meta = {
-  title: 'Record/Authority',
-  component: Authority,
+  title: 'Record/Defense status',
+  component: DefenseStatus,
   parameters: {
     controls: { expanded: true },
   },
@@ -27,66 +27,55 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<UIFragmentContext> = (args) => <Authority  {...args} />;
+const Template: Story<UIFragmentContext> = (args) => <DefenseStatus  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Person = Template.bind({});
-
-Person.args = {
+export const Defended = Template.bind({});
+Defended.args = {
   config: {
-    component: 'authority',
-    fullName: 'John Doe'
+    component: 'defense-status',
+    defended: true
   },
   renderUIFragment: UIFragment
 };
 
-export const PersonWithID = Template.bind({});
-PersonWithID.args = {
+export const NotDefended = Template.bind({});
+NotDefended.args = {
   config: {
-    component: 'authority',
-    fullName: 'John Doe',
-    authorityIdentifiers: [
-      {
-        identifier: '1234',
-        scheme: 'orcid'
-      }
-    ]
+    component: 'defense-status',
+    defended: false
   },
   renderUIFragment: UIFragment
 };
 
-export const PersonWithRole = Template.bind({});
-PersonWithRole.args = {
+export const DefendedFromData = Template.bind({});
+DefendedFromData.args = {
   config: {
-    component: 'authority',
-    fullName: 'John Doe',
-    role: 'developer'
+    component: 'defense-status',
+    dataField: 'defenseStatus'
   },
   renderUIFragment: UIFragment
 };
 
-
-export const PersonFromData = Template.bind({});
-PersonFromData.args = {
-  config: {
-    component: 'authority',
-    dataField: 'personData'
-  },
-  renderUIFragment: UIFragment
-};
-
-PersonFromData.parameters = {
+DefendedFromData.parameters = {
   data: {
-    personData: {
-      fullName: 'Datavid Datovic',
-      role: 'data analyst',
-      authorityIdentifiers: [
-        {
-          identifier: '1234',
-          scheme: 'orcid'
-        }
-      ]
+    defenseStatus: {
+      defended: true,
+      dateDefended: '2020-02-02'
     }
   }
+}
+
+export const CustomDefendedComponent = Template.bind({});
+CustomDefendedComponent.args = {
+  config: {
+    component: 'defense-status',
+    defended: true,
+    defendedComponent: {
+      component: 'icon',
+      name: 'check circle',
+      color: 'green'
+    }
+  }, renderUIFragment: UIFragment
 }

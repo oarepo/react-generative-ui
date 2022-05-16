@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { AuthorityIdentifier } from './AuthorityIdentifier';
 
 const meta: Meta = {
-  title: 'Elements/Authority/Identifier',
+  title: 'Record/Authority/Identifier',
   component: AuthorityIdentifier,
   parameters: {
     controls: { expanded: true },

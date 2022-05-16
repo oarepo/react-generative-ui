@@ -5,13 +5,16 @@
 
 export * from './record/Authority';
 export * from './record/AuthorityIdentifier';
+export * from './record/DefenseStatus';
+
 export * from './structural/Column';
 export * from './structural/Row';
+export * from './structural/Grid';
+
 export * from './basic/SemanticFallback';
 export * from './basic/List';
 export * from './basic/TruncatedText';
 export * from './basic/Raw';
 export * from './basic/Placeholder';
-export * from './structural/Grid';
 export * from './basic/Item';
 export * from './basic/CustomIcon';
