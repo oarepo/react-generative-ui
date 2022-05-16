@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { TruncatedText } from './TruncatedText';
 import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
+import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
   title: 'Elements/TruncatedText',
@@ -26,7 +27,7 @@ Default.args = {
     component: 'truncated-text',
     lines: 2,
     text: 'Tis text is truncated, '.repeat(100)
-  }
+  }, renderUIFragment: UIFragment
 };
 
 export const Shorter = Template.bind({});
@@ -35,5 +36,5 @@ Shorter.args = {
     component: 'truncated-text',
     lines: 4,
     text: 'Tis textt is too short to be truncated'
-  }
+  }, renderUIFragment: UIFragment
 }

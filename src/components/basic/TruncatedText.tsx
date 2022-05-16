@@ -7,7 +7,6 @@ import * as React from "react"
 import { useResolvedData } from "../../hooks"
 import { UIFragmentContext, UILayoutConfig } from "../../types"
 import TextTruncate from 'react-text-truncate'
-import { Button } from "semantic-ui-react"
 import { DataContext } from "../../context"
 
 export interface TruncatedTextLayoutConfig extends UILayoutConfig {
