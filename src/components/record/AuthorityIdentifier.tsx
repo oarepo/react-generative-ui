@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UIFragmentContext, UILayoutConfig } from "../types"
+import { UIFragmentContext, UILayoutConfig } from "../../types"
 import orcid from '../assets/orcid-brands.svg'
 import { Icon } from "semantic-ui-react"
 
@@ -19,7 +19,12 @@ export interface AuthorityIdentifierProps extends UILayoutConfig {
 export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
-    const { identifier, scheme, ...rest } = config as AuthorityIdentifierProps
+    const {
+        identifier,
+        scheme,
+        style = { 'margin': '0 0 0 .2em' },
+        ...rest
+    } = config as AuthorityIdentifierProps
 
     if (!scheme || !identifier) {
         return (<div className="error">
@@ -35,14 +40,14 @@ export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentCon
             target = `https://orcid.org/${identifier}`
         }
         return (
-            <a href={target} target="_blank" {...rest}>
+            <a href={target} target="_blank" style={style} {...rest}>
                 <img alt="ORCID iD" src={orcid} style={{ width: '16px', display: "inline-block" }} />
             </a>
         )
     }
 
     return (
-        <a href={`${scheme}:${identifier}`} target="_blank" {...rest}>
+        <a href={`${scheme}:${identifier}`} target="_blank" style={style} {...rest}>
             {/* @ts-ignore until Semantic-UI supports React 18 */}
             <Icon link name='id card' {...rest} />
         </a>

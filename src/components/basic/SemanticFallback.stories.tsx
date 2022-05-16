@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { SemanticFallback } from '.';
-import { UIFragmentContext } from '../types';
+import { SemanticFallback } from './SemanticFallback';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../GeneratedUI';
+import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
   title: 'Elements/Semantic-UI element',

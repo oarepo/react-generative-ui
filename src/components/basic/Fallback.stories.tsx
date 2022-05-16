@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { UIFragmentContext } from '../types';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { Fallback } from './Fallback';
+import { Fallback } from '../basic/Fallback';
 
 const meta: Meta = {
   title: 'Elements/Fallback',

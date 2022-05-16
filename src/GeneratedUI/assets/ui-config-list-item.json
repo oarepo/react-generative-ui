@@ -5,7 +5,7 @@
         "columnsPerRow": 2,
         "columns": [
             {
-                "className": "result-item-aside one wide",
+                "className": "result-item-aside two wide",
                 "textAlign": "center",
                 "stretched": true,
                 "width": "1",
@@ -41,7 +41,7 @@
                     },
                     {
                         "component": "row",
-                        "separator": "‖",
+                        "separator": " ‖ ",
                         "items": [
                             {
                                 "component": "list",
@@ -66,23 +66,15 @@
                     },
                     {
                         "component": "row",
-                        "props": {
-                            "separator": "‖"
-                        },
+                        "separator": " ‖ ",
                         "items": [
                             {
-                                "component": "label",
-                                "data": "publication_year",
-                                "props": {
-                                    "basic": true
-                                }
+                                "component": "span",
+                                "dataField": "publication_year"
                             },
                             {
-                                "component": "label",
-                                "data": "language",
-                                "props": {
-                                    "basic": true
-                                }
+                                "component": "span",
+                                "dataField": "language"
                             }
                         ]
                     },
@@ -90,12 +82,12 @@
                         "component": "row",
                         "items": [
                             {
-                                "component": "label",
-                                "data": "resource_type"
+                                "component": "span",
+                                "dataField": "resource_type"
                             },
                             {
-                                "component": "label",
-                                "data": "defended"
+                                "component": "span",
+                                "dataField": "defended"
                             }
                         ]
                     },

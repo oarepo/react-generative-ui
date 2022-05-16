@@ -4,10 +4,10 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { AuthorityIdentifierProps } from "."
-import { DataContext } from "../context"
-import { useResolvedData } from "../hooks"
-import { UIFragmentContext, UILayoutConfig } from "../types"
+import { AuthorityIdentifierProps } from ".."
+import { DataContext } from "../../context"
+import { useResolvedData } from "../../hooks"
+import { UIFragmentContext, UILayoutConfig } from "../../types"
 
 
 export enum AuthorityType {

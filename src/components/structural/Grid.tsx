@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react";
-import { UILayoutConfig, UIFragmentContext } from "../types";
+import { UILayoutConfig, UIFragmentContext } from "../../types";
 import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
 
 export interface GridLayoutConfig extends UILayoutConfig {

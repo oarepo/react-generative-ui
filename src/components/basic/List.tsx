@@ -5,9 +5,9 @@
 
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
-import { DataContext } from "../context"
-import { useResolvedData } from "../hooks"
-import { UILayoutConfig, UIFragmentContext } from "../types"
+import { DataContext } from "../../context"
+import { useResolvedData } from "../../hooks"
+import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString'
 
 

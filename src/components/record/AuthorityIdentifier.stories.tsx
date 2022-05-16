@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { UIFragmentContext } from '../types';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 import { AuthorityIdentifier } from './AuthorityIdentifier';
 

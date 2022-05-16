@@ -2,9 +2,9 @@ import React from 'react';
 import { Meta, Story, StoryFn } from '@storybook/react';
 import 'semantic-ui-css/semantic.min.css'
 import { useParameter, useState } from '@storybook/addons';
-import { DataContext } from '../context/data';
-import { CustomIcon, CustomIconLayoutConfig } from '.';
-import { UIFragmentContext } from '../types';
+import { DataContext } from '../../context/data';
+import { CustomIcon, CustomIconLayoutConfig } from './CustomIcon';
+import { UIFragmentContext } from '../../types';
 
 
 const DataContextDecorator = (Story: StoryFn) => {

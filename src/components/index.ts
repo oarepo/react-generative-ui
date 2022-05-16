@@ -3,15 +3,15 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-export * from './Authority';
-export * from './AuthorityIdentifier';
-export * from './Column';
-export * from './Row';
-export * from './SemanticFallback';
-export * from './List';
-export * from './TruncatedText';
-export * from './Raw';
-export * from './Placeholder';
-export * from './Grid';
-export * from './Item';
-export * from './CustomIcon';
+export * from './record/Authority';
+export * from './record/AuthorityIdentifier';
+export * from './structural/Column';
+export * from './structural/Row';
+export * from './basic/SemanticFallback';
+export * from './basic/List';
+export * from './basic/TruncatedText';
+export * from './basic/Raw';
+export * from './basic/Placeholder';
+export * from './structural/Grid';
+export * from './basic/Item';
+export * from './basic/CustomIcon';

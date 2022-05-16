@@ -1,11 +1,11 @@
 import React from 'react';
 import { Meta, Story, StoryFn } from '@storybook/react';
-import { List } from '.';
-import { UIFragmentContext } from '../types';
+import { List } from './List';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 import { useParameter, useState } from '@storybook/addons';
-import { DataContext } from '../context/data';
-import { UIFragment } from '../GeneratedUI/UIFragment';
+import { DataContext } from '../../context/data';
+import { UIFragment } from '../../GeneratedUI/UIFragment';
 import { ListLayoutConfig } from './List';
 
 

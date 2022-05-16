@@ -5,13 +5,13 @@
 
 import * as React from "react"
 import { Placeholder } from "semantic-ui-react"
-import { UIFragmentContext, UILayoutConfig } from "../types"
+import { UIFragmentContext, UILayoutConfig } from "../../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
-import { useResolvedData } from "../hooks"
-import { Fallback } from "./Fallback"
-import { DataContext } from "../context"
+import { useResolvedData } from "../../hooks"
+import { Fallback } from "../basic/Fallback"
+import { DataContext } from "../../context"
 
 
 /**

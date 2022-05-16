@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../../types"
 import {
     Icon as SemanticIcon,
     Image as SemanticImage,
@@ -13,8 +13,8 @@ import {
     StrictImageProps
 } from "semantic-ui-react"
 import _times from 'lodash/times'
-import { useResolvedData } from "../hooks"
-import { DataContext } from "../context"
+import { useResolvedData } from "../../hooks"
+import { DataContext } from "../../context"
 
 
 export interface CustomIconLayoutConfig extends UILayoutConfig {

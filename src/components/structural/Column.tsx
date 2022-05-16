@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Grid } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../../types"
 
 export interface ColumnLayoutConfig extends UILayoutConfig {
     stretched: boolean

@@ -4,9 +4,9 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC, Fragment } from "react"
-import { DataContext } from "../context"
-import { useResolvedData } from "../hooks"
-import { UIFragmentContext } from "../types"
+import { DataContext } from "../../context"
+import { useResolvedData } from "../../hooks"
+import { UIFragmentContext } from "../../types"
 
 /**
  * A Fragment component outputing raw data as its children.

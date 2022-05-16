@@ -1,9 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { Row } from '.';
-import { UIFragmentContext } from '../types';
+import { Row } from './Row';
+import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../GeneratedUI';
+import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
   title: 'Structural/Row',

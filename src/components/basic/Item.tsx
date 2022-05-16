@@ -6,7 +6,7 @@
 import _isString from "lodash/isString"
 import * as React from "react"
 import { Item as SemanticItem } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../types"
+import { UILayoutConfig, UIFragmentContext } from "../../types"
 
 export interface ItemLayoutConfig extends UILayoutConfig {
     children?: UILayoutConfig[],

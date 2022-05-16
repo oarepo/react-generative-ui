@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig } from "../types"
+import { UILayoutConfig } from "../../types"
 import _get from 'lodash/get'
 import _camelCase from 'lodash/camelCase'
 import _capitalize from 'lodash/capitalize'
