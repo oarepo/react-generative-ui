@@ -36,7 +36,8 @@
             {
                 "items": [
                     {
-                        "component": "header",
+                        "component": "result-header",
+                        "linksField": "links",
                         "dataField": "title",
                         "as": "a",
                         "size": "large"

@@ -6,6 +6,7 @@
 export * from './record/Authority';
 export * from './record/AuthorityIdentifier';
 export * from './record/DefenseStatus';
+export * from './record/ResultHeader';
 
 export * from './structural/Column';
 export * from './structural/Row';
