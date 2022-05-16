@@ -59,7 +59,7 @@
                                 "divided": true,
                                 "item": {
                                     "component": "authority",
-                                    "class": "text-gray"
+                                    "className": "text-gray"
                                 }
                             }
                         ]

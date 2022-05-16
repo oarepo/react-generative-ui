@@ -9,10 +9,19 @@ import { DataContext } from "../context"
 import { useResolvedData } from "../hooks"
 import { UIFragmentContext, UILayoutConfig } from "../types"
 
+
+export enum AuthorityType {
+    Personal = 'Personal',
+    Organizational = 'Organizational'
+}
+
 export interface AuthorityLayoutConfig extends UILayoutConfig {
     fullName?: string,
     role?: string,
+    nameType?: AuthorityType,
+    affiliations: string[],
     authorityIdentifiers?: AuthorityIdentifierProps[],
+    wrapperComponent?: UILayoutConfig
     fullNameComponent?: UILayoutConfig
     identifierComponent?: UILayoutConfig
     roleComponent?: UILayoutConfig
@@ -29,7 +38,10 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
         dataField,
         fullName,
         role,
+        nameType,
+        affiliations,
         authorityIdentifiers = [],
+        wrapperComponent = { component: 'div' },
         fullNameComponent = { component: 'span' },
         identifierComponent = { component: 'authority-identifier' },
         roleComponent = { component: 'span' },
@@ -43,6 +55,13 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
     } = dataField
             ? useResolvedData(React.useContext(DataContext), dataField)
             : { fullName, authorityIdentifiers, role, ...rest }
+
+    const Wrapper = (props: React.PropsWithChildren<{}>) => (
+        renderUIFragment({
+            ...wrapperComponent,
+            ...props
+        }, 'wrapper')
+    )
 
     const FullName = renderUIFragment({
         ...fullNameComponent,
@@ -63,10 +82,10 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
     }, 'role')
 
     return (
-        <>
+        <Wrapper {...rest}>
             {FullName}
             {resolvedIdentifiers && Identifiers}
             {resolvedRole && Role}
-        </>
+        </Wrapper>
     )
 }
