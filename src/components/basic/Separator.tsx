@@ -4,10 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedData } from "../../hooks"
 import { UIFragmentContext, UILayoutConfig } from "../../types"
-import TextTruncate from 'react-text-truncate'
-import { DataContext } from "../../context"
 import { SemanticCOLORS } from "semantic-ui-react"
 
 export interface SeparatorLayoutConfig extends UILayoutConfig {
