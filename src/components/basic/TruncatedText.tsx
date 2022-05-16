@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { useResolvedData } from "../../hooks"
-import { UIFragmentContext, UIFragmentProps, UILayoutConfig } from "../../types"
+import { UIFragmentContext, UILayoutConfig } from "../../types"
 import TextTruncate from 'react-text-truncate'
 import { Button } from "semantic-ui-react"
 import { DataContext } from "../../context"
@@ -17,8 +17,8 @@ export interface TruncatedTextLayoutConfig extends UILayoutConfig {
     ellipsis: string,
     /** Text to be rendered truncated */
     text: string,
-    /** Props passed to 'Show more|less' toggle button */
-    expandToggle: UIFragmentProps
+    /** Component description to render 'Show more|less' toggle button */
+    expandToggle: UILayoutConfig
 }
 
 /**
@@ -26,14 +26,23 @@ export interface TruncatedTextLayoutConfig extends UILayoutConfig {
  */
 export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
+    renderUIFragment
 }) => {
+    const [expanded, setExpanded] = React.useState(false)
+
     const {
         component,
         dataField,
         text,
         lines = 1,
         ellipsis = "…",
-        expandToggle = { basic: true, size: 'mini' },
+        expandToggle = {
+            component: 'a',
+            href: '#',
+            basic: true,
+            size: 'mini',
+            children: `> Show ${!expanded ? 'more' : 'less'}`
+        },
         ...rest
     } = config as TruncatedTextLayoutConfig
 
@@ -41,17 +50,17 @@ export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>>
         ? useResolvedData(React.useContext(DataContext), dataField)
         : text?.toString()
 
-    const [expanded, setExpanded] = React.useState(false)
 
-    const toggleExpanded: React.MouseEventHandler<HTMLButtonElement> = () => {
+    const toggleExpanded: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault()
         setExpanded(!expanded)
     }
 
-    const ExpandToggle =
-        // @ts-ignore 2769
-        <Button onClick={toggleExpanded} {...expandToggle}>
-            Show {expanded ? 'less' : 'more'}
-        </Button >
+    const ExpandToggle = renderUIFragment({
+        ...expandToggle,
+        onClick: (e: React.MouseEvent<HTMLButtonElement>) => toggleExpanded(e),
+        expanded,
+    })
 
     return (
         expanded && <p>{resolvedText}{ExpandToggle}</p> ||
