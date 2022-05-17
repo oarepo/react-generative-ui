@@ -5,7 +5,7 @@ import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {
-  title: 'Elements/Separator',
+  title: 'Basic Elements/Separator',
   component: Separator,
   parameters: {
     controls: { expanded: true },

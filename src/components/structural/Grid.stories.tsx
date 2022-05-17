@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Structural/Grid',
+  title: 'Structural/Grid/Grid',
   component: Grid,
   parameters: {
     controls: { expanded: true },
@@ -20,9 +20,9 @@ const Template: Story<UIFragmentContext> = (args) => <Grid {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Columns = Template.bind({});
+export const WithColumns = Template.bind({});
 
-Columns.args = {
+WithColumns.args = {
   config: {
     'component': 'grid',
     'columnsPerRow': 2,
@@ -38,8 +38,8 @@ Columns.args = {
   }, renderUIFragment: UIFragment
 };
 
-export const Rows = Template.bind({});
-Rows.args = {
+export const WithRows = Template.bind({});
+WithRows.args = {
   config: {
     "component": "grid",
     "className": "demo",

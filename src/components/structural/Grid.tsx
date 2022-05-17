@@ -6,29 +6,16 @@
 import React, { FC } from "react";
 import { UILayoutConfig, UIFragmentContext } from "../../types";
 import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
+import { RowLayoutConfig } from "./Row";
+import { ColumnLayoutConfig } from "./Column";
 
 export interface GridLayoutConfig extends UILayoutConfig {
     /* Number of columns rendered per each row in a grid */
     columnsPerRow?: SemanticWIDTHS | "equal",
     /* Layout definition of column items */
-    columns?: UILayoutConfig[],
+    columns?: ColumnLayoutConfig[],
     /* Layour definition of row items */
-    rows?: GridRowLayoutConfig[],
-    /** Any extra props passed down to Grid component */
-    [key: string]: any
-}
-
-export interface GridProps {
-    stretched?: boolean
-    /** Any extra props passed directly to Grid wrapper component */
-    [key: string]: any
-}
-
-export interface GridRowLayoutConfig {
-    columns: UILayoutConfig[]
-    stretched: boolean
-    /** Any extra props passed down to Grid Row column components */
-    [key: string]: any
+    rows?: RowLayoutConfig[],
 }
 
 /**
@@ -42,39 +29,42 @@ export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
     const {
         component,
         columnsPerRow = 1,
-        className,
         container = true,
         columns,
         rows,
-        ...restInnerProps
+        ...rest
     } = config as GridLayoutConfig
-    const { stretched = true, ...rest } = restInnerProps as GridProps
 
-    const ColumnWrapper = ({ ...props }) => {
+    const ColumnWrapper = (props: any) => {
         const { component, key } = props
         if (!component) {
             props.component = 'column'
         } else if (component !== 'column') {
-            return renderUIFragment({ component: 'column', items: [props] })
+            return renderUIFragment({ component: 'column', items: [props] }, key)
+        }
+        return renderUIFragment(props, key)
+    }
+
+    const RowWrapper = (props: any) => {
+        const { component, key } = props
+        if (!component) {
+            props.component = 'row'
+        } else if (component !== 'row') {
+            return renderUIFragment({ component: 'row', columns: [] }, key)
         }
         return renderUIFragment(props, key)
     }
 
     if (columns?.length) {
-        return <SemanticGrid container={container} className={className} columns={columnsPerRow} {...rest}>
-            {columns?.map((column: UILayoutConfig, columnIndex) => (
-                <ColumnWrapper stretched={stretched} key={columnIndex} {...column} {...restInnerProps} />
+        return <SemanticGrid container={container} columns={columnsPerRow} {...rest}>
+            {columns?.map((column, columnIndex) => (
+                <ColumnWrapper key={columnIndex} {...column} />
             ))}
         </SemanticGrid>
     } else if (rows?.length) {
-        return <SemanticGrid container={container} className={className} {...rest}>
-            {rows?.map(({ columns }, index) => (
-                <SemanticGrid.Row key={index} stretched={stretched} {...restInnerProps}>
-                    {columns.map(
-                        (column: UILayoutConfig, columnIndex) => (
-                            <ColumnWrapper {...column} key={columnIndex} />
-                        ))}
-                </SemanticGrid.Row>
+        return <SemanticGrid container={container} {...rest}>
+            {rows?.map((row, index) => (
+                <RowWrapper key={index} {...row} />
             ))}
         </SemanticGrid>
     } else {
@@ -83,4 +73,3 @@ export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
         </div>
     }
 }
-

@@ -13,7 +13,7 @@
                 "width": "1",
                 "items": [
                     {
-                        "component": "custom-icon",
+                        "component": "icon",
                         "dataField": "access_status",
                         "iconSet": {
                             "open": {
@@ -22,7 +22,7 @@
                         }
                     },
                     {
-                        "component": "custom-icon",
+                        "component": "icon",
                         "dataField": "rights",
                         "fluid": true,
                         "iconSet": {

@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Elements/Semantic-UI element',
+  title: 'Basic Elements/Semantic-UI element',
   component: SemanticFallback,
   parameters: {
     controls: { expanded: true },

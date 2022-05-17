@@ -31,10 +31,17 @@ export interface CustomIconLayoutConfig extends UILayoutConfig {
  * An Icon, that renders either as a custom
  * SVG graphic or as a built-in Semantic-UI Icon.
  */
-export const CustomIcon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Icon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
 }) => {
-    const { component, dataField, name, iconSet, ...rest } = config as CustomIconLayoutConfig
+    const {
+        component,
+        dataField,
+        name,
+        iconSet,
+        className,
+        ...rest
+    } = config as CustomIconLayoutConfig
 
     const _getIcon = (name: string) => {
         return iconSet ? iconSet[name] : name
@@ -49,16 +56,23 @@ export const CustomIcon: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
     if (iconData) {
         if (typeof iconData === 'string') {
             // @ts-ignore until Semantic-UI supports React 18
-            return <SemanticIcon name={iconData as SemanticICONS} {...rest} />
+            return <SemanticIcon
+                className={className}
+                name={iconData as SemanticICONS}
+                {...rest} />
         } else {
             const {
                 inline = true,
-                style = { objectFit: 'contain' },
                 size = 'tiny',
                 ...imageProps
             } = iconData as ImageProps
 
-            return <SemanticImage style={style} inline={inline} size={size} {...imageProps} />
+            return <SemanticImage
+                className={`oarepo-ui-image-icon${className ? ' ' + className : ''}`}
+                inline={inline}
+                size={size}
+                {...rest}
+                {...imageProps} />
         }
     }
     return (

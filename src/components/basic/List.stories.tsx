@@ -18,7 +18,7 @@ const DataContextDecorator = (Story: StoryFn) => {
 }
 
 const meta: Meta = {
-  title: 'Elements/List',
+  title: 'Basic Elements/List',
   component: List,
   parameters: {
     controls: { expanded: true },

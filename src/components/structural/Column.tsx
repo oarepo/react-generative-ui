@@ -8,7 +8,6 @@ import { Grid } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 
 export interface ColumnLayoutConfig extends UILayoutConfig {
-    stretched: boolean
     items: UILayoutConfig[]
 }
 

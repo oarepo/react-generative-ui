@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Elements/TruncatedText',
+  title: 'Basic Elements/TruncatedText',
   component: TruncatedText,
   parameters: {
     controls: { expanded: true },

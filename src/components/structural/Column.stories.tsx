@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../../GeneratedUI';
 
 const meta: Meta = {
-  title: 'Structural/Column',
+  title: 'Structural/Grid/Column',
   component: Column,
   parameters: {
     controls: { expanded: true },

@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Fallback } from '../basic/Fallback';
 
 const meta: Meta = {
-  title: 'Elements/Fallback',
+  title: 'Basic Elements/Fallback',
   component: Fallback,
   parameters: {
     controls: { expanded: true },

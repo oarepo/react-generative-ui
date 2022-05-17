@@ -4,14 +4,16 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { Grid } from "semantic-ui-react"
+import { Grid, SemanticWIDTHS } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
 
 
 export interface RowLayoutConfig extends UILayoutConfig {
-    items: [],
-    separator: string | UILayoutConfig
+    /* Number of columns rendered per each row in a grid */
+    columnsPerRow?: SemanticWIDTHS | "equal",
+    /* Layout definition of column items inside row */
+    columns?: UILayoutConfig[],
 }
 
 /**
@@ -24,21 +26,15 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
 }) => {
     const {
         component,
-        items,
-        separator = ' ',
+        columnsPerRow = 1,
+        columns,
         ...rest
     } = config as RowLayoutConfig
 
-    const Separator = _isString(separator) ? separator : renderUIFragment(separator)
-
     return (
-        <Grid.Row {...rest}>
-            {items?.map(
-                (item: UILayoutConfig, index) =>
-                    <React.Fragment key={index}>
-                        {renderUIFragment(item, index)}
-                        {index < items.length - 1 && Separator}
-                    </React.Fragment>
+        <Grid.Row columns={columnsPerRow} {...rest}>
+            {columns?.map(
+                (item: UILayoutConfig, index) => renderUIFragment(item, index)
             )}
         </Grid.Row>
     )

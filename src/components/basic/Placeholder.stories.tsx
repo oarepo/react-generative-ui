@@ -5,7 +5,7 @@ import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {
-  title: 'Elements/Placeholder',
+  title: 'Basic Elements/Placeholder',
   component: Placeholder,
   parameters: {
     controls: { expanded: true },
