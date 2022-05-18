@@ -11,6 +11,16 @@ export interface ColumnLayoutConfig extends UILayoutConfig {
     items: UILayoutConfig[]
 }
 
+
+export const ColumnWrapper = ({ renderUIFragment, ...props }: any) => {
+    const { component, key, ...rest } = props
+    console.log('column wrapper props ', props)
+    if (!component || component !== 'column') {
+        return renderUIFragment({ component: 'column', items: [rest] }, key)
+    }
+    return renderUIFragment(props, key)
+}
+
 /**
  * Component putting its children items into a single responsive column.
  * See https://react.semantic-ui.com/collections/grid/#Grid.Column for available props.

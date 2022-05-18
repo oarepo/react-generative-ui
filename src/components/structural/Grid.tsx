@@ -6,8 +6,9 @@
 import React, { FC } from "react";
 import { UILayoutConfig, UIFragmentContext } from "../../types";
 import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
-import { RowLayoutConfig } from "./Row";
-import { ColumnLayoutConfig } from "./Column";
+import { RowLayoutConfig, RowWrapper } from "./Row";
+import { ColumnLayoutConfig, ColumnWrapper } from "./Column";
+import { ErrorMessage } from "..";
 
 export interface GridLayoutConfig extends UILayoutConfig {
     /* Number of columns rendered per each row in a grid */
@@ -35,41 +36,20 @@ export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
         ...rest
     } = config as GridLayoutConfig
 
-    const ColumnWrapper = (props: any) => {
-        const { component, key } = props
-        if (!component) {
-            props.component = 'column'
-        } else if (component !== 'column') {
-            return renderUIFragment({ component: 'column', items: [props] }, key)
-        }
-        return renderUIFragment(props, key)
-    }
-
-    const RowWrapper = (props: any) => {
-        const { component, key } = props
-        if (!component) {
-            props.component = 'row'
-        } else if (component !== 'row') {
-            return renderUIFragment({ component: 'row', columns: [] }, key)
-        }
-        return renderUIFragment(props, key)
-    }
-
+    console.log(renderUIFragment, config, 'ren')
     if (columns?.length) {
         return <SemanticGrid container={container} columns={columnsPerRow} {...rest}>
             {columns?.map((column, columnIndex) => (
-                <ColumnWrapper key={columnIndex} {...column} />
+                <ColumnWrapper key={columnIndex} renderUIFragment={renderUIFragment} {...column} />
             ))}
         </SemanticGrid>
     } else if (rows?.length) {
         return <SemanticGrid container={container} {...rest}>
             {rows?.map((row, index) => (
-                <RowWrapper key={index} {...row} />
+                <RowWrapper key={index} renderUIFragment={renderUIFragment} {...row} />
             ))}
         </SemanticGrid>
     } else {
-        return <div className="error">
-            Error rendering grid: either rows or columns expected.
-        </div>
+        return <ErrorMessage component='grid'>Expected either rows or columns</ErrorMessage>
     }
 }

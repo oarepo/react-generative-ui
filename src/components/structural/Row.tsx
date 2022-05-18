@@ -7,6 +7,7 @@ import * as React from "react"
 import { Grid, SemanticWIDTHS } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
+import { ColumnWrapper } from "./Column";
 
 
 export interface RowLayoutConfig extends UILayoutConfig {
@@ -15,6 +16,16 @@ export interface RowLayoutConfig extends UILayoutConfig {
     /* Layout definition of column items inside row */
     columns?: UILayoutConfig[],
 }
+
+export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
+    const { component, key, ...rest } = props
+    console.log('row wrapper props', props, rest, renderUIFragment)
+    if (!component || component !== 'row') {
+        return renderUIFragment({ component: 'row', ...rest }, key)
+    }
+    return renderUIFragment(props, key)
+}
+
 
 /**
  * Component rendering its children items in a flexbox row.
@@ -34,7 +45,11 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     return (
         <Grid.Row columns={columnsPerRow} {...rest}>
             {columns?.map(
-                (item: UILayoutConfig, index) => renderUIFragment(item, index)
+                (column: UILayoutConfig, index) =>
+                    <ColumnWrapper
+                        key={index}
+                        renderUIFragment={renderUIFragment}
+                        {...column} />
             )}
         </Grid.Row>
     )

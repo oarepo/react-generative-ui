@@ -7,6 +7,7 @@ import * as React from "react"
 import { UIFragmentContext, UILayoutConfig } from "../../types"
 import orcid from '../../assets/orcid-brands.svg'
 import { Icon } from "semantic-ui-react"
+import { ErrorMessage } from ".."
 
 export interface AuthorityIdentifierProps extends UILayoutConfig {
     identifier: string,
@@ -27,9 +28,9 @@ export const AuthorityIdentifier: React.FC<React.PropsWithChildren<UIFragmentCon
     } = config as AuthorityIdentifierProps
 
     if (!scheme || !identifier) {
-        return (<div className="error">
-            Error rendering authority-identifier: missing value or scheme.
-        </div>)
+        return <ErrorMessage component='authority-identifier'>
+            Missing value or scheme.
+        </ErrorMessage>
     }
 
     if (scheme.toLowerCase() === 'orcid') {

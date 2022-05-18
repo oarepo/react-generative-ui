@@ -15,6 +15,7 @@ import {
 import _times from 'lodash/times'
 import { useResolvedData } from "../../hooks"
 import { DataContext } from "../../context"
+import { ErrorMessage } from "./ErrorMessage"
 
 
 export interface CustomIconLayoutConfig extends UILayoutConfig {
@@ -76,8 +77,6 @@ export const Icon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         }
     }
     return (
-        <div className="error">
-            Unknown icon: {name}.
-        </div>
+        <ErrorMessage component={component}>Unknown icon: {name}.</ErrorMessage>
     )
 }

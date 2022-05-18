@@ -12,6 +12,7 @@ export * from './structural/Column';
 export * from './structural/Row';
 export * from './structural/Grid';
 
+export * from './basic/ErrorMessage';
 export * from './basic/SemanticFallback';
 export * from './basic/List';
 export * from './basic/TruncatedText';

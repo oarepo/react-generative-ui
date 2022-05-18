@@ -4,8 +4,8 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
+import { Icon, Message } from "semantic-ui-react"
 import { UILayoutConfig } from "../../types"
-import { ErrorMessage } from "./ErrorMessage"
 
 
 /**
@@ -14,11 +14,10 @@ import { ErrorMessage } from "./ErrorMessage"
  * A warning is logged to browser console, if component string is an
  * unknown HTML element and component props is rendered as default span.
  */
-export const Fallback: React.FC<React.PropsWithChildren<UILayoutConfig>> = (props) => {
-    const { 'data-component': dataComponent, ...attrs } = props
-
-    if (dataComponent == undefined) {
-        return <ErrorMessage component={dataComponent || 'component'}>Component name is undefined</ErrorMessage>
-    }
-    return <>{React.createElement(dataComponent, attrs)}</>
+export const ErrorMessage: React.FC<UILayoutConfig> = ({ component, children }) => {
+    return <Message size="tiny" icon negative>
+        <Icon name="warning sign" />
+        <Message.Header>Error rendering {component}:&nbsp;</Message.Header>
+        <Message.Content>{children}</Message.Content>
+    </Message>
 }

@@ -9,6 +9,7 @@ import { DataContext } from "../../context"
 import { useResolvedData } from "../../hooks"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString'
+import { ErrorMessage } from ".."
 
 
 export interface ListLayoutConfig extends UILayoutConfig {
@@ -40,9 +41,9 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         : items
 
     if (!resolvedItems) {
-        return <div className="error">
-            Error rendering list: either items or dataField must be provided.
-        </div>
+        return <ErrorMessage component={component}>
+            Either items or dataField must be provided.
+        </ErrorMessage>
     }
 
     const renderItem = (itemData: any, index: React.Key) => {

@@ -26,6 +26,7 @@ import { ComponentMap } from '../types';
 
 export const defaultComponents = {
   authority: Authority,
+  // 'error-message': ErrorMessage,
   'authority-identifier': AuthorityIdentifier,
   'defense-status': DefenseStatus,
   'result-header': ResultHeader,
