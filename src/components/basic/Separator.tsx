@@ -5,7 +5,8 @@
 
 import * as React from "react"
 import { UIFragmentContext, UILayoutConfig } from "../../types"
-import { SemanticCOLORS } from "semantic-ui-react"
+import { Label, SemanticCOLORS } from "semantic-ui-react"
+import clsx from 'clsx'
 
 export interface SeparatorLayoutConfig extends UILayoutConfig {
     double?: boolean,
@@ -20,16 +21,17 @@ export const Separator: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
 }) => {
     const {
         component,
-        double = true,
-        color = '#5EE08A',
-        style = {
-            display: 'inline-block',
-            transform: 'scaleY(1.2)',
-            fontSize: '1.2em',
-            padding: '0.3em',
-        },
+        className,
+        color,
+        double,
         ...rest
     } = config as SeparatorLayoutConfig
 
-    return <span style={{ ...style, color }} {...rest}>{double ? '||' : '|'}</span>
+    // @ts-ignore until Semantic-UI fully supports newest React
+    return <Label
+        basic
+        className={clsx('oarepo-separator', color, className)}
+        {...rest}>
+        {double ? '‖' : '❙'}
+    </Label>
 }

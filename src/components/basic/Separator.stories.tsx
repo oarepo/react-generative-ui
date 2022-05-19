@@ -24,6 +24,7 @@ export const Double = Template.bind({});
 Double.args = {
   config: {
     component: 'separator',
+    double: true
   }
 };
 
@@ -31,6 +32,5 @@ export const Single = Template.bind({});
 Single.args = {
   config: {
     component: 'separator',
-    double: false
   }
 };

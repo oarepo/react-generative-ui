@@ -40,7 +40,7 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         columns,
         ...rest
     } = config as RowLayoutConfig
-
+    console.log('row props', rest)
     return (
         <Grid.Row columns={columnsPerRow} {...rest}>
             {columns?.map(
