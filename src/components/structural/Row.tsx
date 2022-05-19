@@ -8,6 +8,7 @@ import { Grid, SemanticWIDTHS } from "semantic-ui-react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
 import { ColumnWrapper } from "./Column";
+import { ErrorMessage } from "..";
 
 
 export interface RowLayoutConfig extends UILayoutConfig {
@@ -38,18 +39,26 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         component,
         columnsPerRow = 'equal',
         columns,
+        children,
         ...rest
     } = config as RowLayoutConfig
-    console.log('row props', rest)
+
+    if (children?.length && columns?.length) {
+        return <ErrorMessage component={component}>
+            Only one of 'children' or 'columns' could be specified.
+        </ErrorMessage>
+    }
+
     return (
         <Grid.Row columns={columnsPerRow} {...rest}>
-            {columns?.map(
-                (column: UILayoutConfig, index) =>
-                    <ColumnWrapper
-                        key={index}
-                        renderUIFragment={renderUIFragment}
-                        {...column} />
-            )}
+            {children?.length && children ||
+                columns?.map(
+                    (column: UILayoutConfig, index) =>
+                        <ColumnWrapper
+                            key={index}
+                            renderUIFragment={renderUIFragment}
+                            {...column} />
+                )}
         </Grid.Row>
     )
 }

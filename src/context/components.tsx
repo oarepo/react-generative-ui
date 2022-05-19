@@ -21,6 +21,7 @@ import {
   DefenseStatus,
   Separator,
   ResultHeader,
+  DividedRow,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -31,6 +32,7 @@ export const defaultComponents = {
   'result-header': ResultHeader,
   column: Column,
   row: Row,
+  'divided-row': DividedRow,
   list: List,
   raw: Raw,
   grid: Grid,

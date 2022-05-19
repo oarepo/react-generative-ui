@@ -11,6 +11,7 @@ export * from './record/ResultHeader';
 export * from './structural/Column';
 export * from './structural/Row';
 export * from './structural/Grid';
+export * from './structural/DividedRow';
 
 export * from './basic/ErrorMessage';
 export * from './basic/SemanticFallback';
