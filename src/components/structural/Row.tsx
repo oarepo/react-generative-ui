@@ -19,7 +19,6 @@ export interface RowLayoutConfig extends UILayoutConfig {
 
 export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
     const { component, key, ...rest } = props
-    console.log('row wrapper props', props, rest, renderUIFragment)
     if (!component || component !== 'row') {
         return renderUIFragment({ component: 'row', ...rest }, key)
     }
@@ -37,7 +36,7 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
 }) => {
     const {
         component,
-        columnsPerRow = 1,
+        columnsPerRow = 'equal',
         columns,
         ...rest
     } = config as RowLayoutConfig

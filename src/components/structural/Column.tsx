@@ -13,10 +13,12 @@ export interface ColumnLayoutConfig extends UILayoutConfig {
 
 
 export const ColumnWrapper = ({ renderUIFragment, ...props }: any) => {
-    const { component, key, ...rest } = props
-    console.log('column wrapper props ', props)
-    if (!component || component !== 'column') {
-        return renderUIFragment({ component: 'column', items: [rest] }, key)
+    const { component, key } = props
+    console.log('wrapper', props, component)
+    if (component == undefined) {
+        return renderUIFragment({ component: 'column', ...props }, key)
+    } else if (component !== 'column') {
+        return renderUIFragment({ component: 'column', items: [props] })
     }
     return renderUIFragment(props, key)
 }
@@ -29,9 +31,10 @@ export const Column: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     config,
     renderUIFragment
 }) => {
-    const { component, items, stretched = true, ...rest } = config as ColumnLayoutConfig
+    const { component, items, ...rest } = config as ColumnLayoutConfig
+    console.log('column config ', config)
     return (
-        <Grid.Column stretched={stretched} {...rest}>
+        <Grid.Column {...rest}>
             {items?.map((item: UILayoutConfig, index) => (
                 renderUIFragment(item, index)
             ))}

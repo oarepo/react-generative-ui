@@ -4,6 +4,7 @@ import { Grid } from './Grid';
 import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
 import { UIFragment } from '../../GeneratedUI';
+import _times from 'lodash/times'
 
 const meta: Meta = {
   title: 'Structural/Grid/Grid',
@@ -20,54 +21,56 @@ const Template: Story<UIFragmentContext> = (args) => <Grid {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const WithColumns = Template.bind({});
+export const WithTwoColumns = Template.bind({});
 
-WithColumns.args = {
+WithTwoColumns.args = {
   config: {
     'component': 'grid',
-    'columnsPerRow': 2,
+    'columnsPerRow': 3,
     'className': 'demo',
     'columns': [
       {
-        'component': 'placeholder',
+        'component': 'column',
+        'items': [
+          { component: 'h1', children: 'Column #1' },
+          ...(_times(10, () => ({ component: 'placeholder' })))
+        ]
       },
       {
-        'component': 'placeholder',
-      }
+        'component': 'column',
+        'items': [
+          { component: 'h1', children: 'Column #2' },
+          ...(_times(5, () => ({ component: 'placeholder' })))
+        ]
+      },
+      {
+        component: 'h1',
+        children: 'Implicit column #3'
+      },
     ]
   }, renderUIFragment: UIFragment
 };
 
-export const WithRows = Template.bind({});
-WithRows.args = {
+export const WithTwoRows = Template.bind({});
+WithTwoRows.args = {
   config: {
     "component": "grid",
-    "className": "demo",
-    "columnsPerRow": 2,
     "rows": [
       {
         "columns": [
-          {
-            "component": "placeholder",
-          },
-          {
-            "component": "placeholder",
-          }
+          ...(_times(5, () => ({ component: 'placeholder' })))
         ]
       },
       {
         "columns": [
           {
-            "className": "ten wide",
+            "className": "one wide",
             "items": [
-              {
-                "component": "placeholder",
-              }
+              { "component": "placeholder" }
             ]
           },
-          {
-            "component": "placeholder",
-          }
+          { "component": "placeholder" },
+          { "component": "placeholder" }
         ]
       }
     ]

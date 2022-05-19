@@ -29,14 +29,13 @@ export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
 }) => {
     const {
         component,
-        columnsPerRow = 1,
+        columnsPerRow = 'equal',
         container = true,
         columns,
         rows,
         ...rest
     } = config as GridLayoutConfig
 
-    console.log(renderUIFragment, config, 'ren')
     if (columns?.length) {
         return <SemanticGrid container={container} columns={columnsPerRow} {...rest}>
             {columns?.map((column, columnIndex) => (
