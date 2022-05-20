@@ -9,6 +9,7 @@ import { ComponentMap, UILayoutConfig } from "../types"
 import _mapKeys from 'lodash/mapKeys'
 import _get from 'lodash/get';
 import _isEmpty from 'lodash/isEmpty'
+import clsx from 'clsx'
 
 /**
  * UI fragment component redered from the given configuration
@@ -18,14 +19,14 @@ import _isEmpty from 'lodash/isEmpty'
  * @returns UI fragment component
  */
 export const UIFragment = (config: UILayoutConfig, index?: number) => {
-    const { component, ...props } = config
+    const { component, className, ...props } = config
 
     const translatedProps = _mapKeys(props, (_value: string, key: string) => {
         return key === 'class' ? 'className' : key
     })
     const renderContext = {
         renderUIFragment: UIFragment,
-        config: { ...config, ...translatedProps }
+        config: { ...config, ...translatedProps, className: clsx(className, 'oarepo', `oarepo-${component}`) }
     }
 
     const fragmentComponent = (components: ComponentMap, component: string, context: any) => {
