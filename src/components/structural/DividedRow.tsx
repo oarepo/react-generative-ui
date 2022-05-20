@@ -28,10 +28,17 @@ export const DividedRow: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
         ...rest
     } = config as DividedRowLayoutConfig
 
+    const separatorComponent = (index: number) => (
+        _isString(separator)
+            ? renderUIFragment({ component: 'raw', children: separator }, `separator-${index}`)
+            : renderUIFragment(separator, `separator-${index}`)
+    )
+
+
     const renderedItems = items.flatMap(
         (item, index, array) => (
             index !== array.length - 1
-                ? [renderUIFragment(item, index), renderUIFragment(separator, `separator-${index}`)]
+                ? [renderUIFragment(item, index), separatorComponent(index)]
                 : renderUIFragment(item, index)
         ))
 
