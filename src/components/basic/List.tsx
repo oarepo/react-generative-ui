@@ -6,7 +6,7 @@
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
 import { DataContext } from "../../context"
-import { useResolvedData } from "../../hooks"
+import { useResolvedData, useSeparatedItems } from "../../hooks"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString'
 import { ErrorMessage } from ".."
@@ -15,6 +15,7 @@ import { ErrorMessage } from ".."
 export interface ListLayoutConfig extends UILayoutConfig {
     item?: UILayoutConfig
     items?: any[]
+    separator?: UILayoutConfig | string
     horizontal?: boolean
 }
 
@@ -32,7 +33,7 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         dataField,
         items,
         item = { component: 'raw' },
-        horizontal = false,
+        separator,
         ...rest
     } = config as ListLayoutConfig
 
@@ -46,15 +47,12 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         </ErrorMessage>
     }
 
-    const renderItem = (itemData: any, index: React.Key) => {
-        const itemProps = _isString(itemData) ? { children: itemData } : itemData
-        return renderUIFragment({ ...item, ...itemProps }, index)
-    }
+    const itemComponents = resolvedItems.map(
+        (itemData: any) => ({ ...item, ...(_isString(itemData) ? { children: itemData } : itemData) }
+        ))
 
-    const itemProps = resolvedItems?.map((itemData: any, index: React.Key) => ({
-        key: index,
-        content: renderItem(itemData, index)
-    }))
+    const separatedItems = useSeparatedItems(renderUIFragment, itemComponents, separator).map(
+        (item, index) => ({ key: index, content: item }))
 
-    return <SemanticList horizontal={horizontal} items={itemProps} {...rest} />
+    return <SemanticList items={separatedItems} {...rest} />
 }

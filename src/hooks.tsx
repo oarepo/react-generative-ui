@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { DataField } from './types';
+import { DataField, UILayoutConfig } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
@@ -31,3 +31,27 @@ export const useResolvedData = (
   }
 };
 
+
+export const useSeparatedItems = (
+  render: Function,
+  items: any[],
+  separator?: string | UILayoutConfig) => {
+
+  if (!separator) {
+    return items.map((item, index) => render(item, index))
+  }
+
+  const separatorComponent = (index: number) => (
+    _isString(separator)
+      ? render({ component: 'raw', children: separator }, `separator-${index}`)
+      : render(separator, `separator-${index}`)
+  )
+
+  return items.flatMap(
+    (item, index, array) => (
+      index !== array.length - 1
+        ? [render(item, index), separatorComponent(index)]
+        : render(item, index)
+    ))
+
+}

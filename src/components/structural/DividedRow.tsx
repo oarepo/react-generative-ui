@@ -6,6 +6,7 @@
 import * as React from "react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
+import { useSeparatedItems } from "../../hooks";
 
 
 export interface DividedRowLayoutConfig extends UILayoutConfig {
@@ -28,19 +29,7 @@ export const DividedRow: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
         ...rest
     } = config as DividedRowLayoutConfig
 
-    const separatorComponent = (index: number) => (
-        _isString(separator)
-            ? renderUIFragment({ component: 'raw', children: separator }, `separator-${index}`)
-            : renderUIFragment(separator, `separator-${index}`)
-    )
+    const separatedItems = useSeparatedItems(renderUIFragment, items, separator)
 
-
-    const renderedItems = items.flatMap(
-        (item, index, array) => (
-            index !== array.length - 1
-                ? [renderUIFragment(item, index), separatorComponent(index)]
-                : renderUIFragment(item, index)
-        ))
-
-    return renderUIFragment({ component: 'row', children: renderedItems, ...rest })
+    return renderUIFragment({ component: 'row', children: separatedItems, ...rest })
 }

@@ -84,3 +84,25 @@ CustomItemComponent.parameters = {
     ]
   }
 }
+
+export const SeparatedList = Template.bind({});
+SeparatedList.args = {
+  config: {
+    component: 'list',
+    horizontal: true,
+    separator: ',',
+    dataField: 'itemValues',
+    item: {
+      component: "span",
+      "color": "blue"
+    }
+  } as ListLayoutConfig,
+  renderUIFragment: UIFragment
+}
+SeparatedList.parameters = {
+  data: {
+    itemValues: [
+      'this is data item #1', 'this is data item #2', 'this is data item #3'
+    ]
+  }
+}
