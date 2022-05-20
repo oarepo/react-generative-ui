@@ -6,7 +6,6 @@
 import * as React from "react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
-import ReactDOMServer from 'react-dom/server'
 
 
 export interface DividedRowLayoutConfig extends UILayoutConfig {
