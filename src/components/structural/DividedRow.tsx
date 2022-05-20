@@ -6,6 +6,7 @@
 import * as React from "react"
 import { UILayoutConfig, UIFragmentContext } from "../../types"
 import _isString from 'lodash/isString';
+import ReactDOMServer from 'react-dom/server'
 
 
 export interface DividedRowLayoutConfig extends UILayoutConfig {
@@ -35,7 +36,5 @@ export const DividedRow: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
                 : renderUIFragment(item, index)
         ))
 
-    console.log(renderedItems.map(i => i))
-
-    return renderUIFragment({ component: 'row', children: renderedItems })
+    return renderUIFragment({ component: 'row', children: renderedItems, ...rest })
 }
