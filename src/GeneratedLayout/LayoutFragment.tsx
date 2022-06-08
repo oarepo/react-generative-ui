@@ -28,8 +28,8 @@ export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>
 
     const transformedProps = _mapKeys(
         rest,
-        (_value: string, key: string) => {
-            return propertyMap[key] || key
+        (_value: string, _key: string) => {
+            return propertyMap[_key] || key
         })
 
     const fragmentClasses = clsx(

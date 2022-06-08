@@ -37,8 +37,8 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     const { component, items, ...rest } = config as ColumnLayoutConfig
     return (
         <Grid.Column key={key} {...rest}>
-            {items?.map((config: LayoutFragmentConfig, index) => (
-                LayoutFragment({ config, data, key: index })
+            {items?.map((itemConfig: LayoutFragmentConfig, index) => (
+                LayoutFragment({ itemConfig, data, key: index })
             ))}
         </Grid.Column>
     )

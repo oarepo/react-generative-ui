@@ -3,10 +3,10 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { AllHTMLAttributes, FC, HTMLAttributes } from 'react';
+import React, { AllHTMLAttributes, FC } from 'react';
 
 export type ComponentMap = {
-  [key: string]: FC<React.PropsWithChildren<LayoutFragmentContext>>;
+  [key: string]: FC<React.PropsWithChildren<LayoutFragmentProps>>;
 };
 
 /** Field with its value fetched from DataContext */
@@ -26,7 +26,7 @@ export interface LayoutFragmentConfig {
   /** Name of UI component that should render the UI fragment */
   component: string;
   /** UI configs of items (children) contained in the UI fragment */
-  items?: LayoutFragmentConfig[] | undefined;
+  items?: LayoutFragmentConfig[];
   /** Data object holding field values to be rendered */
   data?: LayoutFragmentData;
   /**
