@@ -4,23 +4,25 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import _isString from 'lodash/isString';
 import { useSeparatedItems } from "../../hooks";
+import { LayoutFragment } from "../../GeneratedLayout";
 
 
-export interface DividedRowLayoutConfig extends UILayoutConfig {
-    items: UILayoutConfig[]
-    separator: UILayoutConfig
+export interface DividedRowLayoutConfig extends LayoutFragmentConfig {
+    items: LayoutFragmentConfig[]
+    separator: LayoutFragmentConfig
 }
 
 /**
  * Component rendering its children items in a flexbox row.
  * Items can optionally be separated by a separator component.
  */
-export const DividedRow: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key
 }) => {
     const {
         component,
@@ -29,7 +31,15 @@ export const DividedRow: React.FC<React.PropsWithChildren<UIFragmentContext>> = 
         ...rest
     } = config as DividedRowLayoutConfig
 
-    const separatedItems = useSeparatedItems(renderUIFragment, items, separator)
+    const separatedItems = useSeparatedItems(items, separator)
 
-    return renderUIFragment({ component: 'row', children: separatedItems, ...rest })
+    return LayoutFragment({
+        config: {
+            component: 'row',
+            children: separatedItems,
+            ...rest
+        },
+        data,
+        key
+    })
 }

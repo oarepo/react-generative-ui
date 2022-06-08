@@ -3,11 +3,13 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { DataField, UILayoutConfig } from './types';
+import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData } from './types';
 
+import React from 'react';
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
 import _mapValues from 'lodash/mapValues'
+import { LayoutFragment } from './GeneratedLayout';
 
 /**
  * Uses data field configuration to query DataContext
@@ -21,7 +23,7 @@ import _mapValues from 'lodash/mapValues'
  * @returns `props` with values resolved from DataContext
  */
 export const useResolvedData = (
-  data: { [key: string]: any },
+  data: LayoutFragmentData,
   field: DataField,
 ) => {
   if (_isString(field)) {
@@ -33,25 +35,39 @@ export const useResolvedData = (
 
 
 export const useSeparatedItems = (
-  render: Function,
-  items: any[],
-  separator?: string | UILayoutConfig) => {
+  items: LayoutFragmentConfig[],
+  data?: LayoutFragmentData,
+  separator?: string | LayoutFragmentConfig) => {
+
+  const Item = (item: LayoutFragmentConfig, index: number) => LayoutFragment({ config: item, data, key: index })
 
   if (!separator) {
-    return items.map((item, index) => render(item, index))
+    return items.map((item, index) => Item(item, index))
   }
 
-  const separatorComponent = (index: number) => (
+  const Separator = (index: number) => (
     _isString(separator)
-      ? render({ component: 'raw', children: separator }, `separator-${index}`)
-      : render(separator, `separator-${index}`)
+      ? LayoutFragment({
+        config: { component: 'raw', children: separator },
+        data,
+        key: `separator-${index}`
+      })
+      : LayoutFragment({
+        config: separator,
+        data,
+        key: `separator-${index}`
+      })
   )
 
   return items.flatMap(
     (item, index, array) => (
       index !== array.length - 1
-        ? [render(item, index), separatorComponent(index)]
-        : render(item, index)
+        ? [Item(item, index), Separator(index)]
+        : Item(item, index)
     ))
+}
 
+export const useLayoutFragment = (components: ComponentMap, component: string, props: any) => {
+  const CachedFragment = React.memo(components[component])
+  return <CachedFragment {...props} />
 }

@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Icon, Message } from "semantic-ui-react"
-import { UILayoutConfig } from "../../types"
+import { LayoutFragmentConfig } from "../../types"
 
 
 /**
@@ -14,7 +14,7 @@ import { UILayoutConfig } from "../../types"
  * A warning is logged to browser console, if component string is an
  * unknown HTML element and component props is rendered as default span.
  */
-export const ErrorMessage: React.FC<UILayoutConfig> = ({ component, children }) => {
+export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({ component, children }) => {
     // @ts-ignore 2786 until Semantic-UI fully compatible with React 18
     return <Message size="tiny" icon negative>
         {/* @ts-ignore 2786 */}

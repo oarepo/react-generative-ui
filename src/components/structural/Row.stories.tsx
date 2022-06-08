@@ -1,10 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { Row } from './Row';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../../GeneratedUI';
 import { Grid } from 'semantic-ui-react';
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Structural/Grid/Row',
@@ -17,7 +16,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => (
+const Template: Story<LayoutFragmentProps> = (args) => (
   <Grid>
     <Row  {...args} />;
   </Grid>
@@ -35,4 +34,4 @@ const config = {
   ]
 }
 
-Default.args = { config, renderUIFragment: UIFragment };
+Default.args = { config };

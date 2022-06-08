@@ -1,8 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { Placeholder, PlaceholderLayoutConfig } from './Placeholder';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Basic Elements/Placeholder',
@@ -15,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => <Placeholder  {...args} />;
+const Template: Story<LayoutFragmentProps> = (args) => <Placeholder  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing

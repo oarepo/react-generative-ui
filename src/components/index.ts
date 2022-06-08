@@ -14,7 +14,6 @@ export * from './structural/Grid';
 export * from './structural/DividedRow';
 
 export * from './basic/ErrorMessage';
-export * from './basic/SemanticFallback';
 export * from './basic/List';
 export * from './basic/TruncatedText';
 export * from './basic/Raw';

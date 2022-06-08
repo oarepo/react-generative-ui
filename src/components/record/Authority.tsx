@@ -5,9 +5,9 @@
 
 import * as React from "react"
 import { AuthorityIdentifierProps } from ".."
-import { DataContext } from "../../context"
+import { LayoutFragment } from "../../GeneratedLayout"
 import { useResolvedData } from "../../hooks"
-import { UIFragmentContext, UILayoutConfig } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 
 export enum AuthorityType {
@@ -15,23 +15,24 @@ export enum AuthorityType {
     Organizational = 'Organizational'
 }
 
-export interface AuthorityLayoutConfig extends UILayoutConfig {
+export interface AuthorityLayoutConfig extends LayoutFragmentConfig {
     fullName?: string,
     role?: string,
     nameType?: AuthorityType,
     affiliations: string[],
     authorityIdentifiers?: AuthorityIdentifierProps[],
-    wrapperComponent?: UILayoutConfig
-    fullNameComponent?: UILayoutConfig
-    identifierComponent?: UILayoutConfig
-    roleComponent?: UILayoutConfig
+    wrapperComponent?: LayoutFragmentConfig
+    fullNameComponent?: LayoutFragmentConfig
+    identifierComponent?: LayoutFragmentConfig
+    roleComponent?: LayoutFragmentConfig
 }
 /**
  * Displays either a personal or an organizational authority tag.
  */
-export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key
 }) => {
     const {
         component,
@@ -52,37 +53,52 @@ export const Authority: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
         authorityIdentifiers: resolvedIdentifiers = [],
         fullName: resolvedFullName,
         role: resolvedRole,
-    } = dataField
-            ? useResolvedData(React.useContext(DataContext), dataField)
+    } = dataField && data
+            ? useResolvedData(data, dataField)
             : { fullName, authorityIdentifiers, role, ...rest }
 
     const Wrapper = (props: React.PropsWithChildren<{}>) => (
-        renderUIFragment({
-            ...wrapperComponent,
-            ...props
-        }, 'wrapper')
+        LayoutFragment({
+            config: {
+                ...wrapperComponent,
+                ...props
+            },
+            data,
+            key: 'wrapper'
+        })
     )
 
-    const FullName = renderUIFragment({
-        ...fullNameComponent,
-        children: resolvedFullName,
-    }, 'name')
+    const FullName = LayoutFragment({
+        config: {
+            ...fullNameComponent,
+            children: resolvedFullName,
+        },
+        data,
+        key: 'name'
+    })
 
     const Identifiers = resolvedIdentifiers.map(
         (identifier: AuthorityIdentifierProps, index: number) => (
-            renderUIFragment(
-                { ...identifierComponent, ...identifier },
-                `identifier-${index}`
-            )
+            LayoutFragment({
+                config: {
+                    ...identifierComponent, ...identifier,
+                },
+                data,
+                key: `identifier-${index}`
+            })
         ))
 
-    const Role = renderUIFragment({
-        ...roleComponent,
-        children: `(${resolvedRole})`
-    }, 'role')
+    const Role = LayoutFragment({
+        config: {
+            ...roleComponent,
+            children: `(${resolvedRole})`
+        },
+        data,
+        key: 'role'
+    })
 
     return (
-        <Wrapper {...rest}>
+        <Wrapper key={key} {...rest}>
             {FullName}
             {resolvedIdentifiers && Identifiers}
             {resolvedRole && Role}

@@ -1,21 +1,9 @@
 import React from 'react';
-import { Meta, Story, StoryFn } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { List } from './List';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { useParameter, useState } from '@storybook/addons';
-import { DataContext } from '../../context/data';
-import { UIFragment } from '../../GeneratedUI/UIFragment';
 import { ListLayoutConfig } from './List';
-
-
-const DataContextDecorator = (Story: StoryFn) => {
-  const initialState = useParameter('data', {})
-
-  const [data] = useState({ ...initialState })
-
-  return <><DataContext.Provider value={data}><Story /></DataContext.Provider></>
-}
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Basic Elements/List',
@@ -23,13 +11,12 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  decorators: [DataContextDecorator]
 };
 
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => <List  {...args} />;
+const Template: Story<LayoutFragmentProps> = (args) => <List  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -43,7 +30,6 @@ SimpleList.args = {
       'this is item #3'
     ]
   } as ListLayoutConfig,
-  renderUIFragment: UIFragment
 };
 
 export const HorizontalDataList = Template.bind({});
@@ -52,7 +38,7 @@ HorizontalDataList.args = {
     component: 'list',
     horizontal: true,
     dataField: 'itemValues',
-  }, renderUIFragment: UIFragment
+  }
 };
 
 
@@ -73,7 +59,6 @@ CustomItemComponent.args = {
       "color": "blue"
     }
   } as ListLayoutConfig,
-  renderUIFragment: UIFragment
 }
 CustomItemComponent.parameters = {
   data: {
@@ -97,7 +82,6 @@ SeparatedList.args = {
       "color": "blue"
     }
   } as ListLayoutConfig,
-  renderUIFragment: UIFragment
 }
 SeparatedList.parameters = {
   data: {

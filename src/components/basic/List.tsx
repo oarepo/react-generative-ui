@@ -5,17 +5,16 @@
 
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
-import { DataContext } from "../../context"
 import { useResolvedData, useSeparatedItems } from "../../hooks"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import _isString from 'lodash/isString'
 import { ErrorMessage } from ".."
 
 
-export interface ListLayoutConfig extends UILayoutConfig {
-    item?: UILayoutConfig
+export interface ListLayoutConfig extends LayoutFragmentConfig {
+    item?: LayoutFragmentConfig
     items?: any[]
-    separator?: UILayoutConfig | string
+    separator?: LayoutFragmentConfig | string
     horizontal?: boolean
 }
 
@@ -24,9 +23,10 @@ export interface ListLayoutConfig extends UILayoutConfig {
  * Component putting its children items into a List.
  * See https://react.semantic-ui.com/elements/list for available props.
  */
-export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key
 }) => {
     const {
         component,
@@ -37,8 +37,8 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         ...rest
     } = config as ListLayoutConfig
 
-    const resolvedItems = dataField
-        ? useResolvedData(React.useContext(DataContext), dataField)
+    const resolvedItems = dataField && data
+        ? useResolvedData(data, dataField)
         : items
 
     if (!resolvedItems) {
@@ -51,7 +51,7 @@ export const List: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         (itemData: any) => ({ ...item, ...(_isString(itemData) ? { children: itemData } : itemData) }
         ))
 
-    const separatedItems = useSeparatedItems(renderUIFragment, itemComponents, separator).map(
+    const separatedItems = useSeparatedItems(itemComponents, data, separator).map(
         (item, index) => ({ key: index, content: item }))
 
     return <SemanticList items={separatedItems} {...rest} />

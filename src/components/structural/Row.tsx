@@ -5,25 +5,29 @@
 
 import * as React from "react"
 import { Grid, SemanticWIDTHS } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
-import _isString from 'lodash/isString';
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
+import { LayoutFragment } from "../../GeneratedLayout";
 
 
-export interface RowLayoutConfig extends UILayoutConfig {
+export interface RowLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
     columnsPerRow?: SemanticWIDTHS | "equal",
     /* Layout definition of column items inside row */
-    columns?: UILayoutConfig[],
+    columns?: LayoutFragmentConfig[],
 }
 
-export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
-    const { component, key, ...rest } = props
-    if (!component || component !== 'row') {
-        return renderUIFragment({ component: 'row', ...rest }, key)
-    }
-    return renderUIFragment(props, key)
+export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data, key }) => {
+    const { component, ...rest } = config
+    return LayoutFragment({
+        config: {
+            component: component == undefined || component !== 'row' ? 'row' : component,
+            ...rest
+        },
+        data,
+        key
+    })
 }
 
 
@@ -31,9 +35,10 @@ export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
  * Component rendering its children items in a flexbox row.
  * Items can optionally be separated by a separator component.
  */
-export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key,
 }) => {
     const {
         component,
@@ -44,7 +49,7 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     } = config as RowLayoutConfig
 
     if (children?.length && columns?.length) {
-        return <ErrorMessage component={component}>
+        return <ErrorMessage key={key} component={component}>
             Only one of 'children' or 'columns' could be specified.
         </ErrorMessage>
     }
@@ -53,11 +58,8 @@ export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         <Grid.Row columns={columnsPerRow} {...rest}>
             {children?.length && children ||
                 columns?.map(
-                    (column: UILayoutConfig, index) =>
-                        <ColumnWrapper
-                            key={index}
-                            renderUIFragment={renderUIFragment}
-                            {...column} />
+                    (column: LayoutFragmentConfig, index) =>
+                        <ColumnWrapper {...{ config: column, data, key: index }} />
                 )}
         </Grid.Row>
     )

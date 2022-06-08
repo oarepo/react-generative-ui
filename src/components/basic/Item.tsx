@@ -6,23 +6,24 @@
 import _isString from "lodash/isString"
 import * as React from "react"
 import { Item as SemanticItem } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragment } from "../../GeneratedLayout"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
-export interface ItemLayoutConfig extends UILayoutConfig {
-    children?: UILayoutConfig[],
-    content?: UILayoutConfig
-    description?: UILayoutConfig
-    extra?: UILayoutConfig
+export interface ItemLayoutConfig extends LayoutFragmentConfig {
+    children?: LayoutFragmentConfig[],
+    content?: LayoutFragmentConfig
+    description?: LayoutFragmentConfig
+    extra?: LayoutFragmentConfig
     header?: ItemSectionProps
-    image?: UILayoutConfig
-    meta?: UILayoutConfig
+    image?: LayoutFragmentConfig
+    meta?: LayoutFragmentConfig
 }
 
-export interface ItemSectionProps extends UILayoutConfig {
+export interface ItemSectionProps extends LayoutFragmentConfig {
     as?: string | Function
-    children?: UILayoutConfig[]
+    children?: LayoutFragmentConfig[]
     className?: string
-    content?: string | UILayoutConfig
+    content?: string | LayoutFragmentConfig
     renderUIFragment: Function
 }
 
@@ -41,9 +42,10 @@ const ItemHeader: React.FC<React.PropsWithChildren<ItemSectionProps>> = (props) 
  * An item view presents related collection of content for display.
  * See https://react.semantic-ui.com/views/item for available props.
  */
-export const Item: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Item: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key
 }) => {
     const { component, ...props } = config
     const {
@@ -58,9 +60,9 @@ export const Item: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
     } = props as ItemLayoutConfig
 
     return (
-        <SemanticItem {...rest}>
-            {header && (<ItemHeader {...header} renderUIFragment={renderUIFragment} />)}
-            {children?.map((child, index) => renderUIFragment(child, index))}
+        <SemanticItem key={key} {...rest}>
+            {header && (<ItemHeader {...header} />)}
+            {children?.map((child, index) => LayoutFragment({ config: child, data, key: index }))}
         </SemanticItem>
     )
 }

@@ -5,11 +5,10 @@
 
 import * as React from "react"
 import { Header } from "semantic-ui-react"
-import { DataContext } from "../../context"
 import { useResolvedData } from "../../hooks"
-import { UIFragmentContext, UILayoutConfig } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
-export interface ResultHeaderLayoutConfig extends UILayoutConfig {
+export interface ResultHeaderLayoutConfig extends LayoutFragmentConfig {
     linksField?: string,
     title?: string,
     links?: object
@@ -18,8 +17,10 @@ export interface ResultHeaderLayoutConfig extends UILayoutConfig {
 /**
  * Renders a header title of a record search result.
 */
-export const ResultHeader: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const ResultHeader: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
+    data,
+    key
 }) => {
     const {
         component,
@@ -31,17 +32,15 @@ export const ResultHeader: React.FC<React.PropsWithChildren<UIFragmentContext>> 
         ...rest
     } = config as ResultHeaderLayoutConfig
 
-    const data = React.useContext(DataContext)
-
-    const { self: resolvedSelfLink } = linksField
+    const { self: resolvedSelfLink } = linksField && data
         ? useResolvedData(data, linksField)
         : (links || {})
 
-    const resolvedTitle = dataField
+    const resolvedTitle = dataField && data
         ? useResolvedData(data, dataField)
         : title
 
-    return <Header as={as} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
+    return <Header as={as} key={key} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
         {resolvedTitle}
     </Header>
 }

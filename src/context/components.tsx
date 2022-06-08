@@ -11,7 +11,6 @@ import {
   Column,
   Raw,
   Row,
-  SemanticFallback,
   TruncatedText,
   List,
   Placeholder,
@@ -41,7 +40,6 @@ export const defaultComponents = {
   placeholder: Placeholder,
   item: Item,
   'truncated-text': TruncatedText,
-  _fallback: SemanticFallback
 } as ComponentMap;
 
 export const AvailableComponents = React.createContext(defaultComponents);

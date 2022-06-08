@@ -5,36 +5,40 @@
 
 import * as React from "react"
 import { Grid } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragment } from "../../GeneratedLayout"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
-export interface ColumnLayoutConfig extends UILayoutConfig {
-    items: UILayoutConfig[]
-}
+export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
-
-export const ColumnWrapper = ({ renderUIFragment, ...props }: any) => {
-    const { component, key } = props
-    if (component == undefined) {
-        return renderUIFragment({ component: 'column', ...props }, key)
-    } else if (component !== 'column') {
-        return renderUIFragment({ component: 'column', items: [props] })
-    }
-    return renderUIFragment(props, key)
+/**
+ * A component wrapping the layout inside a column component
+ */
+export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data, key }) => {
+    const { component, ...rest } = config
+    return LayoutFragment({
+        config: {
+            component: component == undefined || component !== 'column' ? 'column' : component,
+            ...rest
+        },
+        data,
+        key
+    })
 }
 
 /**
  * Component putting its children items into a single responsive column.
  * See https://react.semantic-ui.com/collections/grid/#Grid.Column for available props.
  */
-export const Column: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
+    key
 }) => {
     const { component, items, ...rest } = config as ColumnLayoutConfig
     return (
-        <Grid.Column {...rest}>
-            {items?.map((item: UILayoutConfig, index) => (
-                renderUIFragment(item, index)
+        <Grid.Column key={key} {...rest}>
+            {items?.map((config: LayoutFragmentConfig, index) => (
+                LayoutFragment({ config, data, key: index })
             ))}
         </Grid.Column>
     )

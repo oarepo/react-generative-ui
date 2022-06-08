@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { Placeholder as SemanticPlaceholder } from "semantic-ui-react"
 import _times from 'lodash/times'
 
@@ -15,7 +15,7 @@ export enum PlaceholderType {
 }
 
 
-export interface PlaceholderLayoutConfig extends UILayoutConfig {
+export interface PlaceholderLayoutConfig extends LayoutFragmentConfig {
     /** Placeholder representation type */
     type?: PlaceholderType
     /** Number of placeholder content lines */
@@ -33,8 +33,9 @@ export interface PlaceholderProps {
 /**
  * A placeholder used to reserve space for content that soon will appear in a layout.
  */
-export const Placeholder: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Placeholder: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
+    key
 }) => {
     const {
         component,
@@ -79,7 +80,7 @@ export const Placeholder: React.FC<React.PropsWithChildren<UIFragmentContext>> =
     }
 
     return (
-        <SemanticPlaceholder {...rest}>
+        <SemanticPlaceholder key={key} {...rest}>
             {placeholderRepresentation(type)}
         </SemanticPlaceholder>
     )

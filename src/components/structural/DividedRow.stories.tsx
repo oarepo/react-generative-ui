@@ -1,9 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { DividedRow } from './DividedRow';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../../GeneratedUI';
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Structural/DividedRow',
@@ -16,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => <DividedRow  {...args} />
+const Template: Story<LayoutFragmentProps> = (args) => <DividedRow  {...args} />
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = Template.bind({});
@@ -29,4 +28,4 @@ const config = {
   ]
 }
 
-Default.args = { config, renderUIFragment: UIFragment };
+Default.args = { config };
