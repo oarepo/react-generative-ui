@@ -42,7 +42,7 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         : items
 
     if (!resolvedItems) {
-        return <ErrorMessage component={component}>
+        return <ErrorMessage key={key} component={component}>
             Either items or dataField must be provided.
         </ErrorMessage>
     }
@@ -54,5 +54,5 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     const separatedItems = useSeparatedItems(itemComponents, data, separator).map(
         (item, index) => ({ key: index, content: item }))
 
-    return <SemanticList items={separatedItems} {...rest} />
+    return <SemanticList key={key} items={separatedItems} {...rest} />
 }
