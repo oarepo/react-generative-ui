@@ -20,17 +20,17 @@ const Template: Story<LayoutFragmentProps> = (args) => <List  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const SimpleList = Template.bind({});
-SimpleList.args = {
-  config: {
-    component: 'list',
-    items: [
-      'this is item #1',
-      'this is item #2',
-      'this is item #3'
-    ]
-  } as ListLayoutConfig,
-};
+// export const SimpleList = Template.bind({});
+// SimpleList.args = {
+//   config: {
+//     component: 'list',
+//     items: [
+//       'this is item #1',
+//       'this is item #2',
+//       'this is item #3'
+//     ]
+//   } as ListLayoutConfig,
+// };
 
 export const HorizontalDataList = Template.bind({});
 HorizontalDataList.args = {

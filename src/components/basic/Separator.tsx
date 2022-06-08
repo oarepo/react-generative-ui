@@ -18,7 +18,6 @@ export interface SeparatorLayoutConfig extends LayoutFragmentConfig {
  */
 export const Separator: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    key
 }) => {
     const {
         component,
@@ -32,7 +31,6 @@ export const Separator: React.FC<React.PropsWithChildren<LayoutFragmentProps>> =
     return <Label
         basic
         className={clsx(color, className)}
-        key={key}
         {...rest}>
         {double ? '‖' : '❙'}
     </Label>

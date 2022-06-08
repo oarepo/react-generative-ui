@@ -18,7 +18,7 @@ export interface RowLayoutConfig extends LayoutFragmentConfig {
     columns?: LayoutFragmentConfig[],
 }
 
-export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data, key }) => {
+export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, ...rest } = config
     return LayoutFragment({
         config: {
@@ -26,7 +26,6 @@ export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = 
             ...rest
         },
         data,
-        key
     })
 }
 
@@ -38,13 +37,13 @@ export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = 
 export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
     data,
-    key,
 }) => {
     const {
         component,
         columnsPerRow = 'equal',
         columns,
         children,
+        key,
         ...rest
     } = config as RowLayoutConfig
 
@@ -59,7 +58,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
             {children?.length && children ||
                 columns?.map(
                     (column: LayoutFragmentConfig, index) =>
-                        <ColumnWrapper {...{ config: column, data, key: index }} />
+                        <ColumnWrapper {...{ config: { ...column, key: index }, data }} />
                 )}
         </Grid.Row>
     )

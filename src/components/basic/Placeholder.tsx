@@ -35,7 +35,6 @@ export interface PlaceholderProps {
  */
 export const Placeholder: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    key
 }) => {
     const {
         component,
@@ -80,7 +79,7 @@ export const Placeholder: React.FC<React.PropsWithChildren<LayoutFragmentProps>>
     }
 
     return (
-        <SemanticPlaceholder key={key} {...rest}>
+        <SemanticPlaceholder {...rest}>
             {placeholderRepresentation(type)}
         </SemanticPlaceholder>
     )

@@ -32,7 +32,6 @@ export interface AuthorityLayoutConfig extends LayoutFragmentConfig {
 export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
@@ -60,45 +59,46 @@ export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> =
     const Wrapper = (props: React.PropsWithChildren<{}>) => (
         LayoutFragment({
             config: {
+                key: 'wrapper',
                 ...wrapperComponent,
                 ...props
             },
             data,
-            key: 'wrapper'
         })
     )
 
     const FullName = LayoutFragment({
         config: {
+            key: 'name',
             ...fullNameComponent,
             children: resolvedFullName,
         },
         data,
-        key: 'name'
     })
 
     const Identifiers = resolvedIdentifiers.map(
         (identifier: AuthorityIdentifierProps, index: number) => (
             LayoutFragment({
                 config: {
-                    ...identifierComponent, ...identifier,
+                    key: `identifier-${index}`,
+                    ...identifierComponent,
+                    ...identifier,
                 },
                 data,
-                key: `identifier-${index}`
             })
         ))
 
     const Role = LayoutFragment({
         config: {
+            key: 'role',
             ...roleComponent,
-            children: `(${resolvedRole})`
+            children: `(${resolvedRole})`,
         },
         data,
-        key: 'role'
     })
 
     return (
-        <Wrapper key={key} {...rest}>
+        <Wrapper {...rest}>
             {FullName}
             {resolvedIdentifiers && Identifiers}
             {resolvedRole && Role}

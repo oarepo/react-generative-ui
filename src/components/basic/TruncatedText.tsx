@@ -26,7 +26,6 @@ export interface TruncatedTextLayoutConfig extends LayoutFragmentConfig {
 export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const [expanded, setExpanded] = React.useState(false)
 
@@ -61,13 +60,11 @@ export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps
             expanded,
         },
         data,
-        key
     })
 
     return (
         expanded && <p>{resolvedText}{ExpandToggle}</p> ||
         <TextTruncate
-            key={key}
             line={lines}
             truncateText={ellipsis}
             text={resolvedText}

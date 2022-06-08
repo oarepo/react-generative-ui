@@ -21,7 +21,6 @@ export interface DefenseStatusLayoutConfig extends LayoutFragmentConfig {
 export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
@@ -41,7 +40,6 @@ export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps
             ...props
         },
         data,
-        key
     })
 
     const NotDefended = (props: React.PropsWithChildren<{}>) => LayoutFragment({
@@ -50,7 +48,6 @@ export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps
             ...props
         },
         data,
-        key
     })
 
     const {

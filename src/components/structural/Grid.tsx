@@ -26,7 +26,6 @@ export interface GridLayoutConfig extends LayoutFragmentConfig {
 export const Grid: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
@@ -34,6 +33,7 @@ export const Grid: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         container = true,
         columns,
         rows,
+        key,
         ...rest
     } = config as GridLayoutConfig
 

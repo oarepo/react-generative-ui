@@ -19,7 +19,6 @@ export interface AuthorityIdentifierProps extends LayoutFragmentConfig {
  */
 export const AuthorityIdentifier: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    key
 }) => {
     const {
         identifier,
@@ -41,16 +40,16 @@ export const AuthorityIdentifier: React.FC<React.PropsWithChildren<LayoutFragmen
             target = `https://orcid.org/${identifier}`
         }
         return (
-            <a href={target} target="_blank" rel="noopener" key={key} {...rest}>
+            <a href={target} target="_blank" rel="noopener" {...rest}>
                 <img alt="ORCID iD" src={orcid} style={{ width: '16px', display: "inline-block" }} />
             </a>
         )
     }
 
     return (
-        <a href={`${scheme}:${identifier}`} target="_blank" rel="noopener" key={key} {...rest}>
+        <a href={`${scheme}:${identifier}`} target="_blank" rel="noopener" {...rest}>
             {/* @ts-ignore until Semantic-UI supports React 18 */}
-            <Icon link name='id card' {...rest} />
+            <Icon link name='id card' />
         </a>
     )
 }

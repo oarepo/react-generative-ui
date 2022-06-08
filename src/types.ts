@@ -25,10 +25,12 @@ export interface LayoutFragmentAttributes
 export interface LayoutFragmentConfig {
   /** Name of UI component that should render the UI fragment */
   component: string;
-  /** UI configs of items (children) contained in the UI fragment */
+  /** Layout configs of items (children) contained in the UI fragment */
   items?: LayoutFragmentConfig[];
   /** Data object holding field values to be rendered */
   data?: LayoutFragmentData;
+  /** Key used by react to render list elements */
+  key?: React.Key;
   /**
    * Holds configuration of how the values should be
    * fetched from DataContext and where should be used
@@ -55,6 +57,4 @@ export interface LayoutFragmentProps {
   config: LayoutFragmentConfig;
   /** Data object to be rendered by fragment */
   data?: LayoutFragmentData;
-  /** Key used by React, when fragment is a part of list */
-  key?: React.Key;
 }

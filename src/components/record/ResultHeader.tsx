@@ -20,7 +20,6 @@ export interface ResultHeaderLayoutConfig extends LayoutFragmentConfig {
 export const ResultHeader: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
@@ -40,7 +39,7 @@ export const ResultHeader: React.FC<React.PropsWithChildren<LayoutFragmentProps>
         ? useResolvedData(data, dataField)
         : title
 
-    return <Header as={as} key={key} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
+    return <Header as={as} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
         {resolvedTitle}
     </Header>
 }

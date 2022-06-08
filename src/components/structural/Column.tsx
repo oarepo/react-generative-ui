@@ -13,7 +13,7 @@ export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 /**
  * A component wrapping the layout inside a column component
  */
-export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data, key }) => {
+export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, ...rest } = config
     return LayoutFragment({
         config: {
@@ -21,7 +21,6 @@ export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>>
             ...rest
         },
         data,
-        key
     })
 }
 
@@ -32,13 +31,12 @@ export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>>
 export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const { component, items, ...rest } = config as ColumnLayoutConfig
     return (
-        <Grid.Column key={key} {...rest}>
+        <Grid.Column {...rest}>
             {items?.map((itemConfig: LayoutFragmentConfig, index) => (
-                LayoutFragment({ itemConfig, data, key: index })
+                LayoutFragment({ config: { key: index, ...itemConfig, data } })
             ))}
         </Grid.Column>
     )

@@ -13,7 +13,6 @@ import { ErrorMessage } from ".."
 
 export interface ListLayoutConfig extends LayoutFragmentConfig {
     item?: LayoutFragmentConfig
-    items?: any[]
     separator?: LayoutFragmentConfig | string
     horizontal?: boolean
 }
@@ -26,13 +25,12 @@ export interface ListLayoutConfig extends LayoutFragmentConfig {
 export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
         dataField,
         items,
-        item = { component: 'raw' },
+        item = {},
         separator,
         ...rest
     } = config as ListLayoutConfig
@@ -42,17 +40,18 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         : items
 
     if (!resolvedItems) {
-        return <ErrorMessage key={key} component={component}>
+        return <ErrorMessage component={component}>
             Either items or dataField must be provided.
         </ErrorMessage>
     }
 
     const itemComponents = resolvedItems.map(
-        (itemData: any) => ({ ...item, ...(_isString(itemData) ? { children: itemData } : itemData) }
-        ))
+        (itemData: any) => ({ ...item, ...{ content: itemData } })
+    ) as LayoutFragmentConfig[]
 
-    const separatedItems = useSeparatedItems(itemComponents, data, separator).map(
-        (item, index) => ({ key: index, content: item }))
+    const separatedItems = useSeparatedItems(itemComponents, separator)?.map(
+        (item, index) => ({ key: index, ...item })
+    )
 
-    return <SemanticList key={key} items={separatedItems} {...rest} />
+    return <SemanticList items={separatedItems} {...rest} />
 }

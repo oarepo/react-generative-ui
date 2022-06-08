@@ -20,16 +20,15 @@ const propertyMap: { [key: string]: string } = {
  * 
  * @param config layout configuration of a fragment
  * @param data data object to be rendered by fragment
- * @param key optional position of a fragment as a list element, used for key attribute
  * @returns UI fragment component
  */
-export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data, key }) => {
+export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, className, ...rest } = config
 
     const transformedProps = _mapKeys(
         rest,
         (_value: string, _key: string) => {
-            return propertyMap[_key] || key
+            return propertyMap[_key] || _key
         })
 
     const fragmentClasses = clsx(
@@ -46,11 +45,10 @@ export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>
             className: fragmentClasses
         },
         data,
-        key
     }
 
     return (
-        <AvailableComponents.Consumer {...(key != null && { key: key })} >
+        <AvailableComponents.Consumer >
             {components => useLayoutFragment(components, component, renderContext)}
         </AvailableComponents.Consumer >
     )

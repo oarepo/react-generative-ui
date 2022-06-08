@@ -10,7 +10,7 @@ import { LayoutFragmentProps } from "../../types"
 /**
  * A Fragment component outputing raw data as its children.
  */
-export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data, key }) => {
+export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
@@ -18,7 +18,7 @@ export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, 
         : children
 
     return (
-        <Fragment key={key} {...rest}>
+        <Fragment {...rest}>
             {resolvedChildren}
         </Fragment>
     )

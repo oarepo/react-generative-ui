@@ -19,8 +19,8 @@ export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProp
 
     return (
         <AvailableComponents.Provider value={availableComponents}>
-            {layout?.map((fragmentConfig: LayoutFragmentConfig, index: number) =>
-                LayoutFragment({ config: fragmentConfig, data, key: index })
+            {layout?.map((fragmentConfig: LayoutFragmentConfig, key: number) =>
+                LayoutFragment({ config: { ...fragmentConfig, key }, data })
             )}
         </AvailableComponents.Provider>)
 }

@@ -45,7 +45,6 @@ const ItemHeader: React.FC<React.PropsWithChildren<ItemSectionProps>> = (props) 
 export const Item: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const { component, ...props } = config
     const {
@@ -60,9 +59,9 @@ export const Item: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     } = props as ItemLayoutConfig
 
     return (
-        <SemanticItem key={key} {...rest}>
+        <SemanticItem {...rest}>
             {header && (<ItemHeader {...header} />)}
-            {children?.map((child, index) => LayoutFragment({ config: child, data, key: index }))}
+            {children?.map((child, index) => LayoutFragment({ config: { key: index, ...child }, data }))}
         </SemanticItem>
     )
 }

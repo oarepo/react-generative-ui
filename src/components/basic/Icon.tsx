@@ -32,7 +32,6 @@ export interface CustomIconLayoutConfig extends LayoutFragmentConfig {
 export const Icon: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
@@ -59,15 +58,13 @@ export const Icon: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
             return <SemanticIcon
                 className={className}
                 name={iconData as SemanticICONS}
-                key={key}
                 {...rest} />
         } else {
             return <SemanticImage
                 className={className}
-                key={key}
                 {...iconData}
                 {...rest} />
         }
     }
-    return <ErrorMessage key={key} component={component}>Unknown icon: {name}.</ErrorMessage>
+    return <ErrorMessage component={component}>Unknown icon: {name}.</ErrorMessage>
 }

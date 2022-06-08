@@ -11,7 +11,6 @@ import { LayoutFragment } from "../../GeneratedLayout";
 
 
 export interface DividedRowLayoutConfig extends LayoutFragmentConfig {
-    items: LayoutFragmentConfig[]
     separator: LayoutFragmentConfig
 }
 
@@ -22,12 +21,12 @@ export interface DividedRowLayoutConfig extends LayoutFragmentConfig {
 export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
-    key
 }) => {
     const {
         component,
         items,
         separator = { component: 'separator' },
+        key,
         ...rest
     } = config as DividedRowLayoutConfig
 
@@ -37,9 +36,9 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         config: {
             component: 'row',
             children: separatedItems,
+            key,
             ...rest
         },
         data,
-        key
     })
 }
