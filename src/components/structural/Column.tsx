@@ -15,11 +15,13 @@ export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
  */
 export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, ...rest } = config
+
+    const wrapperConfig = component == undefined || component !== 'column'
+        ? { component: 'column', items: [{ ...config, ...rest }] }
+        : { component: component, ...rest }
+
     return LayoutFragment({
-        config: {
-            component: component == undefined || component !== 'column' ? 'column' : component,
-            ...rest
-        },
+        config: wrapperConfig,
         data,
     })
 }

@@ -18,7 +18,7 @@ export default meta;
 
 const Template: Story<LayoutFragmentProps> = (args) => (
   <Grid>
-    <Row  {...args} />;
+    <Row  {...args} />
   </Grid>
 )
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test

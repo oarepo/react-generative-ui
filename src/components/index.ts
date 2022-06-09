@@ -22,3 +22,4 @@ export * from './basic/Item';
 export * from './basic/Icon';
 export * from './basic/Separator';
 export * from './basic/Icon';
+export * from './basic/Label';

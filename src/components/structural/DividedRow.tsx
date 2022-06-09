@@ -26,9 +26,9 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         component,
         items,
         separator = { component: 'separator' },
-        key,
         ...rest
     } = config as DividedRowLayoutConfig
+
 
     const separatedItems = useSeparatedItems(items, separator)
 
@@ -36,7 +36,6 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         config: {
             component: 'row',
             children: separatedItems,
-            key,
             ...rest
         },
         data,

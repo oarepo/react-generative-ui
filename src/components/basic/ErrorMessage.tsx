@@ -3,6 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import clsx from "clsx"
 import * as React from "react"
 import { Icon, Message } from "semantic-ui-react"
 import { LayoutFragmentConfig } from "../../types"
@@ -14,9 +15,15 @@ import { LayoutFragmentConfig } from "../../types"
  * A warning is logged to browser console, if component string is an
  * unknown HTML element and component props is rendered as default span.
  */
-export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({ component, children }) => {
+export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({
+    component,
+    children,
+    className,
+    ...rest
+}) => {
+    const classNames = clsx(className, 'oarepo-error')
     // @ts-ignore 2786 until Semantic-UI fully compatible with React 18
-    return <Message size="tiny" icon negative>
+    return <Message size="tiny" icon negative compact floating className={classNames} {...rest}>
         {/* @ts-ignore 2786 */}
         <Icon name="warning sign" />
         <Message.Header>Error rendering {component}:&nbsp;</Message.Header>

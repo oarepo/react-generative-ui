@@ -43,12 +43,11 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         columnsPerRow = 'equal',
         columns,
         children,
-        key,
         ...rest
     } = config as RowLayoutConfig
 
     if (children?.length && columns?.length) {
-        return <ErrorMessage key={key} component={component}>
+        return <ErrorMessage component={component} {...rest}>
             Only one of 'children' or 'columns' could be specified.
         </ErrorMessage>
     }
@@ -58,7 +57,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
             {children?.length && children ||
                 columns?.map(
                     (column: LayoutFragmentConfig, index) =>
-                        <ColumnWrapper {...{ config: { ...column, key: index }, data }} />
+                        <ColumnWrapper key={index} {...{ config: column, data }} />
                 )}
         </Grid.Row>
     )

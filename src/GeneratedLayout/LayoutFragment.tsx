@@ -23,7 +23,7 @@ const propertyMap: { [key: string]: string } = {
  * @returns UI fragment component
  */
 export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
-    const { component, className, ...rest } = config
+    const { component, className, key, ...rest } = config
 
     const transformedProps = _mapKeys(
         rest,
@@ -38,18 +38,18 @@ export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>
         `oarepo-${component}`
     )
 
-    const renderContext = {
+    const props = {
         config: {
             ...config,
             ...transformedProps,
             className: fragmentClasses
         },
         data,
-    }
+    } as LayoutFragmentProps
 
     return (
-        <AvailableComponents.Consumer >
-            {components => useLayoutFragment(components, component, renderContext)}
+        <AvailableComponents.Consumer {...{ key: key != null ? key : component }}>
+            {components => useLayoutFragment(components, component, props)}
         </AvailableComponents.Consumer >
     )
 }

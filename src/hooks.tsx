@@ -3,13 +3,14 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData } from './types';
+import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData, LayoutFragmentProps } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
 import _mapValues from 'lodash/mapValues'
 import { LayoutFragment } from './GeneratedLayout';
 import React from 'react';
+import { ErrorMessage } from './components';
 
 /**
  * Uses data field configuration to query DataContext
@@ -39,14 +40,11 @@ export const useSeparatedItems = (
   separator?: string | LayoutFragmentConfig) => {
 
   const Item = (item: LayoutFragmentConfig, index: number) => {
-    const { config: itemConfig, data: itemData } = item
-
     return LayoutFragment({
       config: {
-        ...itemConfig,
+        ...item,
         ...{ key: index }
-      },
-      data: itemData
+      }
     })
   }
 
@@ -80,7 +78,20 @@ export const useSeparatedItems = (
 }
 
 
-export const useLayoutFragment = (components: ComponentMap, component: string, props: any) => {
-  const CachedFragment = React.memo(components[component])
-  return <CachedFragment {...props} />
+export const useLayoutFragment = (
+  components: ComponentMap,
+  component: string,
+  props: LayoutFragmentProps
+) => {
+  const { config } = props
+  const fragmentComp = components[component]
+
+  if (fragmentComp) {
+    const LayoutFragment = React.memo(fragmentComp)
+    return <LayoutFragment {...props} />
+  } else {
+    return <ErrorMessage {...config}>
+      Component {component} not found
+    </ErrorMessage>
+  }
 }
