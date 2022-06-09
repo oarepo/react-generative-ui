@@ -5,16 +5,16 @@
 
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { Label as SemanticLabel } from "semantic-ui-react"
+import { Header as SemanticHeader } from "semantic-ui-react"
 import { useResolvedData } from "../../hooks"
 
 
-export interface LabelLayoutConfig extends LayoutFragmentConfig { }
+export interface HeaderLayoutConfig extends LayoutFragmentConfig { }
 
 /**
- * A Semantic-UI Label.
+ * A Semantic-UI header.
  */
-export const Label: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
+export const Header: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
     data,
 }) => {
@@ -23,12 +23,12 @@ export const Label: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         dataField,
         content,
         ...rest
-    } = config as LabelLayoutConfig
+    } = config as HeaderLayoutConfig
 
     const resolvedContent = dataField && data
         ? useResolvedData(data, dataField)
         : content
 
     // @ts-ignore until Semantic-UI supports React 18
-    return <SemanticLabel content={resolvedContent} {...rest} />
+    return <SemanticHeader content={resolvedContent} {...rest} />
 }

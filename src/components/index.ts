@@ -23,3 +23,4 @@ export * from './basic/Icon';
 export * from './basic/Separator';
 export * from './basic/Icon';
 export * from './basic/Label';
+export * from './basic/Header';

@@ -31,20 +31,20 @@ WithTwoColumns.args = {
       {
         'component': 'column',
         'items': [
-          { component: 'h1', children: 'Column #1' },
+          { component: 'header', content: 'Column #1' },
           ...(_times(10, () => ({ component: 'placeholder' })))
         ]
       },
       {
         'component': 'column',
         'items': [
-          { component: 'h1', children: 'Column #2' },
+          { component: 'header', content: 'Column #2' },
           ...(_times(5, () => ({ component: 'placeholder' })))
         ]
       },
       {
-        component: 'h1',
-        children: 'Implicit column #3'
+        component: 'header',
+        content: 'Implicit column #3'
       },
     ]
   }

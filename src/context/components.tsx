@@ -22,6 +22,7 @@ import {
   Separator,
   ResultHeader,
   DividedRow,
+  Header,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -35,6 +36,7 @@ export const defaultComponents = {
   'divided-row': DividedRow,
   list: List,
   label: Label,
+  header: Header,
   raw: Raw,
   grid: Grid,
   separator: Separator,
