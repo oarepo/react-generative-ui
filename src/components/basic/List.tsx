@@ -7,7 +7,6 @@ import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
 import { useResolvedData, useSeparatedItems } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import _isString from 'lodash/isString'
 import { ErrorMessage } from ".."
 
 
@@ -46,11 +45,11 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     }
 
     const itemComponents = resolvedItems.map(
-        (itemData: any) => ({ ...item, ...{ content: itemData } })
+        (itemContent: LayoutFragmentConfig) => ({ ...item, ...{ content: itemContent } })
     ) as LayoutFragmentConfig[]
 
     const separatedItems = useSeparatedItems(itemComponents, separator)?.map(
-        (item, index) => ({ key: index, ...item })
+        (itemConfig, index: number) => ({ key: index, ...itemConfig })
     )
 
     return <SemanticList items={separatedItems} {...rest} />

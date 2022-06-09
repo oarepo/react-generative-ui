@@ -87,8 +87,8 @@ export const useLayoutFragment = (
   const fragmentComp = components[component]
 
   if (fragmentComp) {
-    const LayoutFragment = React.memo(fragmentComp)
-    return <LayoutFragment {...props} />
+    const CachedLayoutFragment = React.memo(fragmentComp)
+    return <CachedLayoutFragment {...props} />
   } else {
     return <ErrorMessage {...config}>
       Component {component} not found
