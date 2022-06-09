@@ -24,3 +24,7 @@ export * from './basic/Separator';
 export * from './basic/Icon';
 export * from './basic/Label';
 export * from './basic/Header';
+export * from './basic/Span';
+export * from './basic/Container';
+export * from './basic/Segment';
+export * from './basic/Button';

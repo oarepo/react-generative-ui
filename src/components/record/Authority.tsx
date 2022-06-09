@@ -41,7 +41,7 @@ export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> =
         nameType,
         affiliations,
         authorityIdentifiers = [],
-        wrapperComponent = { component: 'div' },
+        wrapperComponent = { component: 'segment', basic: true },
         fullNameComponent = { component: 'span' },
         identifierComponent = { component: 'authority-identifier' },
         roleComponent = { component: 'span' },

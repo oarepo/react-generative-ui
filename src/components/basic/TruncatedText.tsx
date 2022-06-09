@@ -8,6 +8,7 @@ import { useResolvedData } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import TextTruncate from 'react-text-truncate'
 import { LayoutFragment } from "../../GeneratedLayout"
+import clsx from "clsx"
 
 export interface TruncatedTextLayoutConfig extends LayoutFragmentConfig {
     /** Number of lines displayed in truncated state */
@@ -36,8 +37,11 @@ export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps
         lines = 1,
         ellipsis = "…",
         expandToggle = {
-            component: 'a',
+            component: 'button',
+            as: 'a',
             href: '#',
+            compact: true,
+            basic: true,
             children: `> Show ${!expanded ? 'more' : 'less'}`
         },
         ...rest
@@ -56,6 +60,7 @@ export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps
     const ExpandToggle = LayoutFragment({
         config: {
             ...expandToggle,
+            className: clsx('oarepo-expand-toggle', expandToggle.className),
             onClick: (e: React.MouseEvent<HTMLButtonElement>) => toggleExpanded(e),
             expanded,
         },

@@ -24,7 +24,6 @@ export interface ItemSectionProps extends LayoutFragmentConfig {
     children?: LayoutFragmentConfig[]
     className?: string
     content?: string | LayoutFragmentConfig
-    renderUIFragment: Function
 }
 
 const ItemHeader: React.FC<React.PropsWithChildren<ItemSectionProps>> = (props) => {
@@ -32,8 +31,8 @@ const ItemHeader: React.FC<React.PropsWithChildren<ItemSectionProps>> = (props) 
     return (
         <SemanticItem.Header
             {...rest}
-            {...(content && { content: _isString(content) ? content : renderUIFragment(content) })} >
-            {children?.map((child, index) => renderUIFragment(child, index))}
+            {...(content && { content: _isString(content) ? content : LayoutFragment({ config: content }) })} >
+            {children?.map((child, index) => LayoutFragment({ config: { ...child, key: index } }))}
         </SemanticItem.Header>)
 }
 

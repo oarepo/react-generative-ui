@@ -27,7 +27,7 @@ export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps
         dataField,
         defended,
         dateDefended,
-        defendedComponent = { component: 'span', 'children': '(obhájeno)', style: { color: 'green' } },
+        defendedComponent = { component: 'span', 'children': '(obhájeno)' },
         notDefendedComponent = { component: 'span', 'children': '(neobhájeno)', style: { color: 'red' } },
         ...rest
     } = config as DefenseStatusLayoutConfig

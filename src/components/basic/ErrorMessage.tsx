@@ -10,10 +10,7 @@ import { LayoutFragmentConfig } from "../../types"
 
 
 /**
- * A Fallback is trying to render a HTML element from component string.
- * 
- * A warning is logged to browser console, if component string is an
- * unknown HTML element and component props is rendered as default span.
+ * An error message to be shown.
  */
 export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({
     component,
@@ -21,9 +18,15 @@ export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({
     className,
     ...rest
 }) => {
-    const classNames = clsx(className, 'oarepo-error')
     // @ts-ignore 2786 until Semantic-UI fully compatible with React 18
-    return <Message size="tiny" icon negative compact floating className={classNames} {...rest}>
+    return <Message
+        size="tiny"
+        icon
+        negative
+        compact
+        floating
+        className={clsx(className, 'oarepo-error')}
+        {...rest}>
         {/* @ts-ignore 2786 */}
         <Icon name="warning sign" />
         <Message.Header>Error rendering {component}:&nbsp;</Message.Header>
