@@ -5,8 +5,7 @@
 
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import _isString from 'lodash/isString';
-import { useSeparatedItems } from "../../hooks";
+import { useItems, useSeparatedItems } from "../../hooks";
 import { LayoutFragment } from "../../GeneratedLayout";
 
 
@@ -25,12 +24,14 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
     const {
         component,
         items,
+        item,
+        dataField,
         separator = { component: 'separator' },
         ...rest
     } = config as DividedRowLayoutConfig
 
 
-    const separatedItems = useSeparatedItems(items, separator)
+    const separatedItems = useSeparatedItems(useItems(items, item, data, dataField), separator)
 
     return LayoutFragment({
         config: {

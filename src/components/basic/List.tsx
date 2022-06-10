@@ -5,13 +5,11 @@
 
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
-import { useResolvedData, useSeparatedItems } from "../../hooks"
+import { useItems, useResolvedData, useSeparatedItems } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { ErrorMessage } from ".."
 
 
 export interface ListLayoutConfig extends LayoutFragmentConfig {
-    item?: LayoutFragmentConfig
     separator?: LayoutFragmentConfig | string
     horizontal?: boolean
 }
@@ -29,28 +27,15 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         component,
         dataField,
         items,
-        item = {},
+        item = { component: 'span' },
         separator,
         ...rest
     } = config as ListLayoutConfig
 
-    const resolvedItems = dataField && data
-        ? useResolvedData(data, dataField)
-        : items
-
-    if (!resolvedItems) {
-        return <ErrorMessage component={component}>
-            Either items or dataField must be provided.
-        </ErrorMessage>
-    }
-
-    const itemComponents = resolvedItems.map(
-        (itemContent: LayoutFragmentConfig) => ({ ...item, ...{ content: itemContent } })
-    ) as LayoutFragmentConfig[]
-
-    const separatedItems = useSeparatedItems(itemComponents, separator)?.map(
-        (itemConfig, index: number) => ({ key: index, ...itemConfig })
-    )
-
-    return <SemanticList items={separatedItems} {...rest} />
+    const separatedItems = useSeparatedItems(useItems(items, item, data, dataField), separator)
+    console.log(separatedItems)
+    return <SemanticList {...rest}>
+        {separatedItems?.map((listItem, index) => (
+            <SemanticList.Item key={index}>{listItem}</SemanticList.Item>))}
+    </SemanticList>
 }

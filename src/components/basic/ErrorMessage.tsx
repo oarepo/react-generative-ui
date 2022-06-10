@@ -14,6 +14,7 @@ import { LayoutFragmentConfig } from "../../types"
  */
 export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({
     component,
+    content,
     children,
     className,
     ...rest
@@ -26,6 +27,7 @@ export const ErrorMessage: React.FC<LayoutFragmentConfig> = ({
         compact
         floating
         className={clsx(className, 'oarepo-error')}
+        {...((content && !children) && { content })}
         {...rest}>
         {/* @ts-ignore 2786 */}
         <Icon name="warning sign" />

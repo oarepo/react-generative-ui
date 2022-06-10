@@ -7,6 +7,8 @@ import * as React from "react"
 import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
+import _isString from 'lodash/isString'
+import { useItems, useResolvedData } from "../../hooks"
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
@@ -34,11 +36,19 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
     data,
 }) => {
-    const { component, items, ...rest } = config as ColumnLayoutConfig
+    const {
+        component,
+        items,
+        item = { component: 'span' },
+        dataField,
+        ...rest
+    } = config as ColumnLayoutConfig
+
+    const columnItems = useItems(items, item, data, dataField)
     return (
         <Grid.Column {...rest}>
-            {items?.map((itemConfig: LayoutFragmentConfig, index) => (
-                LayoutFragment({ config: { key: index, ...itemConfig, data } })
+            {columnItems?.map((columnItem: LayoutFragmentConfig, index: number) => (
+                LayoutFragment({ config: { key: index, ...columnItem, data } })
             ))}
         </Grid.Column>
     )

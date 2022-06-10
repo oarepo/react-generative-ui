@@ -20,20 +20,23 @@ const Template: Story<LayoutFragmentProps> = (args) => <List  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-// export const SimpleList = Template.bind({});
-// SimpleList.args = {
-//   config: {
-//     component: 'list',
-//     items: [
-//       'this is item #1',
-//       'this is item #2',
-//       'this is item #3'
-//     ]
-//   } as ListLayoutConfig,
-// };
+export const SimpleList = Template.bind({});
+SimpleList.args = {
+  config: {
+    component: 'list',
+    items: [
+      'this is item #1',
+      'this is item #2',
+      'this is item #3'
+    ]
+  } as ListLayoutConfig,
+};
 
 export const HorizontalDataList = Template.bind({});
 HorizontalDataList.args = {
+  data: {
+    itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
+  },
   config: {
     component: 'list',
     horizontal: true,
@@ -42,14 +45,15 @@ HorizontalDataList.args = {
 };
 
 
-HorizontalDataList.parameters = {
-  data: {
-    itemValues: ['this is data item #1', 'this is data item #2', 'this is data item #3']
-  }
-}
-
 export const CustomItemComponent = Template.bind({});
 CustomItemComponent.args = {
+  data: {
+    itemValues: [
+      { content: 'this is data item #1', color: 'red' },
+      { header: 'this is data item #2', color: 'green', size: 'large' },
+      { content: 'this is data item #3' }
+    ]
+  },
   config: {
     component: 'list',
     horizontal: true,
@@ -60,18 +64,14 @@ CustomItemComponent.args = {
     }
   } as ListLayoutConfig,
 }
-CustomItemComponent.parameters = {
-  data: {
-    itemValues: [
-      { content: 'this is data item #1', color: 'red' },
-      { header: 'this is data item #2', color: 'green', size: 'large' },
-      { content: 'this is data item #3' }
-    ]
-  }
-}
 
 export const SeparatedList = Template.bind({});
 SeparatedList.args = {
+  data: {
+    itemValues: [
+      'this is data item #1', 'this is data item #2', 'this is data item #3'
+    ]
+  },
   config: {
     component: 'list',
     horizontal: true,
@@ -82,11 +82,4 @@ SeparatedList.args = {
       "color": "blue"
     }
   } as ListLayoutConfig,
-}
-SeparatedList.parameters = {
-  data: {
-    itemValues: [
-      'this is data item #1', 'this is data item #2', 'this is data item #3'
-    ]
-  }
 }

@@ -11,6 +11,7 @@ import _mapValues from 'lodash/mapValues'
 import { LayoutFragment } from './GeneratedLayout';
 import React from 'react';
 import { ErrorMessage } from './components';
+import clsx from 'clsx';
 
 /**
  * Uses data field configuration to query DataContext
@@ -35,6 +36,29 @@ export const useResolvedData = (
 };
 
 
+export const useItems = (
+  items?: LayoutFragmentConfig[] | string[],
+  itemConfig?: LayoutFragmentConfig,
+  data?: LayoutFragmentData,
+  dataField?: DataField
+) => {
+  const resolvedItems = dataField && data
+    ? useResolvedData(data, dataField)
+    : items
+
+  return resolvedItems?.map(
+    (item: LayoutFragmentConfig | string) => {
+      return _isString(item)
+        ? {
+          ...itemConfig,
+          ...{ children: item },
+        } : {
+          ...itemConfig,
+          ...item
+        }
+    })
+}
+
 export const useSeparatedItems = (
   items?: LayoutFragmentConfig[],
   separator?: string | LayoutFragmentConfig) => {
@@ -56,14 +80,16 @@ export const useSeparatedItems = (
     _isString(separator)
       ? LayoutFragment({
         config: {
-          component: 'raw',
+          component: 'span',
           children: separator,
+          className: 'oarepo-separator',
           key: `separator-${index}`
         },
       })
       : LayoutFragment({
         config: {
           ...separator,
+          className: clsx(separator.className, 'oarepo-separator'),
           key: `separator-${index}`
         },
       })
