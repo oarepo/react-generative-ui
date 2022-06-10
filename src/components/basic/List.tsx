@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
-import { useItems, useResolvedData, useSeparatedItems } from "../../hooks"
+import { useItems, useSeparatedItems } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 
