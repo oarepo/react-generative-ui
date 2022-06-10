@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { Header } from "semantic-ui-react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 export interface ResultHeaderLayoutConfig extends LayoutFragmentConfig {
@@ -32,12 +32,14 @@ export const ResultHeader: React.FC<React.PropsWithChildren<LayoutFragmentProps>
     } = config as ResultHeaderLayoutConfig
 
     const { self: resolvedSelfLink } = linksField && data
-        ? useResolvedData(data, linksField)
+        ? useData(data, linksField)
         : (links || {})
 
     const resolvedTitle = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : title
+
+    console.log(resolvedTitle, resolvedSelfLink, data)
 
     return <Header as={as} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
         {resolvedTitle}

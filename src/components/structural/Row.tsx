@@ -43,8 +43,11 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         columnsPerRow = 'equal',
         columns,
         children,
+        dataField,
         ...rest
     } = config as RowLayoutConfig
+
+
 
     if (children?.length && columns?.length) {
         return <ErrorMessage component={component} {...rest}>

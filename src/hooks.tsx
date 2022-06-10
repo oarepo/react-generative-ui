@@ -14,7 +14,7 @@ import { ErrorMessage } from './components';
 import clsx from 'clsx';
 
 /**
- * Uses data field configuration to query DataContext
+ * Uses data field configuration to query data
  * for respectful values.
  *
  * If any of `props.children` or `props.content` was specified,
@@ -24,38 +24,33 @@ import clsx from 'clsx';
  * @param field Data fields configuration
  * @returns `props` with values resolved from DataContext
  */
-export const useResolvedData = (
-  data: LayoutFragmentData,
-  field: DataField,
+export const useData = (
+  data?: LayoutFragmentData,
+  field?: DataField,
 ) => {
   if (_isString(field)) {
     return _get(data, field, '');
-  } else if (field.path || field.default) {
-    return _get(data, field.path || '', field.default || '');
+  } else if (field?.path || field?.default) {
+    return _get(data, field?.path || '', field?.default || '');
   }
+  return null
 };
 
 
 export const useItems = (
   items?: LayoutFragmentConfig[] | string[],
   itemConfig?: LayoutFragmentConfig,
-  data?: LayoutFragmentData,
-  dataField?: DataField
 ) => {
-  const resolvedItems = dataField && data
-    ? useResolvedData(data, dataField)
-    : items
-
-  return resolvedItems?.map(
+  return items?.map(
     (item: LayoutFragmentConfig | string) => {
       return _isString(item)
         ? {
           ...itemConfig,
           ...{ children: item },
-        } : {
+        } as LayoutFragmentConfig : {
           ...itemConfig,
           ...item
-        }
+        } as LayoutFragmentConfig
     })
 }
 

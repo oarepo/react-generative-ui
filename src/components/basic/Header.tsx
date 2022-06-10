@@ -6,7 +6,7 @@
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { Header as SemanticHeader } from "semantic-ui-react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 
 
 export interface HeaderLayoutConfig extends LayoutFragmentConfig { }
@@ -26,7 +26,7 @@ export const Header: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     } = config as HeaderLayoutConfig
 
     const resolvedContent = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : content
 
     // @ts-ignore until Semantic-UI supports React 18

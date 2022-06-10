@@ -11,7 +11,7 @@ import {
     SemanticICONS,
     StrictImageProps
 } from "semantic-ui-react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { ErrorMessage } from "./ErrorMessage"
 
 
@@ -47,7 +47,7 @@ export const Icon: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     }
 
     const resolvedName = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : name
 
     const iconData = _getIcon(resolvedName)

@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
 import { Segment as SemanticSegment } from "semantic-ui-react"
 
@@ -15,7 +15,7 @@ export const Segment: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ conf
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : children
 
     return (

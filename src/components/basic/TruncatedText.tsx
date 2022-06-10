@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import TextTruncate from 'react-text-truncate'
 import { LayoutFragment } from "../../GeneratedLayout"
@@ -48,7 +48,7 @@ export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps
     } = config as TruncatedTextLayoutConfig
 
     const resolvedText = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : text?.toString()
 
 

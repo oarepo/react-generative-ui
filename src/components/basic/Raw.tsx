@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC, Fragment } from "react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
 
 /**
@@ -14,7 +14,7 @@ export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, 
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : children
 
     return (

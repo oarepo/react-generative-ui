@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react"
-import { useResolvedData } from "../../hooks"
+import { useData } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { Button as SemanticButton } from 'semantic-ui-react'
 
@@ -17,7 +17,7 @@ export const Button: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ confi
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
-        ? useResolvedData(data, dataField)
+        ? useData(data, dataField)
         : children
 
     return (
