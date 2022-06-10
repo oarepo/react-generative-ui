@@ -8,7 +8,7 @@ import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import _isString from 'lodash/isString'
-import { useItems, useResolvedData } from "../../hooks"
+import { useItems } from "../../hooks"
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
