@@ -13,10 +13,10 @@ import { LayoutFragmentProps } from "../../types"
 export const Span: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, dataField, children, ...rest } = config
 
-    const resolvedChildren = dataField && data
-        ? useDataContext(data, dataField)
+    const dataContext = useDataContext(data, dataField)
+    const resolvedChildren = dataContext != null
+        ? dataContext
         : children
-
     return (
         <span {...rest}>
             {resolvedChildren}

@@ -49,18 +49,24 @@
                                 "component": "list",
                                 "dataField": "creators",
                                 "horizontal": true,
-                                "separator": ",",
+                                "separator": {
+                                    "component": "separator"
+                                },
                                 "item": {
                                     "component": "authority"
                                 }
                             },
                             {
-                                "component": "separator"
+                                "component": "separator",
+                                "double": true
                             },
                             {
                                 "component": "list",
                                 "dataField": "contributors",
                                 "horizontal": true,
+                                "separator": {
+                                    "component": "separator"
+                                },
                                 "item": {
                                     "component": "authority",
                                     "className": "text-gray"

@@ -7,7 +7,7 @@ import * as React from "react"
 import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { useDataContext, useItems } from "../../hooks"
+import { useDataContext } from "../../hooks"
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
@@ -20,6 +20,7 @@ export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>>
         ? { component: 'column', ...(items ? { items: items } : { items: [config] }) }
         : config
 
+    console.log('wrap', wrapperConfig, data)
     return LayoutFragment({
         config: wrapperConfig,
         data,
@@ -43,16 +44,15 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     } = config as ColumnLayoutConfig
 
     const dataContext = useDataContext(data, dataField)
-    const resolvedItems = dataField && dataContext != null
+    const itemsData = dataField && dataContext != null
         ? dataContext
         : items
 
-    const columnItems = useItems(resolvedItems, item)
-
+    console.log(itemsData, dataContext)
     return (
         <Grid.Column {...rest}>
-            {columnItems?.map((columnItem: LayoutFragmentConfig, index: number) => (
-                LayoutFragment({ config: { key: index, ...columnItem }, data: dataContext })
+            {itemsData?.map((itemData: LayoutFragmentConfig, index: number) => (
+                LayoutFragment({ config: { key: index, ...item }, data: itemData })
             ))}
         </Grid.Column>
     )

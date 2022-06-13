@@ -7,6 +7,7 @@ import * as React from 'react';
 import { ComponentMap, LayoutFragmentConfig, LayoutGeneratorProps } from '../types';
 import { AvailableComponents, defaultComponents } from '../context';
 import { LayoutFragment } from './LayoutFragment';
+import _isArray from 'lodash/isArray'
 
 /**
  * Generated user-configured UI view
@@ -19,8 +20,9 @@ export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProp
 
     return (
         <AvailableComponents.Provider value={availableComponents}>
-            {layout?.map((fragmentConfig: LayoutFragmentConfig, key: number) =>
+            {(_isArray(layout) ? layout : [layout]).map((fragmentConfig: LayoutFragmentConfig, key: number) =>
                 LayoutFragment({ config: { ...fragmentConfig, key }, data })
             )}
-        </AvailableComponents.Provider>)
+        </AvailableComponents.Provider>
+    )
 }

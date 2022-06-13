@@ -9,7 +9,7 @@ import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
-import { useDataContext, useItems } from "../../hooks";
+import { useDataContext } from "../../hooks";
 
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
@@ -45,30 +45,33 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         children,
         dataField,
         items,
-        item,
+        item = { component: 'span' },
         ...rest
     } = config as RowLayoutConfig
 
-    const dataContext = useDataContext(data, dataField)
-    const resolvedItems = dataField && dataContext != null
-        ? dataContext
-        : items
-    const rowItems = useItems(resolvedItems, item)
-
-    if (children?.length && columns?.length) {
+    if ((children?.length && columns?.length) || (children?.length && items?.length) || (columns?.length && items?.length)) {
         return <ErrorMessage component={component} {...rest}>
-            Only one of 'children' or 'columns' could be specified.
+            Only one of 'children', 'columns' or 'items' could be specified.
         </ErrorMessage>
     }
 
-    console.log(rowItems, children, columns)
+    const dataContext = useDataContext(data, dataField)
+    const itemsData = dataField && dataContext != null
+        ? dataContext
+        : items || children
+
+    console.log('rwo', itemsData)
     return (
-        <Grid.Row columns={3} {...rest}>
-            {children?.length && children || (columns?.length && (
+        <Grid.Row columns={columns?.length as SemanticWIDTHS} {...rest}>
+            {itemsData?.map((itemData: LayoutFragmentConfig, index: number) => (
+                LayoutFragment({ config: { key: index, ...item }, data: itemData })
+            ))}
+            {columns?.length && (
                 columns?.map(
-                    (column: LayoutFragmentConfig, index) =>
-                        <ColumnWrapper key={index} {...{ config: column, data: dataContext }} />
-                )) || rowItems?.map((rowItem, index) => (LayoutFragment({ config: { key: index, ...rowItem }, data: dataContext }))))}
+                    (columnConfig: LayoutFragmentConfig, index: number) =>
+                        <ColumnWrapper key={index} {...{ config: columnConfig, data: dataContext }} />
+                )
+            )}
         </Grid.Row>
     )
 }

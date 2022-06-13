@@ -35,58 +35,39 @@ export const useDataContext = (
 };
 
 
-export const useItems = (
-  items?: LayoutFragmentConfig[] | string[],
-  itemConfig?: LayoutFragmentConfig,
-) => {
-  return items?.map(
-    (item: LayoutFragmentConfig | string) => {
-      return _isString(item)
-        ? {
-          ...itemConfig,
-          ...{ children: item },
-        } as LayoutFragmentConfig : {
-          ...itemConfig,
-          ...item
-        } as LayoutFragmentConfig
-    })
-}
-
 export const useSeparatedItems = (
   items?: LayoutFragmentConfig[],
   separator?: string | LayoutFragmentConfig) => {
 
   const Item = (item: LayoutFragmentConfig, index: number) => {
-    return LayoutFragment({
-      config: {
-        ...item,
-        ...{ key: index }
-      }
-    })
+    return {
+      ...item,
+      ...{ key: index }
+    }
   }
 
   if (!separator) {
-    return items?.map((item, index) => Item(item, index))
+    return items
   }
 
-  const Separator = (index: number) => (
-    _isString(separator)
-      ? LayoutFragment({
+  const Separator = (index: number) => {
+    return _isString(separator)
+      ? {
         config: {
           component: 'span',
           children: separator,
           className: 'oarepo-separator',
           key: `separator-${index}`
-        },
-      })
-      : LayoutFragment({
+        }
+      }
+      : {
         config: {
           ...separator,
           className: clsx(separator.className, 'oarepo-separator'),
           key: `separator-${index}`
-        },
-      })
-  )
+        }
+      }
+  }
 
   return items?.flatMap(
     (item, index, array) => (
