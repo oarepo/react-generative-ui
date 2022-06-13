@@ -9,6 +9,7 @@ import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
 import { RowLayoutConfig, RowWrapper } from "./Row";
 import { ColumnLayoutConfig, ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
+import { useDataContext } from "../../hooks";
 
 export interface GridLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
@@ -32,21 +33,24 @@ export const Grid: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         columnsPerRow = 'equal',
         container = true,
         columns,
+        dataField,
         rows,
         key,
         ...rest
     } = config as GridLayoutConfig
 
+    const dataContext = useDataContext(data, dataField)
+
     if (columns?.length) {
         return <SemanticGrid key={key} container={container} columns={columnsPerRow} {...rest}>
             {columns?.map((column, columnIndex) => (
-                <ColumnWrapper {...{ config: column, data, key: columnIndex }} />
+                <ColumnWrapper {...{ config: column, data: dataContext, key: columnIndex }} />
             ))}
         </SemanticGrid>
     } else if (rows?.length) {
         return <SemanticGrid key={key} container={container} {...rest}>
             {rows?.map((row, index) => (
-                <RowWrapper {...{ config: row, data, key: index }} />
+                <RowWrapper {...{ config: row, data: dataContext, key: index }} />
             ))}
         </SemanticGrid>
     } else {

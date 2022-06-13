@@ -7,7 +7,7 @@ import * as React from "react"
 import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { useData, useItems } from "../../hooks"
+import { useDataContext, useItems } from "../../hooks"
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
@@ -42,7 +42,7 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         ...rest
     } = config as ColumnLayoutConfig
 
-    const dataContext = useData(data, dataField)
+    const dataContext = useDataContext(data, dataField)
     const resolvedItems = dataContext != null
         ? dataContext
         : items

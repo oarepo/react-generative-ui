@@ -6,7 +6,7 @@
 import * as React from "react"
 import { AuthorityIdentifierProps } from ".."
 import { LayoutFragment } from "../../GeneratedLayout"
-import { useData } from "../../hooks"
+import { useDataContext } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 
@@ -53,7 +53,7 @@ export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> =
         fullName: resolvedFullName,
         role: resolvedRole,
     } = dataField && data
-            ? useData(data, dataField)
+            ? useDataContext(data, dataField)
             : { fullName, authorityIdentifiers, role, ...rest }
 
     const Wrapper = (props: React.PropsWithChildren<{}>) => (

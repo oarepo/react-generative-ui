@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { LayoutFragment } from "../../GeneratedLayout"
-import { useData } from "../../hooks"
+import { useDataContext } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 export interface DefenseStatusLayoutConfig extends LayoutFragmentConfig {
@@ -55,7 +55,7 @@ export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps
         // TODO: support rendering date
         // dateDefended: resolvedDateDefended
     } = dataField && data
-            ? useData(data, dataField)
+            ? useDataContext(data, dataField)
             : { defended }
 
     // @ts-ignore 2559

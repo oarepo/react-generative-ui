@@ -6,7 +6,7 @@
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { Label as SemanticLabel } from "semantic-ui-react"
-import { useData } from "../../hooks"
+import { useDataContext } from "../../hooks"
 
 
 export interface LabelLayoutConfig extends LayoutFragmentConfig { }
@@ -26,7 +26,7 @@ export const Label: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     } = config as LabelLayoutConfig
 
     const resolvedContent = dataField && data
-        ? useData(data, dataField)
+        ? useDataContext(data, dataField)
         : content
 
     // @ts-ignore until Semantic-UI supports React 18

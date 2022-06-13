@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react"
-import { useData } from "../../hooks"
+import { useDataContext } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
 
 /**
@@ -14,7 +14,7 @@ export const Span: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config,
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
-        ? useData(data, dataField)
+        ? useDataContext(data, dataField)
         : children
 
     return (

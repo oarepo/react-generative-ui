@@ -24,7 +24,7 @@ import clsx from 'clsx';
  * @param field Data fields configuration
  * @returns `props` with values resolved from DataContext
  */
-export const useData = (
+export const useDataContext = (
   data?: LayoutFragmentData,
   field?: DataField,
 ) => {

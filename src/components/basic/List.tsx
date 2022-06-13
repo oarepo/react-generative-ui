@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
-import { useItems, useSeparatedItems } from "../../hooks"
+import { useDataContext, useItems, useSeparatedItems } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
 
@@ -32,7 +32,11 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         ...rest
     } = config as ListLayoutConfig
 
-    const separatedItems = useSeparatedItems(useItems(items, item, data, dataField), separator)
+    const resolvedItems = dataField && data
+        ? useDataContext(data, dataField)
+        : items
+
+    const separatedItems = useSeparatedItems(useItems(resolvedItems, item), separator)
     console.log(separatedItems)
     return <SemanticList {...rest}>
         {separatedItems?.map((listItem, index) => (

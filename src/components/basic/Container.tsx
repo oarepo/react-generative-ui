@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react"
-import { useData } from "../../hooks"
+import { useDataContext } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
 import { Container as SemanticContainer } from "semantic-ui-react"
 
@@ -15,7 +15,7 @@ export const Container: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ co
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
-        ? useData(data, dataField)
+        ? useDataContext(data, dataField)
         : children
 
     return (

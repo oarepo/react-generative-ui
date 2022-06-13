@@ -9,6 +9,7 @@ import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
+import { useDataContext } from "../../hooks";
 
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
@@ -47,7 +48,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         ...rest
     } = config as RowLayoutConfig
 
-
+    const dataContext = useDataContext(data, dataField)
 
     if (children?.length && columns?.length) {
         return <ErrorMessage component={component} {...rest}>
@@ -60,7 +61,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
             {children?.length && children ||
                 columns?.map(
                     (column: LayoutFragmentConfig, index) =>
-                        <ColumnWrapper key={index} {...{ config: column, data }} />
+                        <ColumnWrapper key={index} {...{ config: column, data: dataContext }} />
                 )}
         </Grid.Row>
     )
