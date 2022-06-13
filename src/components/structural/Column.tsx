@@ -48,7 +48,6 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         : items
 
     const columnItems = useItems(resolvedItems, item)
-    console.log('col', dataContext, columnItems)
 
     return (
         <Grid.Column {...rest}>

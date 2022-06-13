@@ -31,7 +31,7 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
     } = config as DividedRowLayoutConfig
 
     const dataContext = useDataContext(data, dataField)
-    const resolvedItems = dataContext != null
+    const resolvedItems = dataField && dataContext != null
         ? dataContext
         : items
 

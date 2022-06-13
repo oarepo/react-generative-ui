@@ -37,7 +37,6 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
         : items
 
     const separatedItems = useSeparatedItems(useItems(resolvedItems, item), separator)
-    console.log(separatedItems)
     return <SemanticList {...rest}>
         {separatedItems?.map((listItem, index) => (
             <SemanticList.Item key={index}>{listItem}</SemanticList.Item>))}

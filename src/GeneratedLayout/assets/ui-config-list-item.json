@@ -44,24 +44,23 @@
                     },
                     {
                         "component": "row",
-                        "separator": {
-                            "component": "separator"
-                        },
                         "items": [
                             {
                                 "component": "list",
                                 "dataField": "creators",
                                 "horizontal": true,
-                                "divided": true,
+                                "separator": ",",
                                 "item": {
                                     "component": "authority"
                                 }
                             },
                             {
+                                "component": "separator"
+                            },
+                            {
                                 "component": "list",
                                 "dataField": "contributors",
                                 "horizontal": true,
-                                "divided": true,
                                 "item": {
                                     "component": "authority",
                                     "className": "text-gray"

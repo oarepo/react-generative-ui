@@ -9,7 +9,7 @@ import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
-import { useDataContext } from "../../hooks";
+import { useDataContext, useItems } from "../../hooks";
 
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
@@ -41,14 +41,19 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
 }) => {
     const {
         component,
-        columnsPerRow = 'equal',
         columns,
         children,
         dataField,
+        items,
+        item,
         ...rest
     } = config as RowLayoutConfig
 
     const dataContext = useDataContext(data, dataField)
+    const resolvedItems = dataField && dataContext != null
+        ? dataContext
+        : items
+    const rowItems = useItems(resolvedItems, item)
 
     if (children?.length && columns?.length) {
         return <ErrorMessage component={component} {...rest}>
@@ -56,13 +61,14 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         </ErrorMessage>
     }
 
+    console.log(rowItems, children, columns)
     return (
-        <Grid.Row columns={columnsPerRow} {...rest}>
-            {children?.length && children ||
+        <Grid.Row columns={3} {...rest}>
+            {children?.length && children || (columns?.length && (
                 columns?.map(
                     (column: LayoutFragmentConfig, index) =>
                         <ColumnWrapper key={index} {...{ config: column, data: dataContext }} />
-                )}
+                )) || rowItems?.map((rowItem, index) => (LayoutFragment({ config: { key: index, ...rowItem }, data: dataContext }))))}
         </Grid.Row>
     )
 }
