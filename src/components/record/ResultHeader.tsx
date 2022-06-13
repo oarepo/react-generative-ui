@@ -39,8 +39,6 @@ export const ResultHeader: React.FC<React.PropsWithChildren<LayoutFragmentProps>
         ? useDataContext(data, dataField)
         : title
 
-    console.log(resolvedTitle, resolvedSelfLink, data)
-
     return <Header as={as} {...resolvedSelfLink && ({ ...{ href: resolvedSelfLink } })} {...rest} >
         {resolvedTitle}
     </Header>

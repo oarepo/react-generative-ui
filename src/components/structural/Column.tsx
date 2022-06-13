@@ -43,17 +43,17 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     } = config as ColumnLayoutConfig
 
     const dataContext = useDataContext(data, dataField)
-    const resolvedItems = dataContext != null
+    const resolvedItems = dataField && dataContext != null
         ? dataContext
         : items
 
-    console.log(resolvedItems, items, config)
-
     const columnItems = useItems(resolvedItems, item)
+    console.log('col', dataContext, columnItems)
+
     return (
         <Grid.Column {...rest}>
             {columnItems?.map((columnItem: LayoutFragmentConfig, index: number) => (
-                LayoutFragment({ config: { key: index, ...columnItem, data: dataContext } })
+                LayoutFragment({ config: { key: index, ...columnItem }, data: dataContext })
             ))}
         </Grid.Column>
     )

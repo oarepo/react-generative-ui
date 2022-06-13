@@ -15,10 +15,8 @@ import clsx from 'clsx';
 
 /**
  * Uses data field configuration to query data
- * for respectful values.
- *
- * If any of `props.children` or `props.content` was specified,
- * it will be replaced by resolved children data value.
+ * for respectful values. If no field is passed
+ * it simply returns all data.
  * 
  * @param data Current Data context object
  * @param field Data fields configuration
@@ -33,7 +31,7 @@ export const useDataContext = (
   } else if (field?.path || field?.default) {
     return _get(data, field?.path || '', field?.default || '');
   }
-  return null
+  return data
 };
 
 
