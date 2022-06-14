@@ -60,7 +60,6 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         ? dataContext
         : items || children
 
-    console.log('rwo', itemsData)
     return (
         <Grid.Row columns={columns?.length as SemanticWIDTHS} {...rest}>
             {itemsData?.map((itemData: LayoutFragmentConfig, index: number) => (

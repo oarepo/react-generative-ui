@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { useDataContext, useItems, useSeparatedItems } from "../../hooks";
+import { useDataContext, useSeparatedItems } from "../../hooks";
 import { LayoutFragment } from "../../GeneratedLayout";
 
 
@@ -35,7 +35,7 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         ? dataContext
         : items
 
-    const separatedItems = useSeparatedItems(useItems(resolvedItems, item), separator)
+    const separatedItems = useSeparatedItems(itemsData, separator)
 
     return LayoutFragment({
         config: {
@@ -46,3 +46,5 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         data: dataContext,
     })
 }
+
+DividedRow.prototype.takesArray = true

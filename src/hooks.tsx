@@ -8,10 +8,10 @@ import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData, Layo
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
 import _mapValues from 'lodash/mapValues'
-import { LayoutFragment } from './GeneratedLayout';
 import React from 'react';
 import { ErrorMessage } from './components';
 import clsx from 'clsx';
+import { GlobalDataContext } from './context';
 
 /**
  * Uses data field configuration to query data
@@ -33,6 +33,15 @@ export const useDataContext = (
   }
   return data
 };
+
+
+export const useGlobalDataContext = () => {
+  const context = React.useContext(GlobalDataContext)
+  if (context === undefined) {
+    throw new Error('useGlobalDataContext must be used within a context provider')
+  }
+  return context
+}
 
 
 export const useSeparatedItems = (

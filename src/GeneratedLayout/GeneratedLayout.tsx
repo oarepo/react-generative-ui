@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import { ComponentMap, LayoutFragmentConfig, LayoutGeneratorProps } from '../types';
-import { AvailableComponents, defaultComponents } from '../context';
+import { AvailableComponents, defaultComponents, GlobalDataContextProvider } from '../context';
 import { LayoutFragment } from './LayoutFragment';
 import _isArray from 'lodash/isArray'
 
@@ -18,11 +18,19 @@ export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProp
         ...defaultComponents
     } as ComponentMap
 
+    const LayoutFragments = (_isArray(layout) ? layout : [layout])
+        .map((fragmentConfig: LayoutFragmentConfig, key: number) =>
+            LayoutFragment({
+                config: { ...fragmentConfig, key },
+                data
+            })
+        )
+
     return (
         <AvailableComponents.Provider value={availableComponents}>
-            {(_isArray(layout) ? layout : [layout]).map((fragmentConfig: LayoutFragmentConfig, key: number) =>
-                LayoutFragment({ config: { ...fragmentConfig, key }, data })
-            )}
+            <GlobalDataContextProvider value={data}>
+                {LayoutFragments}
+            </GlobalDataContextProvider>
         </AvailableComponents.Provider>
     )
 }
