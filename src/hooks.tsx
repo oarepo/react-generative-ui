@@ -12,6 +12,7 @@ import React from 'react';
 import { ErrorMessage } from './components';
 import clsx from 'clsx';
 import { GlobalDataContext } from './context';
+import { dataMatchesItems } from './utils';
 
 /**
  * Uses data field configuration to query data
@@ -34,6 +35,14 @@ export const useDataContext = (
   return data
 };
 
+
+export const useArrayDataContext = (
+  data: any,
+  array: any[],
+  index: number
+) => {
+  return dataMatchesItems(data, array) ? data[index] : data
+}
 
 export const useGlobalDataContext = () => {
   const context = React.useContext(GlobalDataContext)
