@@ -9,7 +9,7 @@ import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
 import { RowLayoutConfig, RowWrapper } from "./Row";
 import { ColumnLayoutConfig, ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
-import { useDataContext } from "../../hooks";
+import { useArrayDataContext, useDataContext } from "../../hooks";
 
 export interface GridLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
@@ -41,17 +41,31 @@ export const Grid: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
 
     const dataContext = useDataContext(data, dataField)
 
-    if (columns?.length) {
+    const Columns = columns?.map(
+        (column, columnIndex) => (
+            <ColumnWrapper {...{
+                key: columnIndex,
+                config: column,
+                data: useArrayDataContext(dataContext, columns, columnIndex),
+            }} />
+        ))
+
+    const Rows = rows?.map(
+        (row, rowIndex) => (
+            <RowWrapper {...{
+                key: rowIndex,
+                config: row,
+                data: useArrayDataContext(dataContext, rows, rowIndex),
+            }} />
+        ))
+
+    if (Columns?.length) {
         return <SemanticGrid key={key} container={container} columns={columnsPerRow} {...rest}>
-            {columns?.map((column, columnIndex) => (
-                <ColumnWrapper {...{ config: column, data: dataContext, key: columnIndex }} />
-            ))}
+            {Columns}
         </SemanticGrid>
-    } else if (rows?.length) {
+    } else if (Rows?.length) {
         return <SemanticGrid key={key} container={container} {...rest}>
-            {rows?.map((row, index) => (
-                <RowWrapper {...{ config: row, data: dataContext, key: index }} />
-            ))}
+            {Rows}
         </SemanticGrid>
     } else {
         return <ErrorMessage key={key} component='grid'>Expected either rows or columns</ErrorMessage>

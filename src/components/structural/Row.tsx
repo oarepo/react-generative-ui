@@ -9,8 +9,8 @@ import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
-import { useDataContext } from "../../hooks";
-
+import { useArrayDataContext, useDataContext } from "../../hooks";
+import _isArray from 'lodash/isArray'
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
@@ -42,6 +42,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     const {
         component,
         columns,
+        columnsPerRow,
         children,
         dataField,
         items,
@@ -56,21 +57,30 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     }
 
     const dataContext = useDataContext(data, dataField)
-    const itemsData = dataField && dataContext != null
+    const dataItems = dataField && dataContext != null
         ? dataContext
         : items || children
 
+    const Items = dataItems?.map(
+        (rowItem: LayoutFragmentConfig, index: number) => (
+            LayoutFragment({
+                config: { key: index, ...rowItem },
+                data: useArrayDataContext(dataContext, dataItems, index)
+            })
+        ))
+
+    const Columns = columns?.map(
+        (columnConfig: LayoutFragmentConfig, index: number) =>
+            <ColumnWrapper key={index} {...{
+                config: columnConfig,
+                data: useArrayDataContext(dataContext, columns, index)
+            }} />
+    )
+
     return (
-        <Grid.Row columns={columns?.length as SemanticWIDTHS} {...rest}>
-            {itemsData?.map((itemData: LayoutFragmentConfig, index: number) => (
-                LayoutFragment({ config: { key: index, ...item }, data: itemData })
-            ))}
-            {columns?.length && (
-                columns?.map(
-                    (columnConfig: LayoutFragmentConfig, index: number) =>
-                        <ColumnWrapper key={index} {...{ config: columnConfig, data: dataContext }} />
-                )
-            )}
+        <Grid.Row columns={columnsPerRow || columns?.length as SemanticWIDTHS} {...rest}>
+            {Items?.length && Items}
+            {Columns?.length && Columns}
         </Grid.Row>
     )
 }

@@ -7,7 +7,9 @@ import * as React from "react"
 import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { useDataContext } from "../../hooks"
+import { useArrayDataContext, useDataContext } from "../../hooks"
+import _isArray from 'lodash/isArray'
+import { dataMatchesItems } from "../../utils"
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 
@@ -20,7 +22,6 @@ export const ColumnWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>>
         ? { component: 'column', ...(items ? { items: items } : { items: [config] }) }
         : config
 
-    console.log('wrap', wrapperConfig, data)
     return LayoutFragment({
         config: wrapperConfig,
         data,
@@ -38,22 +39,25 @@ export const Column: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     const {
         component,
         items,
-        item = { component: 'span' },
         dataField,
         ...rest
     } = config as ColumnLayoutConfig
 
     const dataContext = useDataContext(data, dataField)
-    const itemsData = dataField && dataContext != null
+    const dataItems = dataField && dataContext != null
         ? dataContext
         : items
 
-    console.log(itemsData, dataContext)
+    const ColumnItems = dataItems?.map((columnItem: LayoutFragmentConfig, index: number) => (
+        LayoutFragment({
+            config: { key: index, ...columnItem },
+            data: useArrayDataContext(dataContext, dataItems, index)
+        })
+    ))
+
     return (
         <Grid.Column {...rest}>
-            {itemsData?.map((itemData: LayoutFragmentConfig, index: number) => (
-                LayoutFragment({ config: { key: index, ...item }, data: itemData })
-            ))}
+            {ColumnItems}
         </Grid.Column>
     )
 }

@@ -12,7 +12,7 @@ type State = LayoutFragmentData
 type GlobalDataContextProviderProps = { children: React.ReactNode, value?: LayoutFragmentData }
 
 
-function globalDataReducer (state: State, action: Action) {
+function globalDataReducer (_state: State, action: Action) {
   switch (action.type) {
     case 'set': {
       return action.value
@@ -28,7 +28,6 @@ function GlobalDataContextProvider ({ children, value }: GlobalDataContextProvid
   const [state, dispatch] = React.useReducer(globalDataReducer, value || {})
   const stateValue = { state, dispatch }
 
-  console.log('state val', value, stateValue)
   return (
     <GlobalDataContext.Provider value={stateValue}>
       {children}
