@@ -14,7 +14,7 @@ export const Span: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config,
     const { component, dataField, children, ...rest } = config
 
     const dataContext = useDataContext(data, dataField)
-    const resolvedChildren = dataContext != null
+    const resolvedChildren = dataField && dataContext != null
         ? dataContext
         : children
     return (
