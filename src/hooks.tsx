@@ -13,7 +13,6 @@ import { ErrorMessage } from './components';
 import clsx from 'clsx';
 import { GlobalDataContext } from './context';
 import { dataMatchesItems } from './utils';
-import { LayoutFragment } from './GeneratedLayout';
 
 
 /**
