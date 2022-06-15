@@ -5,7 +5,7 @@
 
 import * as React from "react"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-import { useDataContext, useSeparatedItems } from "../../hooks";
+import { useDataContext, useSeparator } from "../../hooks";
 import { LayoutFragment } from "../../GeneratedLayout";
 
 
@@ -35,12 +35,14 @@ export const DividedRow: React.FC<React.PropsWithChildren<LayoutFragmentProps>> 
         ? dataContext
         : items
 
-    const separatedItems = useSeparatedItems(itemsData, separator)
+    const rowChildren = itemsData.flatMap((rowItem: LayoutFragmentConfig[], index: number) => (
+        index > 0 ? [useSeparator(separator), rowItem] : rowItem
+    ))
 
     return LayoutFragment({
         config: {
             component: 'row',
-            children: separatedItems,
+            children: rowChildren,
             ...rest
         },
         data: dataContext,

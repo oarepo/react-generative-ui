@@ -35,3 +35,16 @@ const config = {
 }
 
 Default.args = { config };
+
+export const StringItems = Template.bind({});
+StringItems.args = {
+  config: {
+    component: 'row',
+    columnsPerRow: 10,
+    items: [
+      'this is item #1',
+      'this is item #2',
+      'this is item #3'
+    ]
+  }
+}

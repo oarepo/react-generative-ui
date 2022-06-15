@@ -27,6 +27,7 @@ import {
   Container,
   Segment,
   Button,
+  Link,
 } from '../components';
 import { ComponentMap } from '../types';
 
@@ -42,6 +43,7 @@ export const defaultComponents = {
   'divided-row': DividedRow,
   list: List,
   label: Label,
+  link: Link,
   header: Header,
   raw: Raw,
   grid: Grid,

@@ -9,7 +9,7 @@ import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
-import { useArrayDataContext, useDataContext } from "../../hooks";
+import { useArrayDataContext, useDataContext, useItems } from "../../hooks";
 import _isArray from 'lodash/isArray'
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
@@ -20,10 +20,11 @@ export interface RowLayoutConfig extends LayoutFragmentConfig {
 }
 
 export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
-    const { component, ...rest } = config
+    const { component, stretched = true, ...rest } = config
     return LayoutFragment({
         config: {
             component: component == undefined || component !== 'row' ? 'row' : component,
+            stretched,
             ...rest
         },
         data,
@@ -61,7 +62,7 @@ export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
         ? dataContext
         : items || children
 
-    const Items = dataItems?.map(
+    const Items = useItems(dataItems, item)?.map(
         (rowItem: LayoutFragmentConfig, index: number) => (
             LayoutFragment({
                 config: { key: index, ...rowItem },

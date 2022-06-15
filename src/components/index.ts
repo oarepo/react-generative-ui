@@ -28,3 +28,4 @@ export * from './basic/Span';
 export * from './basic/Container';
 export * from './basic/Segment';
 export * from './basic/Button';
+export * from './basic/Link';

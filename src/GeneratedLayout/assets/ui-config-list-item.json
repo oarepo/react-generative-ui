@@ -43,7 +43,11 @@
                         "size": "large"
                     },
                     {
-                        "component": "row",
+                        "component": "divided-row",
+                        "separator": {
+                            "component": "separator",
+                            "double": true
+                        },
                         "items": [
                             {
                                 "component": "list",
@@ -55,10 +59,6 @@
                                 "item": {
                                     "component": "authority"
                                 }
-                            },
-                            {
-                                "component": "separator",
-                                "double": true
                             },
                             {
                                 "component": "list",
@@ -75,7 +75,7 @@
                         ]
                     },
                     {
-                        "component": "row",
+                        "component": "divided-row",
                         "separator": {
                             "component": "separator"
                         },
@@ -112,7 +112,7 @@
                                 "divided": true,
                                 "dataField": "keywords",
                                 "item": {
-                                    "component": "a",
+                                    "component": "link",
                                     "href": "#"
                                 }
                             }

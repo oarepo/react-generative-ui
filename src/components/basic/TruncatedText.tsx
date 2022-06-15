@@ -37,11 +37,8 @@ export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps
         lines = 1,
         ellipsis = "…",
         expandToggle = {
-            component: 'button',
-            as: 'a',
+            component: 'link',
             href: '#',
-            compact: true,
-            basic: true,
             children: `> Show ${!expanded ? 'more' : 'less'}`
         },
         ...rest
