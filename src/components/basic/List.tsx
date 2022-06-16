@@ -3,12 +3,13 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
+import clsx from "clsx"
 import * as React from "react"
 import { List as SemanticList } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { useDataContext, useItems, useSeparator } from "../../hooks"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
-
+import _isString from 'lodash/isString'
 
 export interface ListLayoutConfig extends LayoutFragmentConfig {
     separator?: LayoutFragmentConfig | string
@@ -45,7 +46,14 @@ export const List: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
 
     const ListItems = listItems?.map(
         (listItem: LayoutFragmentConfig, index: number) => (
-            <SemanticList.Item key={index}>
+            <SemanticList.Item
+                className={clsx(
+                    'oarepo',
+                    {
+                        'oarepo-separated': separator,
+                        'oarepo-separated-text': _isString(separator)
+                    })}
+                key={index}>
                 {LayoutFragment({ config: listItem })}
             </SemanticList.Item>
         ))

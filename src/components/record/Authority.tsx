@@ -56,7 +56,6 @@ export const Authority: React.FC<React.PropsWithChildren<LayoutFragmentProps>> =
     } = dataField && data
             ? dataContext
             : { fullName, authorityIdentifiers, role, ...rest }
-    console.log('at', dataContext)
 
     const Wrapper = (props: React.PropsWithChildren<{}>) => (
         LayoutFragment({
