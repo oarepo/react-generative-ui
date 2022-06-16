@@ -1,10 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { Row } from './Row';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../../GeneratedUI';
 import { Grid } from 'semantic-ui-react';
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Structural/Grid/Row',
@@ -17,9 +16,9 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => (
+const Template: Story<LayoutFragmentProps> = (args) => (
   <Grid>
-    <Row  {...args} />;
+    <Row  {...args} />
   </Grid>
 )
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
@@ -35,4 +34,17 @@ const config = {
   ]
 }
 
-Default.args = { config, renderUIFragment: UIFragment };
+Default.args = { config };
+
+export const StringItems = Template.bind({});
+StringItems.args = {
+  config: {
+    component: 'row',
+    columnsPerRow: 10,
+    items: [
+      'this is item #1',
+      'this is item #2',
+      'this is item #3'
+    ]
+  }
+}

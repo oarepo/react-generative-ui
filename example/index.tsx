@@ -8,7 +8,7 @@ const App = () => {
     <div>
       <GeneratedUI
         layout={[
-          { component: 'h1', data: 'hello' }
+          { component: 'header', content: 'hello' }
         ]}
         data={{ hello: 'Hello world' }}
         components={{}} />

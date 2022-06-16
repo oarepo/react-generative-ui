@@ -11,21 +11,29 @@ import {
   Column,
   Raw,
   Row,
-  SemanticFallback,
   TruncatedText,
   List,
+  Label,
   Placeholder,
   Grid,
   Item,
+  Span,
   Icon,
   DefenseStatus,
   Separator,
   ResultHeader,
   DividedRow,
+  Header,
+  Container,
+  Segment,
+  Button,
+  Link,
 } from '../components';
 import { ComponentMap } from '../types';
 
 export const defaultComponents = {
+  container: Container,
+  button: Button,
   authority: Authority,
   'authority-identifier': AuthorityIdentifier,
   'defense-status': DefenseStatus,
@@ -34,14 +42,18 @@ export const defaultComponents = {
   row: Row,
   'divided-row': DividedRow,
   list: List,
+  label: Label,
+  link: Link,
+  header: Header,
   raw: Raw,
   grid: Grid,
+  span: Span,
   separator: Separator,
   'icon': Icon,
   placeholder: Placeholder,
   item: Item,
   'truncated-text': TruncatedText,
-  _fallback: SemanticFallback
+  'segment': Segment
 } as ComponentMap;
 
 export const AvailableComponents = React.createContext(defaultComponents);

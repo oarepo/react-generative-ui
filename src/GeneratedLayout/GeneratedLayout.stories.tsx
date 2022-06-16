@@ -1,12 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { GeneratedUI } from '.';
-import { UIFragmentContext, UIGeneratorProps } from '../types';
+import { GeneratedLayout } from '.';
+import { LayoutFragmentProps, LayoutGeneratorProps } from '../types';
 import 'semantic-ui-css/semantic.min.css'
 
 const meta: Meta = {
-  title: 'Views/Generated',
-  component: GeneratedUI,
+  title: 'Views/Generated Layout',
+  component: GeneratedLayout,
   parameters: {
     controls: { expanded: true },
   },
@@ -14,7 +14,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<UIGeneratorProps> = (args) => <GeneratedUI {...args} />;
+const Template: Story<LayoutGeneratorProps> = (args) => <GeneratedLayout {...args} />;
 
 export const Simple = Template.bind({});
 Simple.args = {
@@ -65,7 +65,7 @@ ResultListItem.args = { data, layout };
 
 export const UserProvidedComponent = Template.bind({});
 
-const MyCoolComponent: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({ config }) => {
+const MyCoolComponent: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config }) => {
   const { children } = config
   return (
     <>

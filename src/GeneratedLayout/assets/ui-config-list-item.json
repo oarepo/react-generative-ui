@@ -43,16 +43,19 @@
                         "size": "large"
                     },
                     {
-                        "component": "row",
+                        "component": "divided-row",
                         "separator": {
-                            "component": "separator"
+                            "component": "separator",
+                            "double": true
                         },
                         "items": [
                             {
                                 "component": "list",
                                 "dataField": "creators",
                                 "horizontal": true,
-                                "divided": true,
+                                "separator": {
+                                    "component": "separator"
+                                },
                                 "item": {
                                     "component": "authority"
                                 }
@@ -61,7 +64,9 @@
                                 "component": "list",
                                 "dataField": "contributors",
                                 "horizontal": true,
-                                "divided": true,
+                                "separator": {
+                                    "component": "separator"
+                                },
                                 "item": {
                                     "component": "authority",
                                     "className": "text-gray"
@@ -70,7 +75,7 @@
                         ]
                     },
                     {
-                        "component": "row",
+                        "component": "divided-row",
                         "separator": {
                             "component": "separator"
                         },
@@ -107,7 +112,7 @@
                                 "divided": true,
                                 "dataField": "keywords",
                                 "item": {
-                                    "component": "a",
+                                    "component": "link",
                                     "href": "#"
                                 }
                             }

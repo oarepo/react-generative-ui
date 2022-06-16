@@ -4,13 +4,14 @@
 // https://opensource.org/licenses/MIT
 
 import React, { FC } from "react";
-import { UILayoutConfig, UIFragmentContext } from "../../types";
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types";
 import { Grid as SemanticGrid, SemanticWIDTHS } from 'semantic-ui-react'
 import { RowLayoutConfig, RowWrapper } from "./Row";
 import { ColumnLayoutConfig, ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
+import { useArrayDataContext, useDataContext } from "../../hooks";
 
-export interface GridLayoutConfig extends UILayoutConfig {
+export interface GridLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
     columnsPerRow?: SemanticWIDTHS | "equal",
     /* Layout definition of column items */
@@ -23,32 +24,50 @@ export interface GridLayoutConfig extends UILayoutConfig {
  * Component putting its children items into separate columns.
  * See https://react.semantic-ui.com/collections/grid/ for available props.
  */
-export const Grid: FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Grid: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
 }) => {
     const {
         component,
         columnsPerRow = 'equal',
         container = true,
         columns,
+        dataField,
         rows,
+        key,
         ...rest
     } = config as GridLayoutConfig
 
-    if (columns?.length) {
-        return <SemanticGrid container={container} columns={columnsPerRow} {...rest}>
-            {columns?.map((column, columnIndex) => (
-                <ColumnWrapper key={columnIndex} renderUIFragment={renderUIFragment} {...column} />
-            ))}
+    const dataContext = useDataContext(data, dataField)
+
+    const Columns = columns?.map(
+        (column, columnIndex) => (
+            <ColumnWrapper {...{
+                key: columnIndex,
+                config: column,
+                data: useArrayDataContext(dataContext, columns, columnIndex),
+            }} />
+        ))
+
+    const Rows = rows?.map(
+        (row, rowIndex) => (
+            <RowWrapper {...{
+                key: rowIndex,
+                config: row,
+                data: useArrayDataContext(dataContext, rows, rowIndex),
+            }} />
+        ))
+
+    if (Columns?.length) {
+        return <SemanticGrid key={key} container={container} columns={columnsPerRow} {...rest}>
+            {Columns}
         </SemanticGrid>
-    } else if (rows?.length) {
-        return <SemanticGrid container={container} {...rest}>
-            {rows?.map((row, index) => (
-                <RowWrapper key={index} renderUIFragment={renderUIFragment} {...row} />
-            ))}
+    } else if (Rows?.length) {
+        return <SemanticGrid key={key} container={container} {...rest}>
+            {Rows}
         </SemanticGrid>
     } else {
-        return <ErrorMessage component='grid'>Expected either rows or columns</ErrorMessage>
+        return <ErrorMessage key={key} component='grid'>Expected either rows or columns</ErrorMessage>
     }
 }

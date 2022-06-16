@@ -14,7 +14,6 @@ export * from './structural/Grid';
 export * from './structural/DividedRow';
 
 export * from './basic/ErrorMessage';
-export * from './basic/SemanticFallback';
 export * from './basic/List';
 export * from './basic/TruncatedText';
 export * from './basic/Raw';
@@ -23,3 +22,10 @@ export * from './basic/Item';
 export * from './basic/Icon';
 export * from './basic/Separator';
 export * from './basic/Icon';
+export * from './basic/Label';
+export * from './basic/Header';
+export * from './basic/Span';
+export * from './basic/Container';
+export * from './basic/Segment';
+export * from './basic/Button';
+export * from './basic/Link';

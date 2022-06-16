@@ -4,11 +4,11 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UIFragmentContext, UILayoutConfig } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { Label, SemanticCOLORS } from "semantic-ui-react"
 import clsx from 'clsx'
 
-export interface SeparatorLayoutConfig extends UILayoutConfig {
+export interface SeparatorLayoutConfig extends LayoutFragmentConfig {
     double?: boolean,
     color: SemanticCOLORS
 }
@@ -16,7 +16,7 @@ export interface SeparatorLayoutConfig extends UILayoutConfig {
 /**
  * Longer text that will be displayed truncated, with an option to show more.
  */
-export const Separator: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Separator: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
 }) => {
     const {
@@ -30,7 +30,7 @@ export const Separator: React.FC<React.PropsWithChildren<UIFragmentContext>> = (
     // @ts-ignore until Semantic-UI fully supports newest React
     return <Label
         basic
-        className={clsx('oarepo-separator', color, className)}
+        className={clsx(color, className)}
         {...rest}>
         {double ? '‖' : '❙'}
     </Label>

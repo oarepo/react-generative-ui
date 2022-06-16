@@ -4,21 +4,18 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import {
     Icon as SemanticIcon,
     Image as SemanticImage,
-    ImageProps,
     SemanticICONS,
     StrictImageProps
 } from "semantic-ui-react"
-import _times from 'lodash/times'
-import { useResolvedData } from "../../hooks"
-import { DataContext } from "../../context"
+import { useDataContext } from "../../hooks"
 import { ErrorMessage } from "./ErrorMessage"
 
 
-export interface CustomIconLayoutConfig extends UILayoutConfig {
+export interface CustomIconLayoutConfig extends LayoutFragmentConfig {
     /** Mapping used to translate name prop to actual icon name/image source */
     iconSet?: { [key: string]: SemanticICONS | StrictImageProps }
     /** Icon name */
@@ -32,8 +29,9 @@ export interface CustomIconLayoutConfig extends UILayoutConfig {
  * An Icon, that renders either as a custom
  * SVG graphic or as a built-in Semantic-UI Icon.
  */
-export const Icon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Icon: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
+    data,
 }) => {
     const {
         component,
@@ -48,8 +46,8 @@ export const Icon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
         return iconSet ? iconSet[name] : name
     }
 
-    const resolvedName = dataField
-        ? useResolvedData(React.useContext(DataContext), dataField)
+    const resolvedName = dataField && data
+        ? useDataContext(data, dataField)
         : name
 
     const iconData = _getIcon(resolvedName)
@@ -62,21 +60,11 @@ export const Icon: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
                 name={iconData as SemanticICONS}
                 {...rest} />
         } else {
-            const {
-                inline = true,
-                size = 'tiny',
-                ...imageProps
-            } = iconData as ImageProps
-
             return <SemanticImage
-                className={`oarepo-ui-image-icon${className ? ' ' + className : ''}`}
-                inline={inline}
-                size={size}
-                {...rest}
-                {...imageProps} />
+                className={className}
+                {...iconData}
+                {...rest} />
         }
     }
-    return (
-        <ErrorMessage component={component}>Unknown icon: {name}.</ErrorMessage>
-    )
+    return <ErrorMessage component={component}>Unknown icon: {name}.</ErrorMessage>
 }

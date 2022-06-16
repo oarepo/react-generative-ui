@@ -1,9 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { TruncatedText } from './TruncatedText';
-import { UIFragmentContext } from '../../types';
 import 'semantic-ui-css/semantic.min.css'
-import { UIFragment } from '../../GeneratedUI';
+import { LayoutFragmentProps } from '../../types';
 
 const meta: Meta = {
   title: 'Basic Elements/TruncatedText',
@@ -16,7 +15,7 @@ const meta: Meta = {
 export default meta;
 
 
-const Template: Story<UIFragmentContext> = (args) => <TruncatedText  {...args} />;
+const Template: Story<LayoutFragmentProps> = (args) => <TruncatedText  {...args} />;
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -27,7 +26,7 @@ Default.args = {
     component: 'truncated-text',
     lines: 2,
     text: 'Tis text is truncated, '.repeat(100)
-  }, renderUIFragment: UIFragment
+  }
 };
 
 export const Shorter = Template.bind({});
@@ -36,7 +35,7 @@ Shorter.args = {
     component: 'truncated-text',
     lines: 4,
     text: 'Tis textt is too short to be truncated'
-  }, renderUIFragment: UIFragment
+  }
 }
 
 export const CustomExpand = Template.bind({});
@@ -49,5 +48,5 @@ CustomExpand.args = {
       component: 'button',
       children: 'Toggle'
     }
-  }, renderUIFragment: UIFragment
+  }
 }

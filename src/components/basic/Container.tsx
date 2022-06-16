@@ -3,14 +3,15 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, Fragment } from "react"
+import React, { FC } from "react"
 import { useDataContext } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
+import { Container as SemanticContainer } from "semantic-ui-react"
 
 /**
- * A Fragment component outputing raw data as its children.
+ * A Semantic-UI container
  */
-export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
+export const Container: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, dataField, children, ...rest } = config
 
     const resolvedChildren = dataField && data
@@ -18,8 +19,8 @@ export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, 
         : children
 
     return (
-        <Fragment {...rest}>
+        <SemanticContainer {...rest}>
             {resolvedChildren}
-        </Fragment>
+        </SemanticContainer>
     )
 }

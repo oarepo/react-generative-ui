@@ -5,25 +5,29 @@
 
 import * as React from "react"
 import { Grid, SemanticWIDTHS } from "semantic-ui-react"
-import { UILayoutConfig, UIFragmentContext } from "../../types"
-import _isString from 'lodash/isString';
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
+import { LayoutFragment } from "../../GeneratedLayout";
+import { useArrayDataContext, useDataContext, useItems } from "../../hooks";
 
-
-export interface RowLayoutConfig extends UILayoutConfig {
+export interface RowLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */
     columnsPerRow?: SemanticWIDTHS | "equal",
     /* Layout definition of column items inside row */
-    columns?: UILayoutConfig[],
+    columns?: LayoutFragmentConfig[],
 }
 
-export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
-    const { component, key, ...rest } = props
-    if (!component || component !== 'row') {
-        return renderUIFragment({ component: 'row', ...rest }, key)
-    }
-    return renderUIFragment(props, key)
+export const RowWrapper: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({ config, data }) => {
+    const { component, stretched = true, ...rest } = config
+    return LayoutFragment({
+        config: {
+            component: component == undefined || component !== 'row' ? 'row' : component,
+            stretched,
+            ...rest
+        },
+        data,
+    })
 }
 
 
@@ -31,34 +35,52 @@ export const RowWrapper = ({ renderUIFragment, ...props }: any) => {
  * Component rendering its children items in a flexbox row.
  * Items can optionally be separated by a separator component.
  */
-export const Row: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const Row: React.FC<React.PropsWithoutRef<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
 }) => {
     const {
         component,
-        columnsPerRow = 'equal',
         columns,
+        columnsPerRow,
         children,
+        dataField,
+        items,
+        item = { component: 'span' },
         ...rest
     } = config as RowLayoutConfig
 
-    if (children?.length && columns?.length) {
-        return <ErrorMessage component={component}>
-            Only one of 'children' or 'columns' could be specified.
+    if ((children?.length && columns?.length) || (children?.length && items?.length) || (columns?.length && items?.length)) {
+        return <ErrorMessage component={component} {...rest}>
+            Only one of 'children', 'columns' or 'items' could be specified.
         </ErrorMessage>
     }
 
+    const dataContext = useDataContext(data, dataField)
+    const dataItems = dataField && dataContext != null
+        ? dataContext
+        : items || children
+
+    const Items = useItems(dataItems, item)?.map(
+        (rowItem: LayoutFragmentConfig, index: number) => (
+            LayoutFragment({
+                config: { key: index, ...rowItem },
+                data: useArrayDataContext(dataContext, dataItems, index)
+            })
+        ))
+
+    const Columns = columns?.map(
+        (columnConfig: LayoutFragmentConfig, index: number) =>
+            <ColumnWrapper key={index} {...{
+                config: columnConfig,
+                data: useArrayDataContext(dataContext, columns, index)
+            }} />
+    )
+
     return (
-        <Grid.Row columns={columnsPerRow} {...rest}>
-            {children?.length && children ||
-                columns?.map(
-                    (column: UILayoutConfig, index) =>
-                        <ColumnWrapper
-                            key={index}
-                            renderUIFragment={renderUIFragment}
-                            {...column} />
-                )}
+        <Grid.Row columns={columnsPerRow || columns?.length as SemanticWIDTHS} {...rest}>
+            {Items?.length && Items}
+            {Columns?.length && Columns}
         </Grid.Row>
     )
 }

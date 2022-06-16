@@ -4,52 +4,58 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { DataContext } from "../../context"
-import { useResolvedData } from "../../hooks"
-import { UIFragmentContext, UILayoutConfig } from "../../types"
+import { LayoutFragment } from "../../GeneratedLayout"
+import { useDataContext } from "../../hooks"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 
-export interface DefenseStatusLayoutConfig extends UILayoutConfig {
+export interface DefenseStatusLayoutConfig extends LayoutFragmentConfig {
     dateDefended?: Date
     defended: boolean,
-    defendedComponent?: UILayoutConfig,
-    notDefendedComponent?: UILayoutConfig
+    defendedComponent?: LayoutFragmentConfig,
+    notDefendedComponent?: LayoutFragmentConfig
 }
 
 /**
  * Displays a status of work (thesis) defense.
 */
-export const DefenseStatus: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const DefenseStatus: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
 }) => {
     const {
         component,
         dataField,
         defended,
         dateDefended,
-        defendedComponent = { component: 'span', 'children': '(obhájeno)', style: { color: 'green' } },
+        defendedComponent = { component: 'span', 'children': '(obhájeno)' },
         notDefendedComponent = { component: 'span', 'children': '(neobhájeno)', style: { color: 'red' } },
         ...rest
     } = config as DefenseStatusLayoutConfig
 
-    const Defended = (props: React.PropsWithChildren<{}>) => renderUIFragment({
-        ...defendedComponent,
-        // TODO: maybe support rendering date?
-        // dateDefended: resolvedDateDefended,
-        ...props
+    const Defended = (props: React.PropsWithChildren<{}>) => LayoutFragment({
+        config: {
+            ...defendedComponent,
+            // TODO: maybe support rendering date?
+            // dateDefended: resolvedDateDefended,
+            ...props
+        },
+        data,
     })
 
-    const NotDefended = (props: React.PropsWithChildren<{}>) => renderUIFragment({
-        ...notDefendedComponent,
-        ...props
+    const NotDefended = (props: React.PropsWithChildren<{}>) => LayoutFragment({
+        config: {
+            ...notDefendedComponent,
+            ...props
+        },
+        data,
     })
 
     const {
         defended: resolvedDefended,
         // TODO: support rendering date
         // dateDefended: resolvedDateDefended
-    } = dataField
-            ? useResolvedData(React.useContext(DataContext), dataField)
+    } = dataField && data
+            ? useDataContext(data, dataField)
             : { defended }
 
     // @ts-ignore 2559

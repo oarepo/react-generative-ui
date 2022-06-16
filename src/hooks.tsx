@@ -3,55 +3,99 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { DataField, UILayoutConfig } from './types';
+import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData, LayoutFragmentProps } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
 import _mapValues from 'lodash/mapValues'
+import React from 'react';
+import { ErrorMessage } from './components';
+import clsx from 'clsx';
+import { GlobalDataContext } from './context';
+import { dataMatchesItems } from './utils';
+
 
 /**
- * Uses data field configuration to query DataContext
- * for respectful values.
- *
- * If any of `props.children` or `props.content` was specified,
- * it will be replaced by resolved children data value.
+ * Uses data field configuration to query data
+ * for respectful values. If no field is passed
+ * it simply returns all data.
  * 
  * @param data Current Data context object
  * @param field Data fields configuration
  * @returns `props` with values resolved from DataContext
  */
-export const useResolvedData = (
-  data: { [key: string]: any },
-  field: DataField,
+export const useDataContext = (
+  data?: LayoutFragmentData,
+  field?: DataField,
 ) => {
   if (_isString(field)) {
     return _get(data, field, '');
-  } else if (field.path || field.default) {
-    return _get(data, field.path || '', field.default || '');
+  } else if (field?.path || field?.default) {
+    return _get(data, field?.path || '', field?.default || '');
   }
+  return data
 };
 
 
-export const useSeparatedItems = (
-  render: Function,
-  items: any[],
-  separator?: string | UILayoutConfig) => {
+export const useArrayDataContext = (
+  data: any,
+  array: any[],
+  index: number
+) => {
+  return dataMatchesItems(data, array) ? data[index] : data
+}
 
-  if (!separator) {
-    return items.map((item, index) => render(item, index))
+export const useGlobalDataContext = () => {
+  const context = React.useContext(GlobalDataContext)
+  if (context === undefined) {
+    throw new Error('useGlobalDataContext must be used within a context provider')
   }
+  return context
+}
 
-  const separatorComponent = (index: number) => (
-    _isString(separator)
-      ? render({ component: 'raw', children: separator }, `separator-${index}`)
-      : render(separator, `separator-${index}`)
-  )
 
-  return items.flatMap(
-    (item, index, array) => (
-      index !== array.length - 1
-        ? [render(item, index), separatorComponent(index)]
-        : render(item, index)
-    ))
+export const useItems = (
+  items?: LayoutFragmentConfig[],
+  itemConfig: LayoutFragmentConfig = { component: 'raw' }
+) => {
+  return items?.map(item => {
+    if (_isString(item)) {
+      return { ...itemConfig, children: item }
+    } else if (!item.component) {
+      return { ...itemConfig, ...item }
+    }
+    return item
+  })
+}
 
+
+export const useSeparator = (separator: string | LayoutFragmentConfig) => {
+  if (!separator) { return {} }
+  return _isString(separator)
+    ? {
+      component: 'span',
+      children: separator,
+      className: 'oarepo-separator',
+    } : {
+      ...separator,
+      className: clsx(separator.className, 'oarepo-separator'),
+    }
+}
+
+
+export const useLayoutFragment = (
+  components: ComponentMap,
+  component: string,
+  props: LayoutFragmentProps
+) => {
+  const { config } = props
+  const fragmentComp = components[component]
+  if (fragmentComp) {
+    const CachedLayoutFragment = React.memo(fragmentComp)
+    return <CachedLayoutFragment {...props} />
+  } else {
+    return <ErrorMessage {...config}>
+      Component {component} not found
+    </ErrorMessage>
+  }
 }

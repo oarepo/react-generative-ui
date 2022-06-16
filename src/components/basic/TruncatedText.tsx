@@ -4,12 +4,13 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { useResolvedData } from "../../hooks"
-import { UIFragmentContext, UILayoutConfig } from "../../types"
+import { useDataContext } from "../../hooks"
+import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import TextTruncate from 'react-text-truncate'
-import { DataContext } from "../../context"
+import { LayoutFragment } from "../../GeneratedLayout"
+import clsx from "clsx"
 
-export interface TruncatedTextLayoutConfig extends UILayoutConfig {
+export interface TruncatedTextLayoutConfig extends LayoutFragmentConfig {
     /** Number of lines displayed in truncated state */
     lines: number,
     /** Ellipsis character (default: `…`) */
@@ -17,15 +18,15 @@ export interface TruncatedTextLayoutConfig extends UILayoutConfig {
     /** Text to be rendered truncated */
     text: string,
     /** Component description to render 'Show more|less' toggle button */
-    expandToggle: UILayoutConfig
+    expandToggle: LayoutFragmentConfig
 }
 
 /**
  * Longer text that will be displayed truncated, with an option to show more.
  */
-export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>> = ({
+export const TruncatedText: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = ({
     config,
-    renderUIFragment
+    data,
 }) => {
     const [expanded, setExpanded] = React.useState(false)
 
@@ -36,15 +37,15 @@ export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>>
         lines = 1,
         ellipsis = "…",
         expandToggle = {
-            component: 'a',
+            component: 'link',
             href: '#',
             children: `> Show ${!expanded ? 'more' : 'less'}`
         },
         ...rest
     } = config as TruncatedTextLayoutConfig
 
-    const resolvedText = dataField
-        ? useResolvedData(React.useContext(DataContext), dataField)
+    const resolvedText = dataField && data
+        ? useDataContext(data, dataField)
         : text?.toString()
 
 
@@ -53,10 +54,14 @@ export const TruncatedText: React.FC<React.PropsWithChildren<UIFragmentContext>>
         setExpanded(!expanded)
     }
 
-    const ExpandToggle = renderUIFragment({
-        ...expandToggle,
-        onClick: (e: React.MouseEvent<HTMLButtonElement>) => toggleExpanded(e),
-        expanded,
+    const ExpandToggle = LayoutFragment({
+        config: {
+            ...expandToggle,
+            className: clsx('oarepo-expand-toggle', expandToggle.className),
+            onClick: (e: React.MouseEvent<HTMLButtonElement>) => toggleExpanded(e),
+            expanded,
+        },
+        data,
     })
 
     return (

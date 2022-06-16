@@ -3,23 +3,23 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import React, { FC, Fragment } from "react"
+import React, { FC } from "react"
 import { useDataContext } from "../../hooks"
 import { LayoutFragmentProps } from "../../types"
 
 /**
- * A Fragment component outputing raw data as its children.
+ * A span HTML element
  */
-export const Raw: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
+export const Span: FC<React.PropsWithChildren<LayoutFragmentProps>> = ({ config, data }) => {
     const { component, dataField, children, ...rest } = config
 
-    const resolvedChildren = dataField && data
-        ? useDataContext(data, dataField)
+    const dataContext = useDataContext(data, dataField)
+    const resolvedChildren = dataField && dataContext != null
+        ? dataContext
         : children
-
     return (
-        <Fragment {...rest}>
+        <span {...rest}>
             {resolvedChildren}
-        </Fragment>
+        </span>
     )
 }
