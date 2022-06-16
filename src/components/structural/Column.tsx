@@ -8,7 +8,6 @@ import { Grid } from "semantic-ui-react"
 import { LayoutFragment } from "../../GeneratedLayout"
 import { LayoutFragmentConfig, LayoutFragmentProps } from "../../types"
 import { useArrayDataContext, useDataContext } from "../../hooks"
-import _isArray from 'lodash/isArray'
 
 export interface ColumnLayoutConfig extends LayoutFragmentConfig { }
 

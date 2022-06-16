@@ -10,7 +10,6 @@ import { ColumnWrapper } from "./Column";
 import { ErrorMessage } from "..";
 import { LayoutFragment } from "../../GeneratedLayout";
 import { useArrayDataContext, useDataContext, useItems } from "../../hooks";
-import _isArray from 'lodash/isArray'
 
 export interface RowLayoutConfig extends LayoutFragmentConfig {
     /* Number of columns rendered per each row in a grid */

@@ -13,13 +13,10 @@ type GlobalDataContextProviderProps = { children: React.ReactNode, value?: Layou
 
 
 function globalDataReducer (_state: State, action: Action) {
-  switch (action.type) {
-    case 'set': {
-      return action.value
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
-    }
+  if (action.type === 'set') {
+    return action.value
+  } else {
+    throw new Error(`Unhandled action type: ${action.type}`)
   }
 }
 
