@@ -4,7 +4,7 @@ import { ComponentMap, LayoutFragmentProps, LayoutGeneratorProps } from '../type
 import 'semantic-ui-css/semantic.min.css'
 import { createGeneratedLayout } from '../util';
 import { DefaultComponentLibraryPlugin } from '../plugins';
-import { IPlugin, PluginStore } from 'react-pluggable'
+import { IPlugin } from 'react-pluggable'
 import React from 'react';
 
 const meta: Meta = {

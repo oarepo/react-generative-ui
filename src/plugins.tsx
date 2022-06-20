@@ -105,7 +105,7 @@ class DefaultComponentLibraryPlugin implements IComponentLibraryPlugin {
     }
 
     registerComponents (): void {
-        Object.keys(this.components).map(compName =>
+        Object.keys(this.components).forEach(compName =>
             this.pluginStore.executeFunction(
                 'Renderer.add',
                 compName, this.components[compName]
@@ -113,7 +113,7 @@ class DefaultComponentLibraryPlugin implements IComponentLibraryPlugin {
     }
 
     unregisterComponents (): void {
-        Object.keys(this.components).map(compName =>
+        Object.keys(this.components).forEach(compName =>
             this.pluginStore.executeFunction(
                 'Renderer.remove',
                 compName, this.components[compName]))

@@ -9,6 +9,7 @@ module.exports = {
   rollup(config, options) {
     config.plugins = [
       images({ include: ['**/*.png', '**/*.jpg', '**/*.svg'] }),
+      brotli(),
       ...config.plugins,
     ];
     return config;
