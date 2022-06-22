@@ -4,19 +4,15 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from 'react';
-import { ComponentMap, LayoutFragmentConfig, LayoutGeneratorProps } from '../types';
-import { AvailableComponents, defaultComponents, GlobalDataContextProvider } from '../context';
+import { LayoutFragmentConfig, LayoutGeneratorProps } from '../types';
+import { GlobalDataContextProvider } from '../context';
 import { LayoutFragment } from './LayoutFragment';
 import _isArray from 'lodash/isArray'
 
 /**
  * Generated user-configured UI view
  */
-export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProps>> = ({ layout, data, components }) => {
-    const availableComponents = {
-        ...components,
-        ...defaultComponents
-    } as ComponentMap
+export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProps>> = ({ layout, data }) => {
 
     const LayoutFragments = (_isArray(layout) ? layout : [layout])
         .map((fragmentConfig: LayoutFragmentConfig, key: number) =>
@@ -27,10 +23,8 @@ export const GeneratedLayout: React.FC<React.PropsWithoutRef<LayoutGeneratorProp
         )
 
     return (
-        <AvailableComponents.Provider value={availableComponents}>
-            <GlobalDataContextProvider value={data}>
-                {LayoutFragments}
-            </GlobalDataContextProvider>
-        </AvailableComponents.Provider>
+        <GlobalDataContextProvider value={data}>
+            {LayoutFragments}
+        </GlobalDataContextProvider>
     )
 }

@@ -10124,6 +10124,13 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.6.3:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-pluggable@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/react-pluggable/-/react-pluggable-0.4.3.tgz#84e1cb5f403b31dbfd0d1c228fa129dd6c1b153b"
+  integrity sha512-hWBAVWrhyYPrnSbDFSay2KMJ4TCkOdumdjsyTX/PTZcMwufxJydEZ7yB73pevTRDA6/jEb0kmblvwUXsbC2IlQ==
+  dependencies:
+    semver "^7.3.2"
+
 react-popper@^2.2.4:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-2.3.0.tgz#17891c620e1320dce318bad9fede46a5f71c70ba"
@@ -10614,6 +10621,11 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
+
+rollup-plugin-brotli@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-brotli/-/rollup-plugin-brotli-3.1.0.tgz#a8174bb1ea075fc5711c92fcc99c1c7df074c90c"
+  integrity sha512-vXRPVd9B1x+aaXeBdmLKNNsai9AH3o0Qikf4u0m1icKqgi3qVA4UhOfwGaPYoAHML1GLMUnR//PDhiMHXN/M6g==
 
 rollup-plugin-sourcemaps@^0.6.2:
   version "0.6.3"

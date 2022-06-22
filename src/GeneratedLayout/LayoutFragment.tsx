@@ -4,7 +4,6 @@
 // https://opensource.org/licenses/MIT
 
 import * as React from "react"
-import { AvailableComponents } from "../context/components"
 import { LayoutFragmentProps } from "../types"
 import { useLayoutFragment } from "../hooks";
 import _mapKeys from 'lodash/mapKeys'
@@ -47,9 +46,5 @@ export const LayoutFragment: React.FC<React.PropsWithoutRef<LayoutFragmentProps>
         data,
     } as LayoutFragmentProps
 
-    return (
-        <AvailableComponents.Consumer {...{ key: key != null ? key : component }}>
-            {components => useLayoutFragment(components, component, props)}
-        </AvailableComponents.Consumer >
-    )
+    return useLayoutFragment(component, props)
 }

@@ -4,6 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import React, { AllHTMLAttributes, FC } from 'react';
+import { PluginStore, IPlugin } from 'react-pluggable';
 
 export type ComponentMap = {
   [key: string]: FC<React.PropsWithChildren<LayoutFragmentProps>>;
@@ -50,8 +51,6 @@ export interface LayoutGeneratorProps {
   layout: LayoutFragmentConfig[];
   /** Data object holding field values to be rendered */
   data: LayoutFragmentData;
-  /** Components available to the generator */
-  components: { [key: string]: Function };
 }
 
 export interface LayoutFragmentProps {
@@ -60,3 +59,20 @@ export interface LayoutFragmentProps {
   /** Data object to be rendered by fragment */
   data?: LayoutFragmentData;
 }
+
+export interface IComponentLibraryPlugin extends IPlugin {
+  components: ComponentMap;
+  registerComponents(): void;
+}
+
+export type PluginStoreComponentRegistry = {
+  executeFunction(
+    functionName: 'ComponentRegistry.getComponent',
+    name: string
+  ): {
+    key: string;
+    component: React.FC<React.PropsWithChildren<LayoutFragmentProps>>;
+  };
+};
+
+export type PluginStoreWithPlugins = PluginStore & PluginStoreComponentRegistry;

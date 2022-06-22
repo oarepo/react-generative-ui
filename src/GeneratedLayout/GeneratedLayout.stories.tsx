@@ -1,8 +1,11 @@
-import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { GeneratedLayout } from '.';
-import { LayoutFragmentProps, LayoutGeneratorProps } from '../types';
+import { ComponentMap, LayoutFragmentProps, LayoutGeneratorProps } from '../types';
 import 'semantic-ui-css/semantic.min.css'
+import { createGeneratedLayout } from '../util';
+import { DefaultComponentLibraryPlugin } from '../plugins';
+import { IPlugin } from 'react-pluggable'
+import React from 'react';
 
 const meta: Meta = {
   title: 'Views/Generated Layout',
@@ -14,7 +17,7 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<LayoutGeneratorProps> = (args) => <GeneratedLayout {...args} />;
+const Template: Story<LayoutGeneratorProps & { plugins: IPlugin[] }> = (args) => createGeneratedLayout(args.layout, args.data);
 
 export const Simple = Template.bind({});
 Simple.args = {
@@ -77,10 +80,16 @@ const MyCoolComponent: React.FC<React.PropsWithChildren<LayoutFragmentProps>> = 
   )
 }
 
+class MyCoolComponentPlugin extends DefaultComponentLibraryPlugin {
+  components: ComponentMap = { cool: MyCoolComponent }
+
+  getPluginName (): string {
+    return 'MyCoolComponent@1.0.0'
+  }
+}
+
 UserProvidedComponent.args = {
-  components: {
-    cool: MyCoolComponent
-  },
+  plugins: [new MyCoolComponentPlugin()],
   layout: [{
     component: 'cool',
     children: 'My cool component'

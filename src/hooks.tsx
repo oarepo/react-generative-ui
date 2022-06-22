@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { ComponentMap, DataField, LayoutFragmentConfig, LayoutFragmentData, LayoutFragmentProps } from './types';
+import { DataField, LayoutFragmentConfig, LayoutFragmentData, LayoutFragmentProps, PluginStoreWithPlugins } from './types';
 
 import _get from 'lodash/get';
 import _isString from 'lodash/isString';
@@ -12,7 +12,8 @@ import React from 'react';
 import { ErrorMessage } from './components';
 import clsx from 'clsx';
 import { GlobalDataContext } from './context';
-import { dataMatchesItems } from './utils';
+import { dataMatchesItems } from './util';
+import { usePluginStore } from 'react-pluggable'
 
 
 /**
@@ -84,18 +85,24 @@ export const useSeparator = (separator: string | LayoutFragmentConfig) => {
 
 
 export const useLayoutFragment = (
-  components: ComponentMap,
-  component: string,
+  componentName: string,
   props: LayoutFragmentProps
 ) => {
   const { config } = props
-  const fragmentComp = components[component]
-  if (fragmentComp) {
-    const CachedLayoutFragment = React.memo(fragmentComp)
+
+  const pluginStore: PluginStoreWithPlugins = usePluginStore();
+  const componentConfig = pluginStore.executeFunction(
+    'ComponentRegistry.getComponent',
+    componentName
+  );
+  if (componentConfig) {
+    const { component } = componentConfig
+
+    const CachedLayoutFragment = React.memo(component)
     return <CachedLayoutFragment {...props} />
   } else {
     return <ErrorMessage {...config}>
-      Component {component} not found
+      Component {componentName} not found
     </ErrorMessage>
   }
 }
